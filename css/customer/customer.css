@@ -1,0 +1,31 @@
+/* CSS for top menu */
+.top-menu {
+    background-color: #f2f2f2;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.top-menu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.top-menu li {
+    float: right;
+}
+
+.top-menu li a {
+    display: block;
+    color: #333;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.top-menu li a:hover {
+    background-color: #ddd;
+}
