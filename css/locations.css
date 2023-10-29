@@ -1,0 +1,155 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins',sans-serif;
+}
+
+/* General styling */
+body {
+    font-family: DM Sans;
+    margin: 0;
+    padding: 0;
+    background-color: white; /* light gray background */
+}
+
+/* Header styling */
+header {
+    background-color: #023047; /* nice blue color for the header */
+    padding: 20px;
+    text-align: center;
+    color: white; /* white text color for contrast */
+}
+
+/* Top menu styling */
+.top-menu {
+    list-style-type: none;
+    padding: 0;
+    text-align: right;
+}
+.top-menu li {
+    display: inline;
+    margin-right: 20px;
+}
+.top-menu li a {
+    text-decoration: none;
+    color: #e7e7e7;
+}
+
+.locations-section {
+	display: flex;
+	position: relative;
+	justify-content: center;
+	align-items: center;
+	height: 85vh;
+	background-color: #E1FAFF;
+	border-radius: 2rem;
+	margin: 4rem 3rem 2rem 3rem;
+}
+
+.search-box {
+	display: flex;
+	position: absolute;
+	top: 3rem;
+	left: 3rem;
+	flex-direction: column;
+	/*border: 1px solid red;*/
+}
+
+.search-box-desc {
+	font-size: 3rem;
+	font-weight: bold;
+	color: black;
+	padding-bottom: 2rem;
+}
+
+.locations-search {
+	display: flex;
+
+}
+
+.location-label {
+	display: block;
+	padding-bottom: 0.5rem;
+	font-size: 1.5rem;
+}
+
+.location-input {
+	width: fit-content;
+	margin-bottom: 1rem;
+	padding: 1rem 5rem 1rem 1rem;
+	border-radius: 0.5rem;
+	background-color: #F2F2F2;
+	font-size: 1.25rem;
+	border: solid 1px gray;
+}
+
+.location-input::placeholder {
+	color: black;
+}
+
+.location-search-button {
+	background-color: #081B4B;
+	border-radius: 0.5rem;
+	padding: 1rem 3rem 1rem 3rem;
+	color: white;
+	font-weight: bold;
+	font-size: 1.25rem;
+	border: none;
+}
+
+.locations-table {
+	display: flex;
+	position: absolute;
+	right: 4rem;
+	top: 3rem;
+	flex-direction: column;
+	border: 1px solid black;
+	background-color: white;
+	width: fit-content;
+	height: 70vh;
+	overflow: scroll;
+	overflow-x: hidden;
+}
+
+.post-offices {
+	display: flex;
+	flex-direction: column;
+	width: 40vw;
+}
+
+.post-office {
+	border-bottom: 1px solid gray;
+	list-style: none;
+}
+
+.post-office-details {
+	margin: 0.75rem;
+}
+
+.post-office-city-state {
+	display: block;
+	color: #081B4B;
+	font-weight: bold;
+	font-size: 2rem;
+}
+
+.post-office-street {
+	display: block;
+	font-size: 1rem;
+	padding-bottom: 1rem;
+}
+
+.post-office-hours-box {
+	display: flex;
+	flex-direction: column;
+}
+
+.post-office-hours-desc {
+	display: block;
+	font-size: 1rem;
+}
+
+.post-office-hours {
+	font-size: 1rem;
+}
