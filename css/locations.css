@@ -7,7 +7,6 @@
 
 /* General styling */
 body {
-    font-family: DM Sans;
     margin: 0;
     padding: 0;
     background-color: white; /* light gray background */
@@ -59,7 +58,7 @@ header {
 .search-box-desc {
 	font-size: 3rem;
 	font-weight: bold;
-	color: black;
+	color: #081B4B;
 	padding-bottom: 2rem;
 }
 
