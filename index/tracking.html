@@ -4,18 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Postal Service Business Name</title>
-    <link rel="stylesheet" href="\css\tracking.css"> <!-- Link to your homepage CSS file -->
+    <link rel="stylesheet" href="/css/tracking.css"> <!-- Link to your homepage CSS file -->
 </head>
 <body>
     <header class="header">
-        <h1 class="website-name"><a class="website-homepage-link" href="homepage.html">Western Express Logistics</a></h1>
+        <h1 class="website-name"><a class="website-homepage-link" href="/index.html">Western Express Logistics</a></h1>
         <nav class="navbar">
             <ul class="navlist">
-				<li class="navlist-item"><a class="navlist-link" href="shipping.html">Shipping</a></li>
-				<li class="navlist-item"><a class="navlist-link" href="tracking.html">Tracking</a></li>
-                <li class="navlist-item"><a class="navlist-link" href="locations.html">Locations</a></li>                     
-                <li class="navlist-item"><a class="navlist-link" href="support.html">Support</a></li>               
-                <li class="navlist-item"><a class="navlist-link" href="about.html">About</a></li>                       
+				<li class="navlist-item"><a class="navlist-link" href="/index/shipping.html">Shipping</a></li>
+				<li class="navlist-item"><a class="navlist-link" href="/index/tracking.html">Tracking</a></li>
+                <li class="navlist-item"><a class="navlist-link" href="/index/locations.html">Locations</a></li>                     
+                <li class="navlist-item"><a class="navlist-link" href="/index/support.html">Support</a></li>               
+                <li class="navlist-item"><a class="navlist-link" href="/index/about.html">About</a></li>                       
             </ul>
 			<div class="account-buttons">
 				<button class="sign-in-button"><a class="sign-in-link" href="home_sign_in.html">Log In</a></button>                  
@@ -114,10 +114,29 @@
 		</div>
 	</section>
 	<script>
-		/*const form_button = document.getElementById('tracking-submit');
-		const form_input = document.getElementById('tracking-input').value;
+		const form_button = document.getElementById('tracking-submit');
 
-		form_button.addEventListener('click', form_submission());*/
+		// need to sanitize input
+		form_button.addEventListener('click', (e) => {
+			let form_input = {
+				tracking_id: document.getElementById('tracking-input').value
+			};
+
+			const options = {
+				method: 'POST', 
+				headers: { 
+					'Content-Type':  
+						'application/json;charset=utf-8'
+				}, 
+				body: JSON.stringify(form_input)
+			};
+
+			let fetchReq = fetch('/tracking', options)
+			.then(response => response.json())
+			.then(data => console.log(data.fact))
+			.catch(error => console.error(error));
+		});
+
 	</script>
 </body>
 </html>
