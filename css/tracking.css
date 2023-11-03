@@ -70,7 +70,7 @@ body {
 .account-buttons {
 	display: flex;
 	position: absolute;
-	top: 2rem;
+	top: 1.5rem;
 	right: 3rem;
 }
 
@@ -142,6 +142,7 @@ body {
 	width: 100%;
 	flex-direction: column;
 	margin-top: 3rem;
+	margin-bottom: 2rem;
 	align-items: center;
 
 	/*border: 1px solid red;*/
