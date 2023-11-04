@@ -1,0 +1,114 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+body{
+    height: 100%;
+    width: 100vw;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background: white;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.title_description h2{
+    text-align: center;
+    text-decoration: underline; 
+    transition: .3s;
+}
+.title_description p{
+    text-align: center;
+    margin: auto;
+    width: 50ch;
+    margin-top: 10px;
+    font-size: 15px;
+    transition: .3s ease;
+}
+.title_description h2:hover{
+    transform: scale(1.1);
+    transition: .3s;
+}
+.title_description p:hover{
+    transform: scale(1.1);
+    transition: .3s;
+}
+.container{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin-top: calc(5% - 15px);
+    height: 94vh;
+    width: 85%;
+    text-align: center;
+    color: #081B4B;
+    background: #E1FAFF;
+    box-shadow: 0 2px 5px #c2c2c2;
+    border-radius: 15px;
+}
+.description-row1{
+    margin-top: 5%;
+    display: flex;
+    justify-content: space-evenly;
+    row-gap: 10px;
+}
+.description-sect{
+    flex-basis: 28%;
+    display: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    background: #E1FAFF;
+    box-shadow: 0 2px 5px #c2c2c2;
+    border: 10px solid white;
+    border-radius: 10px;
+    margin-bottom: 5%;
+    padding: 20px 12px;
+    box-sizing: border-box;
+    transition: .3s;
+}
+.description-sect ul{
+    list-style-type: none;
+}
+.description-sect h3{
+    text-decoration: underline;
+}
+.description-sect:hover{
+    transform: scale(1.02);
+    transition: .3s;
+}
+
+.description-row2{
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: center;
+    gap: 3.7%;
+}
+@media only screen and (max-width: 480px){
+    .container::-webkit-scrollbar{
+        display: none;
+    }
+    .container{
+        margin-top: 12%;
+        background: none;
+        box-shadow: none;
+        flex-direction: column;
+        overflow-x: hidden;
+        overflow-y: scroll;
+    }
+    .description-row1, .description-row2{
+        flex-direction: column;
+        width: calc(100% - 15px);
+    }
+    .description-row2{
+        margin-top: 3%;
+        gap: 13px;
+    }
+    #light{
+        opacity: 0;
+    }
+
+}
+

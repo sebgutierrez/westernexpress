@@ -3,12 +3,12 @@
   <head>
     <meta charset="UTF-8">
     <title>Signup Page</title>
-    <link rel="stylesheet" href="\css\customer\cust_signup_style.css">
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="\css\employees\emp_signup_style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    </head>
 <body>
   <div class="container">
-    <div class="title">SIGN UP</div>
+    <div class="title">SIGN UP: EMPLOYEE</div>
     <div class="content">
       <form action="#">
         <div class="user-details">
@@ -52,10 +52,24 @@
             <input type="number" placeholder="Enter your zipcode" required>
           </div>
         </div>
+        <label for="location-opt">Choose a location:</label>
+          <select name="location-opt" id="location-opt" required>
+            <option value="">--Please choose an option--</option>
+            <option value="150">3740 Greenbriar Dr, Houston, TX 77098</option>
+            <option value="151">4516 Burleson Rd, Austin, TX 78744</option>
+            <option value="152">515 Centre St, Dallas, TX 75208</option>
+            <option value="153">1140 S Laredo St, San Antonio, TX 78204</option>
+            <option value="154">3903 Melear Dr, Arlington, TX 77098</option>
+            <option value="155">219 E Mills Ave, El Paso, TX 79901</option>
+            <option value="156">5200 W University Blvd, Odessa, TX 79764</option>
+            <option value="157">10515 Stonewall Blvd, Corpus Christi, TX 78410</option>
+            <option value="158">423 Los Alamos Dr, Alamo, TX 78516</option>
+            <option value="159">5001 Avenue L, Lubbock, TX 79452</option>
+          </select>
         <div class="button">
           <input type="submit" value="Register">
         </div>
-        <a href="cust_login.html">Back to Sign In</a>  
+        <a href="\index\employees\emp_signin.html">Back to Sign In</a>  
       </form>
     </div>
   </div>

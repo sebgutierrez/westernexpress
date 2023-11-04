@@ -1,26 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign In</title>
-    <link rel="stylesheet" href=C:\Users\iStar\Desktop\UH\Database\WesternExpress\Code\css\home_signIn.css> <!-- Link to your homepage CSS file -->
-
-</head>
-<body>
-    <div class="container">
-        <form class="signin-form">
-            <h2>Sign In</h2>
-            <div class="input-group">
-                <label for="username">Username</label>
-                <input type="text" id="username" name="username" required>
-            </div>
-            <div class="input-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <button type="submit">Sign In</button>
-        </form>
-    </div>
-</body>
+<html lang = "en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="\css\home_signin_style.css"> 
+        <title>Western Express Login Page</title>
+    </head>
+    <body>
+        <div class="center">
+            <h1 id="signin">SIGN IN</h1>
+            <form action="" method="post">
+                <div class="input_field">
+                    <input type="text" name="text" required>
+                    <label>Username</label>
+                </div>
+                <div class="input_field">
+                    <input type="password" name="text" required>
+                    <label>Password</label>
+                </div>
+                <div class="links"><a href="\index\customer\cust_forgot_pass.html">Forgot password?</a>  <a href="\index\customer\cust_signup.html">Signup</a></div>
+                <input type="submit" value="LOGIN">
+            </form>
+        </div>
+    </body>
 </html>
+
