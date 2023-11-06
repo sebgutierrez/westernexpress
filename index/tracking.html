@@ -18,15 +18,15 @@
                 <li class="navlist-item"><a class="navlist-link" href="/index/about.html">About</a></li>                       
             </ul>
 			<div class="account-buttons">
-				<button class="sign-in-button"><a class="sign-in-link" href="home_sign_in.html">Log In</a></button>                  
-            	<button class="sign-up-button"><a class="sign-up-link" href="home_sign_up.html">Sign Up</a></button>
+				<button class="sign-in-button"><a class="sign-in-link" href="/index/home_sign_in.html">Log In</a></button>                  
+            	<button class="sign-up-button"><a class="sign-up-link" href="/index/home_sign_up.html">Sign Up</a></button>
 			</div>
         </nav>
     </header>
 	<section class="tracking-section">
 		<span class="section-header">Tracking</span>
-		<div class="track-box">
-			<form class="tracking-search-form" action="/track" method="post">
+		<div class="track-box" id="track-box" style="display: flex;">
+			<form class="tracking-search-form" id="tracking-search-form" action="#" method="POST">
 				<label for="tracking-input" class="tracking-label"></label>
 				<input type="text" name="tracking-input" id="tracking-input" class="tracking-input" placeholder="Enter a 20-digit tracking number" required />
 				<button id="tracking-submit" class="tracking-search-button">Search</button>
@@ -51,7 +51,7 @@
 				</li>
 			</ol>
 		</div>-->
-		<div class="tracking-info-container">
+		<div class="tracking-info-container" id="tracking-info-container" style="display: none;">
 			<div class="tracking-status-container">
 				<span class="latest-tracking-status">IN TRANSIT</span>
 				<span class="tracking-id-container">Tracking ID:
@@ -114,30 +114,72 @@
 		</div>
 	</section>
 	<script>
-		/*
-		const form_button = document.getElementById('tracking-submit');
 
-		// need to sanitize input
-		form_button.addEventListener('click', (e) => {
-			let form_input = {
-				tracking_id: document.getElementById('tracking-input').value
-			};
+		const track_box = document.getElementById('track-box')
+		const search_form = document.getElementById('tracking-search-form')
+		const tracking_info = document.getElementById('tracking-info-container')
+
+		search_form.onsubmit = (event) => {
+			event.preventDefault()
+
+			// switch display 
+			if(track_box.style.display === 'flex'){
+				track_box.style.display = 'none'
+				tracking_info.style.display = 'flex'
+			}
+			else{
+				track_box.style.display = 'flex'
+				tracking_info.style.display = 'none'
+			}	
+		};
+		/*
+		search_form.onsubmit = (event) => {
+			event.preventDefault()
+
+			let tracking_id = document.getElementById('tracking-input').value
+			const form_button = document.getElementById('tracking-submit');
 
 			const options = {
 				method: 'POST', 
-				headers: { 
-					'Content-Type':  
-						'application/json;charset=utf-8'
-				}, 
-				body: JSON.stringify(form_input)
+				headers: { 'Content-Type': 'text/plain' }, 
+				body: String(tracking_id)
 			};
 
-			let fetchReq = fetch('/tracking', options)
-			.then(response => response.json())
-			.then(data => console.log(data.fact))
+			let fetchReq = fetch('/track', options)
+			.then(response => console.log(response))
 			.catch(error => console.error(error));
-		});*/
+			
+			/*const options = {
+				method: 'POST', 
+				headers: { 'Content-Type': 'text/plain' }, 
+				body: tracking_id
+			};
+		};*/
 
+	/*	
+		const form_button = document.getElementById('tracking-submit');
+		
+		// need to sanitize input
+		form_button.addEventListener('submit', (e) => {
+			let form_input = {
+				tracking_id: document.getElementById('tracking-input').value
+			};
+			e.preventDefault()
+			let tracking_id = document.getElementById('tracking-input').value
+
+			const options = {
+				method: 'POST', 
+				headers: { 'Content-Type': 'text/plain' }, 
+				body: tracking_id
+			};
+
+			let fetchReq = fetch('/track', options)
+			.then(response => console.log(response))
+			.catch(error => console.error(error));
+
+			console.log(response)
+		});
+		*/
 	</script>
 </body>
 </html>

@@ -5,7 +5,7 @@
 
 /* General styling */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'DM Sans', serif;
     margin: 0;
     padding: 0;
     background-color: white; /* light gray background */
@@ -18,9 +18,10 @@ body {
 	position: relative;
 	min-height: 80vh;
 	max-height: max-content;
-	background-color: #E1FAFF;
+	/*background-color: #E1FAFF;*/
+	/*background-color: #e7faff;*/
 	border-radius: 2rem;
-	margin: 4rem 3rem 2rem 3rem;
+	/*margin: 1rem 3rem 2rem 3rem;*/
 }
 
 
@@ -30,11 +31,11 @@ body {
 	align-items: center;
 	width: 100%;
 	position: relative;
-	padding: 2rem 2rem 0 3rem;
+	padding: 0.5rem 2rem 0 3rem;
 }
 
 .website-name {
-	font-size: 1.5rem;
+	font-size: 1.75rem;
 	font-weight: bold;
 	color: #081B4B;
 }
@@ -63,12 +64,12 @@ body {
 }
 
 .navlist-item {
-	margin: 0 1rem 0 1rem;
+	margin: 0 1.5rem 0 1.5rem;
 }
 
 .navlist-link {
 	color: #081B4B;
-	font-size: 1rem;
+	font-size: 1.25rem;
 	font-weight: bold;
 }
 
@@ -83,8 +84,8 @@ body {
 .account-buttons {
 	display: flex;
 	position: absolute;
-	top: 2.5rem;
-	right: 9rem;
+	top: 1.5rem;
+	right: 8rem;
 }
 
 .sign-in-button {
@@ -95,7 +96,7 @@ body {
 
 .sign-in-link {
 	color:#081B4B;
-	font-size: 1rem;
+	font-size: 1.25rem;
 	font-weight: bold;
 }
 
@@ -111,12 +112,12 @@ body {
 	background-color: #081B4B;
 	border-radius: 0.5rem;
 	border: none;
-	padding: 0.75rem 1.5rem 0.75rem 1.5rem;
+	padding: 0.75rem 2rem 0.75rem 2rem;
 }
 
 .sign-up-link {
 	color: white;
-	font-size: 1rem;
+	font-size: 1.25rem;
 	font-weight: bold;
 }
 
@@ -128,125 +129,157 @@ body {
 	text-decoration: none;
 }
 
-/* Track package section styling */
-.track-package {
-    text-align: center;
-    margin-top: 30px;
-}
-/***********************************/
-
-
-
-
-
-
-
-/* footer Button layout bacground */
-.footerbuttons {
-    display: flex;
-    justify-content: space-between;
-    background-color: #373737; /* red background for the button container */
-    padding: 20px;
-    margin-top: 30px; 
-   
-    
-    
-}
-/* footer Button layout */
-.left-buttons button {
-    display: flex;
-    justify-content: flex-start;
-    flex-direction: column;
-   
-    
-    
+.hero-banner {
+	display: flex;
+	height: 55vh; 
+	position: relative;
+	top: 1rem;
 }
 
-/* 1 left */
-.center-buttons {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
+.hero-image {
+	z-index: 0;
+	object-fit: cover;
+	width: 100%;
+	opacity: 90%;
+	filter: brightness(50%)
 }
 
-/* 2 left */
-.right-buttons {
-    display: flex;
-    justify-content: flex-end;
-    flex-direction: column;
-}
-/* 3 left */
-
-
-/* setting all together of the 3 button */
-.left-buttons button, .center-buttons button, .right-buttons button {
-    display: block;
-    margin: 10px;
-    padding: 10px 20px;
-    background-color: #373737; /* orange background for the buttons */
-    color: #ffffff;
-    text-decoration: none;
-    border: none;
-    cursor: pointer;
-    background: none;
-    
-    
+.slogan {
+	display: flex;
+	width: 100%;
+	justify-content: center;
+	text-align: center;
+	top: 5rem;
+	position: absolute;
+	font-size: 2.5rem;
+	font-weight: lighter;
+	color: white;
+	z-index: 1;
 }
 
-.footerbuttons button:hover {
-    background: none;
-    text-decoration: underline;
-    border-bottom: 2px solid transparent;
-    
+.tracking-form-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	top: 4rem;
+	height: 100%;
+	width: 100%;
+	z-index: 1;
 }
 
-
-
-
-
-
-/* Adjust button styles as needed */
-button {
-    padding: 10px 20px;
-    background-color: #ffffff;
-    color: rgb(0, 0, 0);
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-/***********************************
-
-
-
-
-
-
-/* Image layout */
-.homepage-images {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 50px;
-}
-.homepage-images img {
-    margin: 10px;
-    max-width: 50%;
-    height: auto;
-}
-/***********************************/
-
-
-
-
-
-h2 {
-    text-align: center;
-    color: #333;
-    margin-top: 30px;
+.tracking-form {
+	display: flex;
+	flex-direction: column;
+	position: relative;
 }
 
+.tracking-label {
+	font-size: 1.25rem;
+	text-align: center;
+	color: white;
+	margin-bottom: 1rem;
+}
 
+.tracking-input {
+	position: relative;
+	padding: 0.75rem 22rem 0.75rem 1rem;
+	border: none;
+	border-radius: 0.25rem;
+}
+.tracking-input::placeholder {
+	position: relative;
+	top: 0.1rem;
+	font-size: 1rem;
+	width: fit-content;
+	color: #B5B5B5; 
+}
 
+.tracking-search-button {
+	position: absolute;
+	bottom: 0.3rem;
+	right: 0.35rem;
+	font-size: 1.2rem;
+	font-weight: bold;
+	padding: 0.25rem 1.55rem 0.25rem 1.5rem;
+	border: none;
+	border-radius: 0.4rem;
+	color: white;
+	background-color: #081B4B;
+}
 
+.tracking-search-button:hover {
+	cursor: pointer;
+}
 
+.mission-statement-container {
+	display: flex;
+	position: relative;
+	flex-direction: column;
+	width: 100%;
+	margin-top: 4rem;
+}
+
+.mission-statement-header {
+	display: block;
+	text-align: center;
+	font-size: 1.25rem;
+	margin-bottom: 1rem;
+}
+
+.mission-statement-text {
+	display: flex;
+	width: 100%;
+	justify-content: center;
+}
+
+.website-navigation-container {
+	display: flex;
+	justify-content: space-evenly;
+	position: relative;
+	width: 100%;
+	margin: 3rem 0rem 2rem 0rem;
+}
+
+.website-service-container {
+	background-color: #E1FAFF;
+	border: none;
+	border-radius: 0.5rem;
+	padding: 2rem 8rem 2rem 8rem;
+}
+
+.website-service-container:hover {
+	background-color: #70D4FF;
+	/*display: inline-block;
+    vertical-align: middle;
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    position: relative;
+    transition-property: color;
+    transition-duration: 0.3s;*/
+}
+
+.service-name {
+	display: flex;
+	justify-content: center;
+	position: relative;
+	margin-bottom: 1rem;
+}
+
+.service-link {
+	font-size: 2rem;
+	font-weight: bold;
+	color: #081B4B;
+	text-decoration: none;
+}
+
+.service-link:visited {
+	text-decoration: none;
+}
+
+.svg-icon {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	margin: 1.5rem 0 2rem 0;
+}
