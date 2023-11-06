@@ -103,10 +103,10 @@ form .button input:hover{
     border-bottom-width: 2px;
 }
 a{
-  text-align: center;
-  display: block;
-  color: black;
-  font-weight: 600;
+    text-align: center;
+    display: block;
+    color: black;
+    font-weight: 600;
 }
 @media(max-width: 584px){
 .container{
