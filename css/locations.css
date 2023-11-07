@@ -1,15 +1,9 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins',sans-serif;
-}
-
-/* General styling */
 body {
+    font-family: 'DM Sans', serif;
     margin: 0;
     padding: 0;
     background-color: white; /* light gray background */
+    overflow-x: hidden;
 }
 
 /* Header styling */
@@ -18,11 +12,11 @@ body {
 	align-items: center;
 	width: 100%;
 	position: relative;
-	padding: 2rem 2rem 0 3rem;
+	padding: 0.5rem 2rem 0 3rem;
 }
 
 .website-name {
-	font-size: 1.5rem;
+	font-size: 1.75rem;
 	font-weight: bold;
 	color: #081B4B;
 }
@@ -51,12 +45,12 @@ body {
 }
 
 .navlist-item {
-	margin: 0 1rem 0 1rem;
+	margin: 0 1.5rem 0 1.5rem;
 }
 
 .navlist-link {
 	color: #081B4B;
-	font-size: 1rem;
+	font-size: 1.25rem;
 	font-weight: bold;
 }
 
@@ -72,7 +66,7 @@ body {
 	display: flex;
 	position: absolute;
 	top: 1.5rem;
-	right: 3rem;
+	right: 8rem;
 }
 
 .sign-in-button {
@@ -83,7 +77,7 @@ body {
 
 .sign-in-link {
 	color:#081B4B;
-	font-size: 1rem;
+	font-size: 1.25rem;
 	font-weight: bold;
 }
 
@@ -99,12 +93,12 @@ body {
 	background-color: #081B4B;
 	border-radius: 0.5rem;
 	border: none;
-	padding: 0.75rem 1.5rem 0.75rem 1.5rem;
+	padding: 0.75rem 2rem 0.75rem 2rem;
 }
 
 .sign-up-link {
 	color: white;
-	font-size: 1rem;
+	font-size: 1.25rem;
 	font-weight: bold;
 }
 
@@ -115,15 +109,16 @@ body {
 .sign-up-link:visited {
 	text-decoration: none;
 }
+
 .locations-section {
 	display: flex;
 	position: relative;
 	justify-content: center;
 	align-items: center;
-	height: 85vh;
+	height: 82vh;
 	background-color: #E1FAFF;
 	border-radius: 2rem;
-	margin: 4rem 3rem 2rem 3rem;
+	margin: 1rem 3rem 2rem 3rem;
 }
 
 .search-box {
@@ -135,7 +130,7 @@ body {
 }
 
 .search-box-desc {
-	font-size: 3rem;
+	font-size: 2rem;
 	font-weight: bold;
 	color: #081B4B;
 	padding-bottom: 2rem;
@@ -143,7 +138,6 @@ body {
 
 .locations-search {
 	display: flex;
-
 }
 
 .location-label {
@@ -155,7 +149,7 @@ body {
 .location-input {
 	width: fit-content;
 	margin-bottom: 1rem;
-	padding: 1rem 5rem 1rem 1rem;
+	padding: 1rem 8rem 1rem 1rem;
 	border-radius: 0.5rem;
 	background-color: white;
 	font-size: 1.25rem;
@@ -192,7 +186,9 @@ body {
 
 .post-offices {
 	display: flex;
+	position: relative;
 	flex-direction: column;
+	left: -2rem;
 	width: 40vw;
 }
 
