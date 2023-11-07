@@ -13,15 +13,124 @@ body{
     color: #081B4B;
     overflow-y: hidden;
     overflow-x: hidden;
+}
+.header {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	position: relative;
+	padding: 2rem 2rem 0 3rem;
+}
+
+.website-name {
+	font-size: 1.5rem;
+	font-weight: bold;
+	color: #081B4B;
+}
+
+.website-homepage-link {
+	color: #081B4B;
+}
+
+.website-homepage-link:link {
+	text-decoration: none;
+}
+
+.website-homepage-link:visited {
+	text-decoration: none;
+}
+
+.navbar {
+	display: flex;
+	width: min-content;
+}
+
+.navlist {
+	display: flex;
+	list-style: none;
+	padding: 0.2rem 0 0 2rem;
+}
+
+.navlist-item {
+	margin: 0 1rem 0 1rem;
+}
+
+.navlist-link {
+	color: #081B4B;
+	font-size: 1rem;
+	font-weight: bold;
+}
+
+.navlist-link:link {
+	text-decoration: none;
+}
+
+.navlist-link:visited {
+	text-decoration: none;
+}
+
+.account-buttons {
+	display: flex;
+	position: absolute;
+	top: 2rem;
+	right: 3rem;
+}
+
+.sign-in-button {
+	border: none;
+	background-color: white;
+	margin-right: 2rem;
+    padding: 0 1.5rem  0.75rem 1.5rem;
+    border: 1.5px solid black;
+    border-radius: 5px;
+}
+
+.sign-in-link {
+	color:#081B4B;
+	font-size: 1rem;
+	font-weight: bold;
+}
+
+.sign-in-link:link {
+	text-decoration: none;
+}
+
+.sign-in-link:visited {
+	text-decoration: none;
+}
+
+.sign-up-button {
+	background-color: #081B4B;
+	border-radius: 0.5rem;
+	border: none;
+	padding: 0 1.5rem 0.75rem 1.5rem;
+}
+
+.sign-up-link {
+	color: white;
+	font-size: 1rem;
+	font-weight: bold;
+}
+
+.sign-up-link:link {
+	text-decoration: none;
+}
+
+.sign-up-link:visited {
+	text-decoration: none;
+}
+
+.page{
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 2% 0;
 }
 .container{
 	height: 85vh;
     width: 90vw;
 	background-color: #E1FAFF;
-    box-shadow: 0 2px 3px #c2c2c2;
+    box-shadow: 0 2px 5px #c2c2c2;
     border-radius: 20px;
     display: flex;
     justify-content: center;

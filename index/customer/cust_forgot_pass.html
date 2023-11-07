@@ -8,16 +8,34 @@
         <title>Forget Password Page</title>
     </head>
     <body>
-        <div class="container">
-            <form action="" method="get">
-                <h1 id="forget_pass">Forget Password</h1>
-                <div class="input_field">
-                    <p>Username</p>
-                    <input type="text" name="text" required>
-                </div>
-                <input type="submit" value="Continue">
-                <a href="cust_login.html">Back to Sign In</a>                                                                                                                                              
-            </form>
+        <header class="header">
+            <h1 class="website-name"><a class="website-homepage-link" href="homepage.html">Western Express Logistics</a></h1>
+            <nav class="navbar">
+                <ul class="navlist">
+                    <li class="navlist-item"><a class="navlist-link" href="shipping.html">Shipping</a></li>
+                    <li class="navlist-item"><a class="navlist-link" href="tracking.html">Tracking</a></li>
+                    <li class="navlist-item"><a class="navlist-link" href="locations.html">Locations</a></li>                     
+                    <li class="navlist-item"><a class="navlist-link" href="support.html">Support</a></li>               
+                    <li class="navlist-item"><a class="navlist-link" href="about.html">About</a></li>                       
+                </ul>
+          <div class="account-buttons">
+            <button class="sign-in-button"><a class="sign-in-link" href="home_sign_in.html">Log In</a></button>                  
+                  <button class="sign-up-button"><a class="sign-up-link" href="home_sign_up.html">Sign Up</a></button>
+          </div>
+            </nav>
+        </header>
+        <div class="page">
+            <div class="container">
+                <form action="" method="post">
+                    <h1 id="forget_pass">Forget Password</h1>
+                    <div class="input_field">
+                        <p>Username</p>
+                        <input type="text" name="text" required>
+                    </div>
+                    <input type="submit" value="Continue">
+                    <a href="cust_login.html">Back to Sign In</a>                                                                                                                                              
+                </form>
+            </div>
         </div>
     </body>
 </html>
