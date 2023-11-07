@@ -202,11 +202,18 @@
     background: #E1FAFF;
     border: 2px solid #081B4B;
   }
-  a{
+  .back_home{
     text-align: center;
     display: block;
     color: black;
     font-weight: 600;
+    text-decoration: none;
+  }
+  .back_home a{
+    text-decoration: none;
+  }
+  .back_home a:visited{
+    text-decoration: none;
   }
   @media(max-width: 584px){
     .container{

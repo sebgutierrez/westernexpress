@@ -157,7 +157,7 @@ body{
     left: 50%;
     transform: translate(-50%, -50%);
     margin-top: calc(9% - 15px);
-    height: 105vh;
+    height: 880px;
     width: 85%;
     text-align: center;
     color: #081B4B;

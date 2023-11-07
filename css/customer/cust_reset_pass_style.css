@@ -138,7 +138,7 @@ body{
 }
 form{
     min-width: 300px;
-    min-height: 250px;
+    min-height: 270px;
     text-align: center;
     background: white;
     box-shadow: 0 0 2px #c2c2c2;
@@ -204,9 +204,17 @@ input[type="Submit"]:hover{
     border: 1px solid #081B4B;
     transition: .5s;
 }
-a{
+.back_home{
     display: block;
     margin-top: 15px;
     color: black;
     font-weight: 600;
+}
+.back_home:visited{
+    text-decoration: none;
+}
+@media only screen and (max-width: 500px){
+    form{
+        height: calc(50% + 55px);
+    }
 }
