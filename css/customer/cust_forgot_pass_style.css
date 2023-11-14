@@ -80,7 +80,7 @@ body{
 	border: none;
 	background-color: white;
 	margin-right: 2rem;
-    padding: 0.75rem 1.5rem 0.75rem 1.5rem;
+    padding:0.75rem 1.5rem;
     border: 1.5px solid black;
     border-radius: 5px;
 }
@@ -103,7 +103,7 @@ body{
 	background-color: #081B4B;
 	border-radius: 0.5rem;
 	border: none;
-	padding: 0.75rem 1.5rem 0.75rem 1.5rem;
+	padding: 0.75rem 1.5rem;
 }
 
 .sign-up-link {
@@ -137,14 +137,14 @@ body{
     align-items: center;
 }
 form{
-    min-width: 300px;
-    min-height: 280px;
+    min-width: 18.75rem;
+    min-height: 17.5rem;
     text-align: center;
     background: white;
     box-shadow: 0 2px 3px #c2c2c2;
     border-radius: 10px;
-    width: 40vw;
-    height: calc(33vh + 15px);
+    width: 40rem;
+    height: 18rem;
 }
 #forget_pass{
     padding-top: 3vh;
@@ -216,9 +216,4 @@ input[type="Submit"]:hover{
 }
 .back_home a:visited{
     text-decoration: none;
-}
-@media only screen and (max-width: 500px){
-    form{
-        height: calc(40% + 55px);
-    }
 }

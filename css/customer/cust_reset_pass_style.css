@@ -80,7 +80,7 @@ body{
 	border: none;
 	background-color: white;
 	margin-right: 2rem;
-    padding: 0 1.5rem  0.75rem 1.5rem;
+    padding: 0.75rem 1.5rem;
     border: 1.5px solid black;
     border-radius: 5px;
 }
@@ -103,7 +103,7 @@ body{
 	background-color: #081B4B;
 	border-radius: 0.5rem;
 	border: none;
-	padding: 0 1.5rem 0.75rem 1.5rem;
+	padding: 0.75rem 1.5rem;
 }
 
 .sign-up-link {
@@ -143,8 +143,8 @@ form{
     background: white;
     box-shadow: 0 0 2px #c2c2c2;
     border-radius: 10px;
-    width: 40vw;
-    height: 45vh;
+    width: 37rem;
+    height: 25rem;
 }
 #reset_pass{
     padding-top: 3vh;
@@ -204,17 +204,12 @@ input[type="Submit"]:hover{
     border: 1px solid #081B4B;
     transition: .5s;
 }
-.back_home{
+#back_home_link{
     display: block;
     margin-top: 15px;
     color: black;
     font-weight: 600;
 }
-.back_home:visited{
+#back_home_link:visited{
     text-decoration: none;
-}
-@media only screen and (max-width: 500px){
-    form{
-        height: calc(50% + 55px);
-    }
 }
