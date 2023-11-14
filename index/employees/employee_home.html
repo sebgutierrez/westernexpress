@@ -38,13 +38,11 @@
             <a href="#" onclick="loadContent('packages')">Packages Overview</a>
           </li>
           <li><a href="#" onclick="loadContent('support')">Support</a></li>
-          <li>
+          <!--<li>
             <a href="#" onclick="loadContent('post office')">Post-Offices</a>
-          </li>
+          </li>-->
           <li>
-            <a href="#" onclick="loadContent('manager reports')"
-              >Manager Reports</a
-            >
+            <a href="/index/employees/financial_report.html">Financial Report</a>
           </li>
           <li><a href="#" onclick="loadContent('contact')">Contact</a></li>
         </ul>
@@ -136,7 +134,88 @@
           <p>This is the default content for Link 5.</p>
         </div>
         <div id="manager reports">
-          <p>This is the default content for Link 6.</p>
+          <div id="reports">
+            <div class="sales">
+              <h2>Sales Report Generator</h2>
+  
+              <div id="reportForm">
+                <div class="fieldBox">
+                  <label>
+                    <input type="checkbox" id="fieldAmount" /> Amount
+                  </label>
+                  <select id="amountComparison" name="amountComparison">
+                    <option value="equal">Equal to</option>
+                    <option value="greater">Greater than</option>
+                    <option value="less">Less than</option>
+                  </select>
+                  <input type="number" id="amount" name="amount" />
+                </div>
+  
+                <div class="fieldBox">
+                  <label>
+                    <input type="checkbox" id="fieldLocation" /> Location
+                  </label>
+                  <select id="location" name="location">
+                    <option disabled selected value="">Select a location</option>
+                    <option value="location1">
+                      4516 Burleson Rd, Austin, TX 78744
+                    </option>
+                    <option value="location2">
+                      3740 Greenbriar Dr, Houston, TX 77098
+                    </option>
+                    <option value="location3">
+                      515 Centre St, Dallas, TX 75208
+                    </option>
+                    <option value="location4">
+                      219 E Mills Ave, El Paso, TX 79901
+                    </option>
+                    <option value="location5">
+                      5001 Avenue L, Lubbock, TX 79452
+                    </option>
+                    <option value="location6">
+                      3903 Melear Dr, Arlington, TX 76015
+                    </option>
+                    <option value="location7">
+                      1140 S Laredo St, San Antonio, TX 78204
+                    </option>
+                    <option value="location8">
+                      5200 W University Blvd, Odessa, TX 79764
+                    </option>
+                    <option value="location9">
+                      10515 Stonewall Blvd, Corpus Christi, TX 78410
+                    </option>
+                    <option value="location10">
+                      423 Los Alamos Dr, Alamo, TX 78516
+                    </option>
+                  </select>
+                </div>
+  
+                <div class="fieldBox">
+                  <label> <input type="checkbox" id="fieldDate" /> Date </label>
+                  <select id="dateComparison" name="dateComparison">
+                    <option value="on">On</option>
+                    <option value="before">Before</option>
+                    <option value="after">After</option>
+                  </select>
+                  <input type="date" id="date" name="date" />
+                </div>
+  
+                <div class="fieldBox">
+                  <label>
+                    <input type="checkbox" id="fieldEmployeeId" /> Employee ID
+                  </label>
+                  <input type="text" id="employeeId" name="employeeId" />
+                </div>
+  
+                <button onclick="generateReport()">Generate Report</button>
+              </div>
+  
+              <div id="result">
+                <h3>Generated Report:</h3>
+                <ul id="reportList"></ul>
+              </div>
+            </div>
+          </div>
         </div>
         <div id="contact">
           <p>This is the default content for Link 7.</p>
