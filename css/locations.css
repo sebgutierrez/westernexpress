@@ -35,13 +35,15 @@ body {
 
 .navbar {
 	display: flex;
+	position: relative;
 	width: min-content;
 }
 
 .navlist {
 	display: flex;
+	align-items: center;
 	list-style: none;
-	padding: 0.2rem 0 0 2rem;
+	padding: 0 0 0 1.5rem;
 }
 
 .navlist-item {
@@ -65,7 +67,7 @@ body {
 .account-buttons {
 	display: flex;
 	position: absolute;
-	top: 1.5rem;
+	bottom: 1rem;
 	right: 8rem;
 }
 
@@ -109,6 +111,7 @@ body {
 .sign-up-link:visited {
 	text-decoration: none;
 }
+
 
 .locations-section {
 	display: flex;

@@ -12,17 +12,16 @@
         <h1 class="website-name"><a class="website-homepage-link" href="/index.html">Western Express</a></h1>
         <nav class="navbar">
             <ul class="navlist">
-				<li class="navlist-item"><a class="navlist-link" href="/index/shipping.html">Shipping</a></li>
+				<li class="navlist-item"><a class="navlist-link" href="/index/customer/cust_service.html">Shipping</a></li>
 				<li class="navlist-item"><a class="navlist-link" href="/index/tracking.html">Tracking</a></li>
                 <li class="navlist-item"><a class="navlist-link" href="/index/locations.html">Locations</a></li>                     
-                <li class="navlist-item"><a class="navlist-link" href="/index/support.html">Support</a></li>               
-                <li class="navlist-item"><a class="navlist-link" href="/index/about.html">About</a></li>                       
+                <li class="navlist-item"><a class="navlist-link" href="/index/support.html">Support</a></li>                                    
             </ul>
-			<div class="account-buttons">
-				<button class="sign-in-button"><a class="sign-in-link" href="/index/home_sign_in.html">Log In</a></button>                  
-            	<button class="sign-up-button"><a class="sign-up-link" href="/index/home_sign_up.html">Sign Up</a></button>
-			</div>
         </nav>
+        <div class="account-buttons">
+            <button class="sign-in-button"><a class="sign-in-link" href="/index/customer/cust_login.html">Log In</a></button>                  
+            <button class="sign-up-button"><a class="sign-up-link" href="/index/customer/cust_signup.html">Sign Up</a></button>
+        </div>
     </header>
 	<section class="tracking-section">
 		<span class="section-header">Western Express Tracking</span>
@@ -157,14 +156,11 @@
 			};
 		};*/
 
-	/*	
+	
 		const form_button = document.getElementById('tracking-submit');
 		
 		// need to sanitize input
 		form_button.addEventListener('submit', (e) => {
-			let form_input = {
-				tracking_id: document.getElementById('tracking-input').value
-			};
 			e.preventDefault()
 			let tracking_id = document.getElementById('tracking-input').value
 
@@ -177,10 +173,8 @@
 			let fetchReq = fetch('/track', options)
 			.then(response => console.log(response))
 			.catch(error => console.error(error));
-
-			console.log(response)
 		});
-		*/
+		
 	</script>
 </body>
 </html>

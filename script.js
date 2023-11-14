@@ -1,14 +1,16 @@
 const http = require('http');
-const sql = require('mssql');
+const sql = require('./server/node_modules/mssql');
+
+require('dotenv').config()
 
 const config = {
-    user: 'systemauthor',
-    password: 'westernexpress2023_',
-    server: 'westernexpressserver.database.windows.net',
-    database: 'westernexpressdb',
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    server: process.env.DB_SERVER,
+    database: process.env.DB_NAME,
     options: {
-        encrypt: true, // For Azure
-        trustServerCertificate: true // For Azure
+        encrypt: true, 
+        trustServerCertificate: true 
     }
 };
 
@@ -37,14 +39,11 @@ const server = http.createServer((req, res) => {
                 });
             }
         });
-    } else {
-        res.writeHead(404, { 'Content-Type': 'text/plain' });
-        res.end('Not Found');
     }
 });
 
 // return json of package tracking history
-function getTrackingData(tracking_id) {
+function getStatusHistory(tracking_id) {
     // Creating a connection pool
     sql.connect(config, (err) => {
         if (!err) {
@@ -52,26 +51,25 @@ function getTrackingData(tracking_id) {
             const request = new sql.Request();
 
             // Query to the database
-            /*
-            request.query(`select * from addresses`, (err, recordset) => {
+            request.query(`SELECT P.status, P.date, A.address, A.city, A.state, A.zip, P.notes FROM package_status_history AS P, addresses as A WHERE P.tracking_number=${tracking_id} AND A.address_id = P.address_id;`, (err, recordset) => {
                 if (!err) {
-                    console.log(err);
                     // Print the recordset
+                    let records = []
                     recordset.recordset.forEach((row) => {
+                        records.push(row)
                         console.log(row); // This will print each row in the recordset
                     });
-
                     sql.close(); // Close the connection pool
+                    return records
                 } 
                 else{
-                    console.log(err);
+                    console.log('Package status history query failed');
                 }
 
             });
-            */
         }
         else{
-            console.log(err);
+            console.log('Failed to connect to database');
         }
     });
 }
@@ -94,29 +92,16 @@ server.on('request', (request, response) => {
             console.log(chunk)
 			body.push(chunk)
 		});
-        request.on('end', () => {
-            var tracking_id = Buffer.concat(body).toString();
-            console.log(tracking_id)
-        })
         response.on('end', () => {
-            let tracking_data = getTrackingData(tracking_id)
+            let tracking_num = Buffer.concat(body).toString();
+            console.log(tracking_num)
+            let tracking_data = getStatusHistory(tracking_num)
             response.writeHead(200, {'Content-Type': 'application/json'})
-            response.end({text: " query successful"})
-        })
-	}
-	else{
-        response.on('end', () => {
-            response.writeHead(404, { 'Content-Type': 'text/plain' });
-            response.end('Track Page Not Found');
+            response.end(tracking_data)
         })
 	}
 });
 
-port = 5500
-hostname = '127.0.0.1'
-
-server.listen(5500, hostname, () => {
-    console.log(`Server is running on port ${port}`);
+server.listen(process.env.PORT, process.env.HOST, () => {
+    console.log(`Server is running on port ${process.env.PORT}`);
 });
-
-module.exports.server = server

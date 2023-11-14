@@ -35,13 +35,15 @@ body {
 
 .navbar {
 	display: flex;
+	position: relative;
 	width: min-content;
 }
 
 .navlist {
 	display: flex;
+	align-items: center;
 	list-style: none;
-	padding: 0.2rem 0 0 2rem;
+	padding: 0 0 0 1.5rem;
 }
 
 .navlist-item {
@@ -65,7 +67,7 @@ body {
 .account-buttons {
 	display: flex;
 	position: absolute;
-	top: 1.5rem;
+	bottom: 1rem;
 	right: 8rem;
 }
 
@@ -109,6 +111,7 @@ body {
 .sign-up-link:visited {
 	text-decoration: none;
 }
+
 
 .tracking-section {
 	display: flex;
@@ -201,7 +204,7 @@ body {
 
 .tracking-status-container {
 	position: relative;
-	padding: 2rem 2rem 0 2rem;
+	padding: 2rem 0 0 0;
 	width: 100%;
 }
 
@@ -210,17 +213,19 @@ body {
 	font-weight: bold;
 	color: #081B4B;
 	display: block;
+	padding: 2rem 2rem 0 2rem;
 }
 
 .tracking-id-container {
 	color: #535353;
+	padding: 2rem 2rem 0 2rem;
 }
 
 .latest-checkpoint-container {
 	display: flex;
 	justify-content: space-between;
 	position: relative;
-	padding-top: 2rem;
+	padding: 2rem 2rem 0 2rem;
 }
 
 .latest-checkpoint-desc-container {
