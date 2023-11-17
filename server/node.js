@@ -1,14 +1,15 @@
 const sql = require('mssql');
 
-// Configuring the database connection
+require('dotenv').config()
+
 const config = {
-    user: 'systemauthor',
-    password: 'westernexpress2023_',
-    server: 'westernexpressserver.database.windows.net',
-    database: 'westernexpressdb',
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    server: process.env.DB_SERVER,
+    database: process.env.DB_NAME,
     options: {
-        encrypt: true, // For Azure
-        trustServerCertificate: true // For Azure
+        encrypt: true, 
+        trustServerCertificate: true 
     }
 };
 
