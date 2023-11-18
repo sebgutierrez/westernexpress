@@ -211,3 +211,17 @@ body {
   #supportTable th {
 	background-color: #f0f0f0;
   }
+
+  /* css for tracking page */
+
+  .update-form {
+	display: block;
+  }
+
+  .view-form {
+	display: block;
+  }
+
+  .hidden {
+	display: none;
+  }

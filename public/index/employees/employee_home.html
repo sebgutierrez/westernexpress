@@ -33,17 +33,11 @@
       <nav class="side-nav">
         <ul>
           <li><a href="#" onclick="loadContent('home')">Home</a></li>
-          <li><a href="#" onclick="loadContent('shipping')">Shipping</a></li>
-          <li>
-            <a href="#" onclick="loadContent('packages')">Packages Overview</a>
-          </li>
+          <li><a href="#" onclick="loadContent('tracking')">Tracking</a></li>
+          <li><a href="#" onclick="loadContent('packages')">Packages Overview</a></li>
           <li><a href="#" onclick="loadContent('support')">Support</a></li>
-          <!--<li>
-            <a href="#" onclick="loadContent('post office')">Post-Offices</a>
-          </li>-->
-          <li>
-            <a href="/index/employees/financial_report.html">Financial Report</a>
-          </li>
+          <!--<li><a href="#" onclick="loadContent('post office')">Post-Offices</a></li>-->
+          <li><a href="/index/employees/financial_report.html">Financial Report</a></li>
           <li><a href="#" onclick="loadContent('contact')">Contact</a></li>
         </ul>
       </nav>
@@ -103,8 +97,21 @@
             </div>
           </div>
         </div>
-        <div id="shipping">
-          <p>This is the default content for Link 2.</p>
+        <div id="tracking">
+          <div>
+            <button id="view-tracking-btn">View Tracking History</button>
+            <button id="update-tracking-btn">Update Tracking History</button>
+          </div>
+          <form class="" id="view-tracking-form">
+            <label for="view-tracking-input" class=""></label>
+            <input type="text" name="view-tracking-input" id="view-tracking-input" class="" placeholder="Enter a 12-digit tracking number" required />
+            <button id="view-tracking-submit" onClick="viewTracking()" class="">View</button>
+          </form>
+          <form class="" id="upate-tracking-form">
+            <label for="update-tracking-input" class=""></label>
+            <input type="text" name="update-tracking-input" id="update-tracking-input" class="" placeholder="Enter a 12-digit tracking number" required />
+            <button id="update-tracking-submit" onClick="updateTracking()" class="">Update</button>
+          </form>
         </div>
         <div id="packages">
           <p>This is the default content for Link 3.</p>
@@ -256,5 +263,6 @@
       homeLink.classList.add("clicked");
       loadContent("home");
     </script>
+    <script src="./js/employee_home.js"></script>
   </body>
 </html>
