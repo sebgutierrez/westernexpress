@@ -106,7 +106,7 @@
           <div class="view-tracking">
             <h1 class="view-tracking-header">View Tracking History</h1>
             <form class="" id="view-tracking-form" action="#" style="display: block;">
-              <label for="view-tracking-input" class="">Tracking ID:</label>
+              <label for="view-tracking-input" class="view-tracking-label">Tracking ID:</label>
               <input type="text" name="view-tracking-input" id="view-tracking-input" class="" placeholder="" required />
               <button id="view-tracking-submit" onClick="viewTracking(); return false" class="">View</button>
             </form>
@@ -115,12 +115,19 @@
           <div class="update-tracking">
             <h1 class="update-tracking-header">Update Tracking History</h1>
             <form class="" id="upate-tracking-form" action="#" style="display: block;">
-              <label for="update-tracking-employee" class="">Employee ID:</label>
+              <label for="update-tracking-employee" class="update-employee-label">Employee ID:</label>
               <input type="text" name="update-tracking-employee" id="update-tracking-employee" class="" placeholder="" required />
-              <label for="update-tracking-input" class="">Tracking ID:</label>
+              <label for="update-tracking-input" class="update=tracking-label">Tracking ID:</label>
               <input type="text" name="update-tracking-input" id="update-tracking-input" class="" placeholder="" required />
-              <label for="update-tracking-status" class="">Status:</label>
-              <input type="text" name="update-tracking-status" id="update-tracking-status" class="" placeholder="" required />
+              <label for="update-tracking-status" class="update-status-label">Status:</label>
+              <select name="update-tracking-status" id="update-tracking-status"> 
+                <option value="processed">PROCESSED</option> 
+                <option value="shipped">SHIPPED</option> 
+                <option value="in transit">IN TRANSIT</option>
+                <option value="arrived">ARRIVED</option> 
+                <option value="delay">DELAY</option> 
+              </select>
+              <!--<input type="text" name="update-tracking-status" id="update-tracking-status" class="" placeholder="" required />-->
               <button id="update-tracking-submit" onClick="updateTracking(); return false" class="">Update</button>
             </form>
           </div>

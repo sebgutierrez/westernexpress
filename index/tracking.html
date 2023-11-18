@@ -160,8 +160,9 @@
 			let tracking_id = document.getElementById('tracking-input').value
 			const tracking_id_span = document.getElementById('tracking-id');
 			tracking_id_span.innerHTML = tracking_id;
-			
-			fetch(`/track/history/${tracking_id}`)
+			/*
+			const azureEndpoint = 'https://westernexpresspostal.azurewebsites.net';
+			fetch(`${azureEndpoint}/track/history/${tracking_id}`)
 				.then(response => response.json())
 				.then(data => {
 					if(typeof data.alert === 'undefined'){
@@ -172,7 +173,19 @@
 					}
 				})
 				.catch(error => (console.error('Fetch error:', error)));	
+			*/
 
+			fetch(`http://localhost:5500/track/history/${tracking_id}`)
+				.then(response => response.json())
+				.then(data => {
+					if(typeof data.alert === 'undefined'){
+						JSONToHTMLTable(data[0], "tracking-table");
+					}
+					else{
+						alert('The tracking ID you sent does not exist!'); 
+					}
+				})
+				.catch(error => (console.error('Fetch error:', error)));
 		}
 
 		function JSONToHTMLTable(data, elementToBind) {           
