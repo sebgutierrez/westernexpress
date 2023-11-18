@@ -12,7 +12,9 @@ const router = express.Router();
 
 /* server static pages */
 const path = require('path')
-app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.static(path.join(__dirname, 'index')))
+app.use(express.static(path.join(__dirname, 'images')))
+app.use(express.static(path.join(__dirname, 'css')))
 
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json());
@@ -26,8 +28,9 @@ app.get('/track/history/:id', (req, res) => {
     })
 })
 
-app.get('/track/update/:id', (req, res) => {
-    tracking.employeeTrackingUpdate(req.params.id)
+app.post('/track/update', (req, res) => {
+    console.log(req.body);
+    tracking.employeeTrackingUpdate(req.body)
     .then(result => {
         res.send(result);
     })
@@ -41,11 +44,11 @@ app.get('/track/package/:id', (req, res) => {
 })
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '/index.html'));
+    res.sendFile(path.join(__dirname, 'index.html'));
 })
 
 app.get('/index.html', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+    res.sendFile(path.join(__dirname, '/index.html'));
 });
 
 app.listen(process.env.PORT, () => {

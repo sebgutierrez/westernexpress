@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Western Express: Employee Portal</title>
     <link rel="stylesheet" href="\css\employees\employee_home.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=DM Sans">
   </head>
   <body>
     <div class="transparent-background"></div>
-
     <header>
       <h1>Welcome, <strong>Jane Doe</strong>!</h1>
       <div class="top-icons">
@@ -98,20 +98,32 @@
           </div>
         </div>
         <div id="tracking">
-          <div>
+          <span style="display: none;">Tracking ID:<span id="tracking-id"></span></span>
+          <!--<div>
             <button id="view-tracking-btn">View Tracking History</button>
             <button id="update-tracking-btn">Update Tracking History</button>
+          </div>-->
+          <div class="view-tracking">
+            <h1 class="view-tracking-header">View Tracking History</h1>
+            <form class="" id="view-tracking-form" action="#" style="display: block;">
+              <label for="view-tracking-input" class="">Tracking ID:</label>
+              <input type="text" name="view-tracking-input" id="view-tracking-input" class="" placeholder="" required />
+              <button id="view-tracking-submit" onClick="viewTracking(); return false" class="">View</button>
+            </form>
+            <div id="tracking-table"></div>
           </div>
-          <form class="" id="view-tracking-form">
-            <label for="view-tracking-input" class=""></label>
-            <input type="text" name="view-tracking-input" id="view-tracking-input" class="" placeholder="Enter a 12-digit tracking number" required />
-            <button id="view-tracking-submit" onClick="viewTracking()" class="">View</button>
-          </form>
-          <form class="" id="upate-tracking-form">
-            <label for="update-tracking-input" class=""></label>
-            <input type="text" name="update-tracking-input" id="update-tracking-input" class="" placeholder="Enter a 12-digit tracking number" required />
-            <button id="update-tracking-submit" onClick="updateTracking()" class="">Update</button>
-          </form>
+          <div class="update-tracking">
+            <h1 class="update-tracking-header">Update Tracking History</h1>
+            <form class="" id="upate-tracking-form" action="#" style="display: block;">
+              <label for="update-tracking-employee" class="">Employee ID:</label>
+              <input type="text" name="update-tracking-employee" id="update-tracking-employee" class="" placeholder="" required />
+              <label for="update-tracking-input" class="">Tracking ID:</label>
+              <input type="text" name="update-tracking-input" id="update-tracking-input" class="" placeholder="" required />
+              <label for="update-tracking-status" class="">Status:</label>
+              <input type="text" name="update-tracking-status" id="update-tracking-status" class="" placeholder="" required />
+              <button id="update-tracking-submit" onClick="updateTracking(); return false" class="">Update</button>
+            </form>
+          </div>
         </div>
         <div id="packages">
           <p>This is the default content for Link 3.</p>

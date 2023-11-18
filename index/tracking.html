@@ -19,7 +19,7 @@
 		  padding: 10px;
 		  text-align: left;
 		}
-	  </style>
+	</style>
 </head>
 <body>
     <header class="header">
@@ -160,7 +160,7 @@
 			let tracking_id = document.getElementById('tracking-input').value
 			const tracking_id_span = document.getElementById('tracking-id');
 			tracking_id_span.innerHTML = tracking_id;
-
+			
 			fetch(`/track/history/${tracking_id}`)
 				.then(response => response.json())
 				.then(data => {
@@ -174,7 +174,7 @@
 				.catch(error => (console.error('Fetch error:', error)));	
 
 		}
-		
+
 		function JSONToHTMLTable(data, elementToBind) {           
 			var col = [];
 			for (var i = 0; i < data.length; i++) {
