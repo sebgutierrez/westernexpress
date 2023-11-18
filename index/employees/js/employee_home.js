@@ -78,7 +78,7 @@ function viewTracking(){
   const tracking_id_span = document.getElementById('tracking-id');
   tracking_id_span.innerHTML = tracking_id;
 
-  fetch(`http://localhost:5500/track/history/${tracking_id}`)
+  fetch(`https://main.d2xbxyr9nuopel.amplifyapp.com/track/history/${tracking_id}`)
     .then(response => response.json())
     .then(data => {
       if(typeof data.alert === 'undefined'){
@@ -104,7 +104,7 @@ function updateTracking(){
   };
 
   console.log(data);
-  fetch('http://localhost:5500/track/update', {
+  fetch('https://main.d2xbxyr9nuopel.amplifyapp.com/track/update', {
     headers : {
       "Content-type": "application/json; charset=UTF-8"
     },
