@@ -172,56 +172,9 @@
 					}
 				})
 				.catch(error => (console.error('Fetch error:', error)));	
-/*
-			fetch(`/track/package/${tracking_id}`)
-			.then(response => response.json())
-				.then(data => {
-					if(typeof data.alert === 'undefined'){
-						JSONToHTMLTable(data[0], "package-table");
-					}
-				})
-				.catch(error => (console.error('Fetch error:', error)));	
-*/			
-		}
-/*
-		function displayTable(data) {
-			const table = querySelector('table');
 
-			getTH(data);
 		}
-
-		function getTH(data) {
-			const column = Object.keys(data[0]);
-			console.log(`data[0] is: ${data[0]}`);
-			console.log(`num of cols: ${column}`);
-			const head = document.querySelector('thead');
-			let tags = '<tr>';
-			for(i = 0; i < column.length; i++){
-				tags += `<th>${column[i]}</th>`;
-			}
-			tags += "</tr>";
-			head.innerHTML = tags;
-
-			getTD(data[0]);
-		}
-		function getTD(data) {
-			const body = document.querySelector('tbody');
-			let tags = '<tr>';
-			data.map(d => {
-				tags += `<tr>
-						 <td>${d.status}</td>
-						 <td>${d.date}</td>
-						 <td>${d.address}</td>
-						 <td>${d.city}</td>
-						 <td>${d.state}</td>
-						 <td>${d.zip}</td>
-						 <td>${d.notes}</td>
-						 </tr>`
-			})
-			body.innerHTML = tags;
-		}	
-		getTH();
-*/
+		
 		function JSONToHTMLTable(data, elementToBind) {           
 			var col = [];
 			for (var i = 0; i < data.length; i++) {
