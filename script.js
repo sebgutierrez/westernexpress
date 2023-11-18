@@ -22,7 +22,6 @@ app.use(cors());
 
 
 app.get('/track/history/:id', (req, res) => {
-    console.log('received request');
     tracking.customerTracking(req.params.id)
     .then(result => {
         res.send(result);
@@ -30,7 +29,6 @@ app.get('/track/history/:id', (req, res) => {
 })
 
 app.post('/track/update', (req, res) => {
-    console.log(req.body);
     tracking.employeePackageUpdate(req.body)
     .then(result => {
         res.send(result);

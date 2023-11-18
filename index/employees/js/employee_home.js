@@ -77,8 +77,8 @@ function viewTracking(){
   let tracking_id = document.getElementById('view-tracking-input').value;
   const tracking_id_span = document.getElementById('tracking-id');
   tracking_id_span.innerHTML = tracking_id;
-
-  fetch(`https://main.d2xbxyr9nuopel.amplifyapp.com/track/history/${tracking_id}`)
+  // https://main.d2xbxyr9nuopel.amplifyapp.com
+  fetch(`https://westernexpresspostal.azurewebsites.net/track/history/${tracking_id}`)
     .then(response => response.json())
     .then(data => {
       if(typeof data.alert === 'undefined'){
@@ -104,7 +104,7 @@ function updateTracking(){
   };
 
   console.log(data);
-  fetch('https://main.d2xbxyr9nuopel.amplifyapp.com/track/update', {
+  fetch('https://westernexpresspostal.azurewebsites.net/track/update', {
     headers : {
       "Content-type": "application/json; charset=UTF-8"
     },

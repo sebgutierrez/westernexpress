@@ -66,15 +66,12 @@ async function customerPackage(tracking_id){
 // get post office address where the employee is working at
 async function getPostOfficeId(employee_id){
     try {
-        console.log('before');
         let pool = await sql.connect(config);
         let postoffice_id = await pool.request()
         .query(`SELECT D.postoffice_id
                 FROM post_office_details AS D, employees_new AS E
                 WHERE D.postoffice_id = E.postoffice_id AND E.emp_id = ${employee_id};`);
         pool.close();
-        console.log('after');
-        console.log(postoffice_id.recordset[0].postoffice_id);
         return postoffice_id.recordset[0].postoffice_id;
     } catch (error) {
         console.log(error);
@@ -84,15 +81,12 @@ async function getPostOfficeId(employee_id){
 // get post office address where the employee is working at
 async function getPostOfficeAddress(employee_id){
     try {
-        console.log('before');
         let pool = await sql.connect(config);
         let address_id = await pool.request()
         .query(`SELECT D.address_id
                 FROM post_office_details AS D, employees_new AS E
                 WHERE D.postoffice_id = E.postoffice_id AND E.emp_id = ${employee_id};`);
         pool.close();
-        console.log('after');
-        console.log(address_id.recordset[0].address_id);
         return address_id.recordset[0].address_id;
     } catch (error) {
         console.log(error);
@@ -101,8 +95,6 @@ async function getPostOfficeAddress(employee_id){
 
 async function employeePackageUpdate(request){
     try {
-        console.log('package');
-        console.log(request);
         let exists = await trackingIdValidation(request.tracking_id);
         if(exists === 1){
             // should only allow update if there's no match with old and new package status
@@ -120,12 +112,8 @@ async function employeePackageUpdate(request){
                     SET status = '${request.status}', postoffice_id = ${postoffice_id}, last_edited_by = @last_edited_by
 			        WHERE tracking_number = ${request.tracking_id};`);
             pool.close();
-            console.log('updated');
-            console.log(update.rowsAffected);
             // insert new package update to package_status_history table. 
             let history = await employeeTrackingUpdate(request);
-            console.log('returning history');
-            console.log(history.recordsets);
             return {'success' : 'true'};
         }
         else{
@@ -138,8 +126,6 @@ async function employeePackageUpdate(request){
 
 async function employeeTrackingUpdate(request){
     try {
-        console.log('history');
-        console.log(request);
         let exists = await trackingIdValidation(request.tracking_id);
         if(exists === 1){
             let datetime = new Date().toLocaleString();
@@ -155,8 +141,6 @@ async function employeeTrackingUpdate(request){
                     INSERT INTO package_status_history(status_id, tracking_number, status, date, time, address_id) VALUES 
                     (@status_id, ${request.tracking_id}, '${request.status}', @date, @time, ${address_id});`);
             pool.close();
-            console.log('package rows affected');
-            console.log(package.rowsAffected);
             return package.recordsets;
         }
         else{

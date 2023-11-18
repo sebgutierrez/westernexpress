@@ -175,7 +175,8 @@
 				.catch(error => (console.error('Fetch error:', error)));	
 			*/
 
-			fetch(`https://main.d2xbxyr9nuopel.amplifyapp.com/track/history/${tracking_id}`)
+			// https://main.d2xbxyr9nuopel.amplifyapp.com
+			fetch(`https://westernexpresspostal.azurewebsites.net/track/history/${tracking_id}`)
 				.then(response => response.json())
 				.then(data => {
 					if(typeof data.alert === 'undefined'){

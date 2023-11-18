@@ -45,10 +45,10 @@
         <div id="home">
           <div class="background-container">
             <h1>Western Express Postal: Employee Portal</h1>
-            <div class="track-package">
+            <!--<div class="track-package">
               <input type="text" placeholder="Enter tracking number" />
               <button>Track</button>
-            </div>
+            </div>-->
           </div>
           <div class="services">
             <h2>Services Overview</h2>
@@ -121,11 +121,11 @@
               <input type="text" name="update-tracking-input" id="update-tracking-input" class="" placeholder="" required />
               <label for="update-tracking-status" class="update-status-label">Status:</label>
               <select name="update-tracking-status" id="update-tracking-status"> 
-                <option value="processed">PROCESSED</option> 
-                <option value="shipped">SHIPPED</option> 
-                <option value="in transit">IN TRANSIT</option>
-                <option value="arrived">ARRIVED</option> 
-                <option value="delay">DELAY</option> 
+                <option value="PROCESSED">PROCESSED</option> 
+                <option value="SHIPPED">SHIPPED</option> 
+                <option value="IN TRANSIT">IN TRANSIT</option>
+                <option value="ARRIVED">ARRIVED</option> 
+                <option value="DELAY">DELAY</option> 
               </select>
               <!--<input type="text" name="update-tracking-status" id="update-tracking-status" class="" placeholder="" required />-->
               <button id="update-tracking-submit" onClick="updateTracking(); return false" class="">Update</button>
