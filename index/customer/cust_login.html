@@ -4,22 +4,23 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" type="text/css" href="\css\customer\login_style.css"> 
+        <link rel="stylesheet" type="text/css" href="\css\customer\cust_login_style.css"> 
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=DM Sans">
         <title>Western Express Login Page</title>
     </head>
     <body>
         <div class="center">
             <h1 id="signin">SIGN IN</h1>
-            <form action="" method="post">
+            <form action="/server/cust_login.js" method="post">
                 <div class="input_field">
-                    <input type="text" name="text" required>
+                    <input type="text" name="username" required>
                     <label>Username</label>
                 </div>
                 <div class="input_field">
-                    <input type="password" name="text" required>
+                    <input type="password" name="password" required>
                     <label>Password</label>
                 </div>
-                <div class="links"><a href="#">Forgot password?</a>  <a href="signup.html">Signup</a></div>
+                <div class="links"><a href="cust_forgot_pass.html">Forgot password?</a>  <a href="cust_signup.html">Signup</a></div>
                 <input type="submit" value="LOGIN">
             </form>
         </div>
