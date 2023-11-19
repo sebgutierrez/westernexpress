@@ -9,8 +9,9 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const app = express();
 const router = express.Router();
-const PORT = process.env.PORT || 5500;
+const PORT = process.env.PORT;
 
+console.log(PORT);
 /* server static files */
 const path = require('path')
 app.use(express.static(path.join(__dirname, 'index')))
