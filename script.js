@@ -11,7 +11,7 @@ const app = express();
 const router = express.Router();
 const PORT = process.env.PORT || 5500;
 
-/* server static pages */
+/* server static files */
 const path = require('path')
 app.use(express.static(path.join(__dirname, 'index')))
 app.use(express.static(path.join(__dirname, 'images')))

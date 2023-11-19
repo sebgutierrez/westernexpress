@@ -63,7 +63,7 @@ async function customerPackage(tracking_id){
     }
 }
 
-// get post office address where the employee is working at
+// get post office address where the employee is working
 async function getPostOfficeId(employee_id){
     try {
         let pool = await sql.connect(config);

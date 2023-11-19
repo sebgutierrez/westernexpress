@@ -50,7 +50,7 @@ async function clockIn(request){
                     DECLARE @time TIME;
                     SET @date = CAST(SYSDATETIME() AS date);
 			        SET @clock_in_time = CAST(SYSDATETIME() AS time);
-					
+
 					INSERT INTO employee_hours(record_id, FK_employee_id, clock_in, clock_out, date, total_hours)
 					VALUES (@record_id, '${employee_id}', @clock_in_time, @clock_in_time, @date, 0);`);
 			pool.close();
@@ -170,6 +170,7 @@ async function updateWeeklyHours(employee_id, total_hours){
 				SET weekly_hours.weekly_hours = weekly_hours.weekly_hours + ${total_hours}
 				WHERE FK_employee_id = '${employee_id}' AND week_start = '@week_start' AND week_end = '@week_end';`);
         pool.close();
+		
 		return {'success' : 'updateWeeklyHours was successful'}
 	} catch (error) {
 		console.log(error);

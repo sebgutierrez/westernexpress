@@ -161,20 +161,6 @@
 			let tracking_id = document.getElementById('tracking-input').value
 			const tracking_id_span = document.getElementById('tracking-id');
 			tracking_id_span.innerHTML = tracking_id;
-			/*
-			const azureEndpoint = 'https://westernexpresspostal.azurewebsites.net';
-			fetch(`${azureEndpoint}/track/history/${tracking_id}`)
-				.then(response => response.json())
-				.then(data => {
-					if(typeof data.alert === 'undefined'){
-						JSONToHTMLTable(data[0], "tracking-table");
-					}
-					else{
-						alert('The tracking ID you sent does not exist!'); 
-					}
-				})
-				.catch(error => (console.error('Fetch error:', error)));	
-			*/
 
 			// https://main.d2xbxyr9nuopel.amplifyapp.com
 			//https://westernexpresspostal.azurewebsites.net

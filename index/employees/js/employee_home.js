@@ -140,7 +140,7 @@ function JSONToHTMLTable(data, elementToBind) {
   //This Code creates HTML table
   var table = document.createElement("table");
 
-  //This Code getsrows for header creader above.
+  //This Code getsrows for header creator above.
   var tr = table.insertRow(-1);
 
   for (var i = 0; i < col.length; i++) {
