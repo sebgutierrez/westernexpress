@@ -137,8 +137,7 @@
 	</section>
 	<script>
 		
-		const BASE_URL = '';
-		//const BASE_URL = 'https://westernexpresspostal.azurewebsites.net';
+		const BASE_URL = 'https://westernexpresspostal.azurewebsites.net';
 		const track_box = document.getElementById('track-box')
 		const search_form = document.getElementById('tracking-search-form')
 		const tracking_info = document.getElementById('tracking-info-container')
@@ -164,7 +163,7 @@
 			tracking_id_span.innerHTML = tracking_id;
 
 			// https://main.d2xbxyr9nuopel.amplifyapp.com
-			//https://westernexpresspostal.azurewebsites.net
+			//https://westernexpresspostal.azurewebsites.net/
 			fetch(`${BASE_URL}/track/history/${tracking_id}`)
 				.then(response => response.json())
 				.then(data => {
