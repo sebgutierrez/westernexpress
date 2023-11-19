@@ -39,6 +39,7 @@
           <!--<li><a href="#" onclick="loadContent('post office')">Post-Offices</a></li>-->
           <li><a href="/index/employees/financial_report.html">Financial Report</a></li>
           <li><a href="#" onclick="loadContent('contact')">Contact</a></li>
+          <li><a href="#" onclick="loadContent('clockin-clockout')">Clock In/Clock Out</a></li>
         </ul>
       </nav>
       <main class="content">
@@ -245,6 +246,28 @@
         </div>
         <div id="contact">
           <p>This is the default content for Link 7.</p>
+        </div>
+        <div id="clockin-clockout">
+          <div class="clockin">
+            <h1 class="clockin-header">Clock In</h1>
+            <form class="" id="clockin-form" action="#" style="display: block;">
+              <label for="clockin-user-input" class="clockin-user-label">Enter username:</label>
+              <input type="text" name="clockin-user-input" id="clockin-user-input" class="" placeholder="" required />
+              <label for="clockin-pass-input" class="clockin-pass-label">Enter password:</label>
+              <input type="text" name="clockin-pass-input" id="clockin-pass-input" class="" placeholder="" required />
+              <button id="clockin-submit" onClick="clockin(); return false" class="">Clock In</button>
+            </form>
+          </div>
+          <div class="clockout">
+            <h1 class="clockout-header">Clock Out</h1>
+            <form class="" id="clockout-form" action="#" style="display: block;">
+              <label for="clockout-user-input" class="clockout-user-label">Enter username:</label>
+              <input type="text" name="clockout-user-input" id="clockout-user-input" class="" placeholder="" required />
+              <label for="clockout-pass-input" class="clockout-pass-label">Enter password:</label>
+              <input type="text" name="clockout-pass-input" id="clockout-pass-input" class="" placeholder="" required />
+              <button id="clockout-submit" onClick="clockOut(); return false" class="">Clock Out</button>
+            </form>
+          </div>
         </div>
       </main>
     </div>
