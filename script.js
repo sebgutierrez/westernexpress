@@ -9,6 +9,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const app = express();
 const router = express.Router();
+const PORT = process.env.PORT || 5500;
 
 /* server static pages */
 const path = require('path')

@@ -4,6 +4,8 @@
 //mkaes the shadow appear when scrolling
 const horizontalLine = document.querySelector(".horizontal-line");
 
+const BASE_URL = 'https://westernexpresspostal.azurewebsites.net';
+
 window.addEventListener("scroll", () => {
   // Check if the user has scrolled down a certain distance (e.g., 100px)
   if (window.scrollY > 100) {
@@ -78,7 +80,7 @@ function viewTracking(){
   const tracking_id_span = document.getElementById('tracking-id');
   tracking_id_span.innerHTML = tracking_id;
   // https://main.d2xbxyr9nuopel.amplifyapp.com
-  fetch(`http://localhost:5500/track/history/${tracking_id}`)
+  fetch(`${BASE_URL}/track/history/${tracking_id}`)
     .then(response => response.json())
     .then(data => {
       if(typeof data.alert === 'undefined'){
@@ -104,7 +106,7 @@ function updateTracking(){
   };
 
   console.log(data);
-  fetch('http://localhost:5500/track/update', {
+  fetch(`${BASE_URL}/track/update`, {
     headers : {
       "Content-type": "application/json; charset=UTF-8"
     },
@@ -163,7 +165,9 @@ function JSONToHTMLTable(data, elementToBind) {
   divContainer.appendChild(table);
 }
 
-const view_tracking_form = document.getElementById('view-tracking-form');
+/*const view_tracking_form = document.getElementById('view-tracking-form');
 const update_tracking_form= document.getElementById('update-tracking-form');
 const view_tracking_btn = document.getElementById('view-tracking-btn');
-const update_tracking_btn = document.getElementById('update-tracking-btn');
+const update_tracking_btn = document.getElementById('update-tracking-btn');*/
+
+/**************************** EMPLOYEE CLOCKIN / CLOCKOUT **********************************************************/
