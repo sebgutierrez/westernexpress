@@ -22,6 +22,17 @@ app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json());
 app.use(cors());
 
+// Middleware to handle CORS headers
+app.use((req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Methods", "OPTIONS, POST, GET");
+    res.setHeader(
+      "Access-Control-Allow-Headers",
+      "X-Requested-With,content-type"
+    );
+    res.setHeader("Access-Control-Allow-Credentials", true);
+    next();
+  });
 
 app.get('/track/history/:id', (req, res) => {
     tracking.customerTracking(req.params.id)
@@ -60,6 +71,29 @@ app.post('/clockout', (req, res) => {
     })
 })
 
+app.post("/generateReport", async (req, res) => {
+    try {
+      const requestData = req.body;
+  
+      await mssql.connect({
+        user: process.env.DB_USER,
+        password: process.env.DB_PASSWORD,
+        server: String(process.env.DB_SERVER),
+        database: process.env.DB_DATABASE,
+        encrypt: true,
+      });
+  
+      const result = await mssql.query(requestData.query); // Using the received SQL query
+  
+      res.json(result.recordset);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send("Internal Server Error");
+    } finally {
+      await mssql.close();
+    }
+  });
+
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
@@ -69,6 +103,6 @@ app.get('/index.html', (req, res) => {
     res.sendFile(path.join(__dirname, '/index.html'));
 });
 
-app.listen(process.env.PORT, () => {
-    console.log(`Server is running on port ${process.env.PORT}`);
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });

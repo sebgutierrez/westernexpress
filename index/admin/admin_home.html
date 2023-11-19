@@ -43,26 +43,24 @@
               >Dashboard Overview</a
             >
           </li>
-          <!--<li>
-            <a href="#" onclick="loadContent('package')">Package Tracking</a>
-          </li>-->
           <li>
-            <a href="#" onclick="loadContent('employment')"
+            <a href="#" onclick="loadContent('package')">Package Tracking</a>
+          </li>
+          <li>
+            <a href="#" onclick="loadContent('employee')"
               >Employee Management</a
             >
           </li>
           <li>
-            <a href="#" onclick="loadContent('shipment')"
-              >Shipment Management</a
-            >
+            <a href="#" onclick="loadContent('salary')">Salary Report</a>
           </li>
           <li>
-            <a href="#" onclick="loadContent('post office')"
-              >Customer Support</a
-            >
+            <a href="#" onclick="loadContent('reports')">Sales Report</a>
           </li>
           <li>
-            <a href="#" onclick="loadContent('reports')">Reports</a>
+            <a href="#" onclick="loadContent('supportreport')"
+              >Support Ticket Report</a
+            >
           </li>
         </ul>
       </nav>
@@ -145,10 +143,33 @@
           </div>
         </div>
 
-        <div id="employment">
+        <div id="employee">
+          <h2>Employee Management</h2>
+          <div id="shipment">
+            <table id="shipmentTable">
+              <thead>
+                <tr>
+                  <th>Location</th>
+                  <th>Tracking ID</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Subject</th>
+                  <th>Category</th>
+                  <th>Status</th>
+                  <th>Created</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Table rows will be added dynamically via JavaScript -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div id="salary">
           <div class="e-container">
             <div class="employmentRequestForm">
-              <h2>Employee Information Generator</h2>
+              <h2>Salary Report</h2>
               <form id="RequestForm" action="submit_handler.php" method="post">
                 <div class="request-form">
                   <label for="title">Title:</label>
@@ -210,31 +231,6 @@
           </table>
         </div>
 
-        <div id="shipment">
-          <h2>Shipment Management</h2>
-          <div id="shipment">
-            <table id="shipmentTable">
-              <thead>
-                <tr>
-                  <th>Location</th>
-                  <th>Tracking ID</th>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Subject</th>
-                  <th>Category</th>
-                  <th>Status</th>
-                  <th>Created</th>
-                </tr>
-              </thead>
-              <tbody>
-                <!-- Table rows will be added dynamically via JavaScript -->
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <div id="post office">
-          <p>This is the default content for Link 5.</p>
-        </div>
         <div id="reports">
           <div class="sales">
             <h2>Sales Report Generator</h2>
@@ -245,9 +241,9 @@
                   <input type="checkbox" id="fieldAmount" /> Amount
                 </label>
                 <select id="amountComparison" name="amountComparison">
-                  <option value="equal">Equal to</option>
-                  <option value="greater">Greater than</option>
-                  <option value="less">Less than</option>
+                  <option value="=">Equal to</option>
+                  <option value=">">Greater than</option>
+                  <option value="<">Less than</option>
                 </select>
                 <input type="number" id="amount" name="amount" />
               </div>
@@ -258,54 +254,48 @@
                 </label>
                 <select id="location" name="location">
                   <option disabled selected value="">Select a location</option>
-                  <option value="location1">
-                    4516 Burleson Rd, Austin, TX 78744
-                  </option>
-                  <option value="location2">
+                  <option value="1">4516 Burleson Rd, Austin, TX 78744</option>
+                  <option value="2">
                     3740 Greenbriar Dr, Houston, TX 77098
                   </option>
-                  <option value="location3">
-                    515 Centre St, Dallas, TX 75208
-                  </option>
-                  <option value="location4">
-                    219 E Mills Ave, El Paso, TX 79901
-                  </option>
-                  <option value="location5">
-                    5001 Avenue L, Lubbock, TX 79452
-                  </option>
-                  <option value="location6">
-                    3903 Melear Dr, Arlington, TX 76015
-                  </option>
-                  <option value="location7">
+                  <option value="3">515 Centre St, Dallas, TX 75208</option>
+                  <option value="4">219 E Mills Ave, El Paso, TX 79901</option>
+                  <option value="5">5001 Avenue L, Lubbock, TX 79452</option>
+                  <option value="6">3903 Melear Dr, Arlington, TX 76015</option>
+                  <option value="7">
                     1140 S Laredo St, San Antonio, TX 78204
                   </option>
-                  <option value="location8">
+                  <option value="8">
                     5200 W University Blvd, Odessa, TX 79764
                   </option>
-                  <option value="location9">
+                  <option value="9">
                     10515 Stonewall Blvd, Corpus Christi, TX 78410
                   </option>
-                  <option value="location10">
-                    423 Los Alamos Dr, Alamo, TX 78516
-                  </option>
+                  <option value="10">423 Los Alamos Dr, Alamo, TX 78516</option>
                 </select>
               </div>
 
               <div class="fieldBox">
                 <label> <input type="checkbox" id="fieldDate" /> Date </label>
                 <select id="dateComparison" name="dateComparison">
-                  <option value="on">On</option>
-                  <option value="before">Before</option>
-                  <option value="after">After</option>
+                  <option value="=">On</option>
+                  <option value=">">Before</option>
+                  <option value="<">After</option>
                 </select>
-                <input type="date" id="date" name="date" />
+                <input
+                  type="text"
+                  id="date"
+                  name="date"
+                  pattern="\d{4}-\d{2}-\d{2}"
+                  placeholder="YYYY-MM-DD"
+                />
               </div>
 
               <div class="fieldBox">
                 <label>
                   <input type="checkbox" id="fieldEmployeeId" /> Employee ID
                 </label>
-                <input type="text" id="employeeId" name="employeeId" />
+                <input type="number" id="employeeId" name="employeeId" />
               </div>
 
               <button onclick="generateReport()">Generate Report</button>
@@ -317,9 +307,11 @@
             </div>
           </div>
         </div>
+        <div id="supportreport"></div>
       </main>
     </div>
 
     <script src="js/admin_home.js"></script>
+    <script src="js/adminreport1.js"></script>
   </body>
 </html>

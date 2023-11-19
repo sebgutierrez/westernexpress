@@ -1,19 +1,19 @@
-/*               JAVASCRIPT FOR ADMIN HOME PAGE                */
+const links = document.querySelectorAll(".side-nav a");
 
-/************************** HORIZONTAL LINE ***************************************************************/
-//mkaes the shadow appear when scrolling
-const horizontalLine = document.querySelector(".horizontal-line");
+links.forEach((link) => {
+  link.addEventListener("click", (event) => {
+    event.preventDefault(); // Prevent the default link behavior (optional)
 
-window.addEventListener("scroll", () => {
-  // Check if the user has scrolled down a certain distance (e.g., 100px)
-  if (window.scrollY > 100) {
-    horizontalLine.classList.add("has-shadow");
-  } else {
-    horizontalLine.classList.remove("has-shadow");
-  }
+    // Remove the "clicked" class from all links
+    links.forEach((otherLink) => {
+      otherLink.classList.remove("clicked");
+    });
+
+    // Add the "clicked" class to the clicked link
+    link.classList.add("clicked");
+  });
 });
 
-/*************************************************************************************************************/
 function loadContent(contentId) {
   // Hide all content divs
   const contentDivs = document.querySelectorAll(".content > div");
@@ -24,51 +24,7 @@ function loadContent(contentId) {
   // Show the selected content
   document.getElementById(contentId).style.display = "block";
 }
-
-/**********************************  DROP DOWN MENU  (NOT WORKING AS OF RIGHT NOW)******************************************************/
-//Add your JavaScript code here (as previously provided)
-const dropdown = document.querySelector(".dropdown");
-const dropdownContent = dropdown.querySelector(".dropdown-content");
-
-dropdown.addEventListener("click", () => {
-  dropdownContent.style.display =
-    dropdownContent.style.display === "block" ? "none" : "block";
-});
-
-// Close the dropdown when clicking outside of it
-window.addEventListener("click", (event) => {
-  if (!event.target.matches(".icon")) {
-    dropdownContent.style.display = "none";
-  }
-});
-
-/**************************** EMPLOYEE SUPPORT TICKET PAGE**********************************************************/
-//Example ticket data (replace this with data from backend)
-const ticketData = {
-  ticketID: 1,
-  name: "John Doe",
-  email: "john@example.com",
-  subject: "Issue with product",
-  category: "Technical",
-  status: "Open",
-  created: "2023-11-03",
-};
-
-// Function to add a new row to the support table
-function addTicketToTable(data) {
-  const tableBody = document.querySelector("#supportTable tbody");
-  const newRow = document.createElement("tr");
-
-  newRow.innerHTML = `
-    <td>${data.ticketID}</td>
-    <td>${data.name}</td>
-    <td>${data.email}</td>
-    <td>${data.subject}</td>
-    <td>${data.category}</td>
-    <td>${data.status}</td>
-    <td>${data.created}</td>
-  `;
-  tableBody.appendChild(newRow);
-}
-// Adding the sample ticket data to the table
-addTicketToTable(ticketData);
+// Set the "Home" link to be lit up by default
+const homeLink = document.querySelector(".side-nav a[href='#']");
+homeLink.classList.add("clicked");
+loadContent("dashboard");

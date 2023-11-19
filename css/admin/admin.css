@@ -4,7 +4,6 @@ body {
 	margin: 0;
 	padding: 0;
 	height: auto;
-	font-family: 'DM Sans', serif;
   }
   
   header {
@@ -309,4 +308,73 @@ body {
   table th {
 	background-color: #023047; /* Dark blue header background color */
 	color: white;
+  }
+  
+  /*     SALES REPORTS PAGE CSS          */
+  .sales {
+	font-family: Arial, sans-serif;
+	margin: 20px;
+	background-color: #023047; /* Light Steel Blue */
+  }
+  
+  .fieldBox {
+	background-color: #87ceeb; /* Sky Blue */
+	padding: 10px;
+	margin-bottom: 10px;
+	border-radius: 5px;
+  }
+  
+  h2 {
+	color: white; /* Navy */
+  }
+  
+  #reportForm {
+	background-color: #87ceeb; /* Sky Blue */
+	padding: 20px;
+	border-radius: 10px;
+	width: 300px;
+	margin: auto;
+  }
+  
+  label {
+	display: block;
+	margin-bottom: 8px;
+	color: black;
+  }
+  
+  input[type="checkbox"] {
+	margin-right: 5px;
+  }
+  
+  button {
+	padding: 8px;
+	margin-top: 10px;
+	background-color: #4caf50;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+  }
+  
+  button:hover {
+	background-color: #45a049;
+  }
+  
+  #result {
+	margin-top: 20px;
+	padding: 10px;
+	border: 1px solid #ddd;
+	display: none;
+	background-color: white;
+	border-radius: 10px;
+  }
+  
+  ul {
+	list-style: none;
+	padding: 0;
+  }
+  
+  li {
+	margin-bottom: 5px;
+	color: #000080; /* Navy */
   }
