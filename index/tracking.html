@@ -176,7 +176,8 @@
 			*/
 
 			// https://main.d2xbxyr9nuopel.amplifyapp.com
-			fetch(`https://westernexpresspostal.azurewebsites.net/track/history/${tracking_id}`)
+			//https://westernexpresspostal.azurewebsites.net
+			fetch(`http://localhost:5500/track/history/${tracking_id}`)
 				.then(response => response.json())
 				.then(data => {
 					if(typeof data.alert === 'undefined'){
