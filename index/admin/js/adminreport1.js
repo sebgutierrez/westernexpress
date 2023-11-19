@@ -7,22 +7,38 @@ if (typeof require !== "undefined") {
 }
 
 function generateReport() {
+  const amountChecked = document.getElementById("fieldAmount").checked;
+  const locationChecked = document.getElementById("fieldLocation").checked;
+  const dateChecked = document.getElementById("fieldDate").checked;
+  const employeeIdChecked = document.getElementById("fieldEmployeeId").checked;
+
+  // Check if none of the checkboxes are checked
+  if (!(amountChecked || locationChecked || dateChecked || employeeIdChecked)) {
+    // You can display a message to the user or simply return
+    console.log("Please select at least one filter to generate a report.");
+    return;
+  }
+
   const requestData = {
     amount: document.getElementById("amount").value,
     amountComparison: document.getElementById("amountComparison").value,
     location: document.getElementById("location").value,
-    dateComparison: document.getElementById("dateComparison").value,
     date: document.getElementById("date").value,
+    dateComparison: document.getElementById("dateComparison").value,
     employeeId: document.getElementById("employeeId").value,
   };
 
-  let query =
-    "SELECT s.amount, s.sale_date, s.tracking_number, s.emp_id FROM dbo.sales s";
+  let query = `
+  SELECT s.amount, s.sale_date, f.emp_id, f.first_name, f.last_name
+  FROM dbo.sales s
+  INNER JOIN dbo.employees_new f ON s.emp_id = f.emp_id
+`;
+
   let whereClauses = [];
 
   if (
     document.getElementById("fieldAmount").checked &&
-    requestData.amount !== ""
+    requestData.amount !== undefined
   ) {
     const sqlOperator =
       requestData.amountComparison === "greater than"
@@ -31,33 +47,28 @@ function generateReport() {
     whereClauses.push(`s.amount ${sqlOperator} ${requestData.amount}`);
   }
 
-  if (
-    document.getElementById("fieldLocation").checked &&
-    requestData.location !== ""
-  ) {
-    whereClauses.push(
-      `s.address_id IN (SELECT address_id FROM dbo.post_office_details WHERE postoffice_id = ${requestData.location})`
-    );
+  // modify location
+  if (document.getElementById("fieldLocation").checked) {
+    query += ` INNER JOIN dbo.post_office_details pd ON s.address_id = pd.address_id`;
+    whereClauses.push(`pd.postoffice_id = ${requestData.location}`);
   }
 
-  if (document.getElementById("fieldDate").checked && requestData.date !== "") {
+  if (document.getElementById("fieldDate").checked) {
     whereClauses.push(
       `s.sale_date ${requestData.dateComparison} '${requestData.date}'`
     );
   }
 
-  if (
-    document.getElementById("fieldEmployeeId").checked &&
-    requestData.employeeId !== ""
-  ) {
-    whereClauses.push(`s.emp_id = '${requestData.employeeId}'`);
+  if (document.getElementById("fieldEmployeeId").checked) {
+    whereClauses.push(`f.emp_id = '${requestData.employeeId}'`);
   }
 
+  // Combine WHERE clauses if there are any
   if (whereClauses.length > 0) {
     query += ` WHERE ${whereClauses.join(" AND ")}`;
   }
 
-  // Add this line before making the fetch request to see SQL Query
+  //See SQL Query
   console.log("Generated SQL query:", query);
 
   fetch("http://localhost:3000/generateReport", {
@@ -87,7 +98,7 @@ function generateReport() {
           .split("T")[0];
 
         // Include emp_id in the list item text content
-        listItem.textContent = `Amount: ${item.amount}, Date: ${formattedDate}, Tracking Number: ${item.tracking_number}, Employee ID: ${item.emp_id}`;
+        listItem.textContent = `Amount: ${item.amount}, Date: ${formattedDate}, Employee ID: ${item.emp_id}, Employee Name: ${item.first_name} ${item.last_name}`;
         reportList.appendChild(listItem);
       });
 
@@ -96,6 +107,5 @@ function generateReport() {
     })
     .catch((error) => {
       console.error(error);
-      // Handle errors and provide feedback to the user
     });
 }

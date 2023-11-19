@@ -1,10 +1,3 @@
-/*               JAVASCRIPT FOR ADMIN HOME PAGE                */
-/* const http = require("http"); */
-/* const url = require("url"); */
-/* const mssql = require("mssql"); */
-/* const dbOperations = require("./dbOperations"); */
-
-/*************************************************************************************************************/
 const links = document.querySelectorAll(".side-nav a");
 
 links.forEach((link) => {
