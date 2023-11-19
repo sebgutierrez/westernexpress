@@ -1,0 +1,282 @@
+/* CSS for Homepage */
+
+/* General styling */
+body {
+    font-family: 'DM Sans', serif;
+    margin: 0;
+    padding: 0;
+    background-color: white; /* light gray background */
+    overflow-x: hidden;
+}
+
+.homepage-section {
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	min-height: 80vh;
+	max-height: max-content;
+	border-radius: 2rem;
+	/*margin: 1rem 3rem 2rem 3rem;*/
+}
+
+
+/* Header styling */
+.header {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	position: relative;
+	padding: 0.5rem 2rem 0 3rem;
+}
+
+.website-name {
+	font-size: 1.75rem;
+	font-weight: bold;
+	color: #081B4B;
+}
+
+.website-homepage-link {
+	color: #081B4B;
+}
+
+.website-homepage-link:link {
+	text-decoration: none;
+}
+
+.website-homepage-link:visited {
+	text-decoration: none;
+}
+
+.navbar {
+	display: flex;
+	position: relative;
+	width: min-content;
+}
+
+.navlist {
+	display: flex;
+	align-items: center;
+	list-style: none;
+	padding: 0 0 0 1.5rem;
+}
+
+.navlist-item {
+	margin: 0 1.5rem 0 1.5rem;
+}
+
+.navlist-link {
+	color: #081B4B;
+	font-size: 1.25rem;
+	font-weight: bold;
+}
+
+.navlist-link:link {
+	text-decoration: none;
+}
+
+.navlist-link:visited {
+	text-decoration: none;
+}
+
+.account-buttons {
+	display: flex;
+	position: absolute;
+	bottom: 1rem;
+	right: 8rem;
+}
+
+.sign-in-button {
+	border: none;
+	background-color: white;
+	margin-right: 2rem;
+}
+
+.sign-in-link {
+	color:#081B4B;
+	font-size: 1.25rem;
+	font-weight: bold;
+}
+
+.sign-in-link:link {
+	text-decoration: none;
+}
+
+.sign-in-link:visited {
+	text-decoration: none;
+}
+
+.sign-up-button {
+	background-color: #081B4B;
+	border-radius: 0.5rem;
+	border: none;
+	padding: 0.75rem 2rem 0.75rem 2rem;
+}
+
+.sign-up-link {
+	color: white;
+	font-size: 1.25rem;
+	font-weight: bold;
+}
+
+.sign-up-link:link {
+	text-decoration: none;
+}
+
+.sign-up-link:visited {
+	text-decoration: none;
+}
+
+.hero-banner {
+	display: flex;
+	height: 55vh; 
+	position: relative;
+	top: 1rem;
+}
+
+.hero-image {
+	z-index: 0;
+	object-fit: cover;
+	width: 100%;
+	opacity: 90%;
+	filter: brightness(50%)
+}
+
+.slogan {
+	display: flex;
+	width: 100%;
+	justify-content: center;
+	text-align: center;
+	top: 5rem;
+	position: absolute;
+	font-size: 2.5rem;
+	font-weight: lighter;
+	color: white;
+	z-index: 1;
+}
+
+.tracking-form-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	top: 4rem;
+	height: 100%;
+	width: 100%;
+	z-index: 1;
+}
+
+.tracking-form {
+	display: flex;
+	flex-direction: column;
+	position: relative;
+}
+
+.tracking-label {
+	font-size: 1.25rem;
+	text-align: center;
+	color: white;
+	margin-bottom: 1rem;
+}
+
+.tracking-input {
+	position: relative;
+	padding: 0.75rem 22rem 0.75rem 1rem;
+	border: none;
+	border-radius: 0.25rem;
+}
+.tracking-input::placeholder {
+	position: relative;
+	top: 0.1rem;
+	font-size: 1rem;
+	width: fit-content;
+	color: #B5B5B5; 
+}
+
+.tracking-search-button {
+	position: absolute;
+	bottom: 0.3rem;
+	right: 0.35rem;
+	font-size: 1.2rem;
+	font-weight: bold;
+	padding: 0.25rem 1.55rem 0.25rem 1.5rem;
+	border: none;
+	border-radius: 0.4rem;
+	color: white;
+	background-color: #081B4B;
+}
+
+.tracking-search-button:hover {
+	cursor: pointer;
+}
+
+.mission-statement-container {
+	display: flex;
+	position: relative;
+	flex-direction: column;
+	width: 100%;
+	margin-top: 4rem;
+}
+
+.mission-statement-header {
+	display: block;
+	text-align: center;
+	font-size: 1.25rem;
+	margin-bottom: 1rem;
+}
+
+.mission-statement-text {
+	display: flex;
+	width: 100%;
+	justify-content: center;
+}
+
+.website-navigation-container {
+	display: flex;
+	justify-content: space-evenly;
+	position: relative;
+	width: 100%;
+	margin: 3rem 0rem 2rem 0rem;
+}
+
+.website-service-container {
+	background-color: #E1FAFF;
+	border: none;
+	border-radius: 0.5rem;
+	padding: 2rem 8rem 2rem 8rem;
+}
+
+.website-service-container:hover {
+	background-color: #70D4FF;
+	/*display: inline-block;
+    vertical-align: middle;
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    position: relative;
+    transition-property: color;
+    transition-duration: 0.3s;*/
+}
+
+.service-name {
+	display: flex;
+	justify-content: center;
+	position: relative;
+	margin-bottom: 1rem;
+}
+
+.service-link {
+	font-size: 2rem;
+	font-weight: bold;
+	color: #081B4B;
+	text-decoration: none;
+}
+
+.service-link:visited {
+	text-decoration: none;
+}
+
+.svg-icon {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	margin: 1.5rem 0 2rem 0;
+}

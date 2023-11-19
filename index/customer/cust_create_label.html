@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Postal Service Business Name</title>
+    <link rel="stylesheet" href="/css/customer/cust_create_label.css"> <!-- Link to your homepage CSS file -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=DM Sans">
+</head>
+<body>
+
+<div class="container">
+    <h2>Shipping Label Form</h2>
+    <form id="shipping-form">
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date"><br>
+
+        <label for="recipientName">Recipient Name:</label>
+        <input type="text" id="recipientName" name="recipientName" value="Default Computer"><br>
+
+        <h3>Sender Details</h3>
+        <label for="senderName">Sender Name:</label>
+        <input type="text" id="senderName" name="senderName"><br>
+
+        <label for="senderAddress">Sender Address:</label><br>
+        <input type="text" id="senderStreet" name="senderStreet" placeholder="Street"><br>
+        <input type="text" id="senderCity" name="senderCity" placeholder="City"><br>
+        <select id="senderState" name="senderState">
+            <option value="">Select a state</option>
+            <!-- Add all USA states dynamically using JavaScript -->
+        </select><br>
+        <input type="text" id="senderCountry" name="senderCountry" value="USA" disabled><br>
+
+        <h3>Receiver Details</h3>
+        <label for="receiverName">Receiver Name:</label>
+        <input type="text" id="receiverName" name="receiverName"><br>
+
+        <label for="receiverPhone">Receiver Phone:</label>
+        <input type="text" id="receiverPhone" name="receiverPhone"><br>
+
+        <label for="receiverAddress">Receiver Address:</label><br>
+        <input type="text" id="receiverStreet" name="receiverStreet" placeholder="Street"><br>
+        <input type="text" id="receiverCity" name="receiverCity" placeholder="City"><br>
+        <select id="receiverState" name="receiverState">
+            <option value="">Select a state</option>
+            <!-- Add all USA states dynamically using JavaScript -->
+        </select><br>
+        <input type="text" id="receiverCountry" name="receiverCountry" value="USA" disabled><br>
+
+        <h3>Package Details</h3>
+        <label for="description">Description:</label>
+        <input type="text" id="description" name="description"><br>
+
+        <label for="size">Size:</label>
+        <input type="text" id="size" name="size"><br>
+
+        <label for="weight">Weight:</label>
+        <input type="text" id="weight" name="weight"><br>
+
+        <label for="class">Class:</label>
+        <select id="class" name="class" onchange="calculateCost()">
+            <option value="1st class">1st class</option>
+            <option value="2nd day air">2nd day air</option>
+            <option value="economy">economy</option>
+        </select><br>
+
+        <label for="cost">Cost:</label>
+        <input type="text" id="cost" name="cost" readonly><br>
+
+        <label for="postOffice">Select Post Office:</label>
+        <select id="postOffice" name="postOffice">
+            <option value="1">4516 Burleson Rd, Austin, TX, 78744</option>
+            <option value="2">3740 Greenbriar Dr, Houston, TX, 77098</option>
+            <option value="3">515 Centre St, Dallas, TX, 75208</option>
+            <option value="4">219 E Mills Ave, El Paso, TX, 79901</option>
+            <option value="5">5001 Avenue L, Lubbock, TX, 79452</option>
+            <option value="6">3903 Melear Dr, Arlington, TX, 76015</option>
+            <option value="7">1140 S Laredo St, San Antonio, TX, 78204</option>
+            <option value="8">5200 W University Blvd, Odessa, TX, 79764</option>
+            <option value="9">10515 Stonewall Blvd, Corpus Christi, TX, 78410</option>
+            <option value="10">423 Los Alamos Dr, Alamo, TX, 78516</option>
+        </select><br>
+
+        <label for="status">Status:</label>
+        <select id="status" name="status">
+            <option value="Created Label">Created Label</option>
+            <option value="Shipped">Shipped</option>
+            <option value="In Transit">In Transit</option>
+            <option value="Delivered">Delivered</option>
+        </select><br>
+
+        <input type="button" value="Generate Label" onclick="generateLabel()">
+    </form>
+</div>
+
+
+
+
+<script>
+    // Add all USA states dynamically
+    const usStates = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"];
+
+    const senderStateSelect = document.getElementById('senderState');
+    const receiverStateSelect = document.getElementById('receiverState');
+
+    usStates.forEach(state => {
+        let option1 = document.createElement('option');
+        option1.text = state;
+        option1.value = state;
+        senderStateSelect.add(option1);
+
+        let option2 = document.createElement('option');
+        option2.text = state;
+        option2.value = state;
+        receiverStateSelect.add(option2);
+    });
+
+    function calculateCost() {
+        const selectedClass = document.getElementById('class').value;
+        let cost;
+        if (selectedClass === '1st class') {
+            cost = 100;
+        } else if (selectedClass === '2nd day air') {
+            cost = 70;
+        } else if (selectedClass === 'economy') {
+            cost = 15;
+        }
+        document.getElementById('cost').value = '$' + cost;
+    }
+
+    function generateLabel() {
+        const trackingNumber = generateTrackingNumber();
+        const senderName = document.getElementById('senderName').value;
+        const senderAddress = `${document.getElementById('senderStreet').value}, ${document.getElementById('senderCity').value}, ${document.getElementById('senderState').value}`;
+        const receiverName = document.getElementById('receiverName').value;
+        const receiverAddress = `${document.getElementById('receiverStreet').value}, ${document.getElementById('receiverCity').value}, ${document.getElementById('receiverState').value}`;
+        const shippingClass = document.getElementById('class').value;
+
+        const labelContent = `
+            <div style="text-align: center;">
+                <h1>WESTERN EXPRESS LOGISTICS</h1>
+                <h2>Shipping Label</h2>
+                <p>Tracking Number: ${trackingNumber}</p>
+                <p>Sender Information:</p>
+                <p>Name: ${senderName}</p>
+                <p>Address: ${senderAddress}</p>
+                <p>Receiver Information:</p>
+                <p>Name: ${receiverName}</p>
+                <p>Address: ${receiverAddress}</p>
+                <p>Class: ${shippingClass}</p>
+                <img src="https://www.barcodesinc.com/generator/image.php?code=${trackingNumber}&style=68&type=C128B&width=200&height=50&xres=1&font=3" alt="Barcode">
+            </div>
+        `;
+        const labelWindow = window.open('', '_blank');
+        labelWindow.document.write(labelContent);
+    }
+
+    function generateTrackingNumber() {
+        const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        let result = '';
+        for (let i = 0; i < 10; i++) {
+            result += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        return result;
+    }
+</script>

@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Western Express: Employee Portal</title>
+    <link rel="stylesheet" href="\css\employees\employee_home.css" />
+  </head>
+  <body>
+    <div class="transparent-background"></div>
+
+    <header>
+      <h1>Welcome, <strong>Jane Doe</strong>!</h1>
+      <div class="top-icons">
+        <div class="dropdown">
+          <div class="icon">
+            <img
+              src="/images/employee_images/account_circle.svg"
+              alt="user logo"
+            />
+          </div>
+          <div class="dropdown-content">
+            <a href="#">Profile</a>
+            <a href="#">Settings</a>
+            <a href="#">Sign Out</a>
+          </div>
+        </div>
+      </div>
+    </header>
+    <hr class="horizontal-line" />
+
+    <div class="container">
+      <nav class="side-nav">
+        <ul>
+          <li><a href="#" onclick="loadContent('home')">Home</a></li>
+          <li><a href="#" onclick="loadContent('tracking')">Tracking</a></li>
+          <li><a href="#" onclick="loadContent('packages')">Packages Overview</a></li>
+          <li><a href="#" onclick="loadContent('support')">Support</a></li>
+          <!--<li><a href="#" onclick="loadContent('post office')">Post-Offices</a></li>-->
+          <li><a href="/index/employees/financial_report.html">Financial Report</a></li>
+          <li><a href="#" onclick="loadContent('contact')">Contact</a></li>
+        </ul>
+      </nav>
+      <main class="content">
+        <div id="home">
+          <div class="background-container">
+            <h1>Western Express Postal: Employee Portal</h1>
+            <div class="track-package">
+              <input type="text" placeholder="Enter tracking number" />
+              <button>Track</button>
+            </div>
+          </div>
+          <div class="services">
+            <h2>Services Overview</h2>
+            <h3>Priority Mail Express</h3>
+            <p>
+              Perfect for sending urgent mails or packages within 1-2 days.
+              Money back guaranteed if it doesn’t arrive by delivery date Price:
+              Starts at $27.75 Delivery Speed: Next day to 2 days Weight: Up to
+              70lbs
+            </p>
+            <h3>Priority Mail</h3>
+            <p>
+              You need to send something important that need to arrive within 1
+              to 3 business days Price: Flat Rate Envelop: From $8.65 Mailing
+              Box: From $9.20 Your Own Box by Weight: From $9.35 Delivery Speed:
+              1-2 days Weight: Up to 70lbs
+            </p>
+            <h3>Ground</h3>
+            <p>
+              Low rates for packages that only need to be delivered within 2-5
+              days. Good option for HAZMAT items that can’t travel by air.
+              Price: From $4.25 Delivery Speed: 2-5 days Weight: Up to 70lbs
+              inside the US. Packages up to 15.999 oz is priced by ounces.
+            </p>
+            <h3>First Class</h3>
+            <p>
+              For sending letter envelops (below 3.5oz) or large envelop (below
+              13 oz) that can flatten and bend. Price: Postcards: $0.41 Letters:
+              $0.56 Large Envelops: $1.25 Delivery Speed: 2-5 days Weight:
+              Single-piece envelops weighs up 10 3.5oz, and large envelops up to
+              13oz.
+            </p>
+            <h3>Media Class</h3>
+            <p>
+              Sending books, medias, and educational materials for an affordable
+              price. Can only be shipped in store. Items are subjected to be
+              inspected at Postal Service Price: From $3.75 Delivery Speed: 2-8
+              days Weight: Up to 70lbs
+            </p>
+            <div class="contactinfo">
+              <p>Western Express Postal Service</p>
+              <p>CONTACT INFORMATION</p>
+              <p>Email: westernexpresspostal@outlook.net</p>
+              <p>Location's Phone Number: (888) 777 6666</p>
+              <p>Manager's Phone Number: (666) 555 4444</p>
+            </div>
+          </div>
+        </div>
+        <div id="tracking">
+          <div>
+            <button id="view-tracking-btn">View Tracking History</button>
+            <button id="update-tracking-btn">Update Tracking History</button>
+          </div>
+          <form class="" id="view-tracking-form">
+            <label for="view-tracking-input" class=""></label>
+            <input type="text" name="view-tracking-input" id="view-tracking-input" class="" placeholder="Enter a 12-digit tracking number" required />
+            <button id="view-tracking-submit" onClick="viewTracking()" class="">View</button>
+          </form>
+          <form class="" id="upate-tracking-form">
+            <label for="update-tracking-input" class=""></label>
+            <input type="text" name="update-tracking-input" id="update-tracking-input" class="" placeholder="Enter a 12-digit tracking number" required />
+            <button id="update-tracking-submit" onClick="updateTracking()" class="">Update</button>
+          </form>
+        </div>
+        <div id="packages">
+          <h2>Packages Overview</h2>
+            <form class="package-overview-form" id="package-overview-form">
+                <div class="page">
+                  <div class="container1">
+                      <h3>From</h3>
+                      <input type="date" id="startDate">
+                      <h3>To</h3>
+                      <input type="date" id="endDate">
+                  </div>
+                  <div class="container2">
+                      <h3>Class Types</h3>
+                      <label>
+                        <select id="packageType" name="packageType">
+                          <option value="">Choose an option</option>
+                          <option value="Priority Mail Express">Priority Mail Express</option>
+                          <option value="Priority Mail">Priority Mail</option>
+                          <option value="Ground">Ground</option>
+                          <option value="First Class">First Class</option>
+                          <option value="Media Class">Media Class</option>
+                        </select>
+                      <h3>Status</h3>
+                      <label>
+                        <select id="status" name="status">
+                          <option value="">Choose an option</option>
+                          <option value="Processed">Processed</option>
+                          <option value="Shipped">Shipped</option>
+                          <option value="On The Way ">On The Way</option>
+                          <option value="Delivered">Delivered</option>
+                          <option value="Delay">Delay</option>
+                      </select>
+                    </label>
+                  </div>
+              </div>
+              <div class="submit_button">
+                <input type= "submit" id="package_submit" onClick="generateOverview()" class="package_submit" value="Generate">
+            </div>
+            <div id="packageOverview"></div>
+            </form>
+        </div>
+        <div id="support">
+          <h2>Support Tickets</h2>
+          <div id="support">
+            <table id="supportTable">
+              <thead>
+                <tr>
+                  <th>Ticket ID</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Subject</th>
+                  <th>Category</th>
+                  <th>Status</th>
+                  <th>Created</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Table rows will be added dynamically via JavaScript -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div id="post office">
+          <p>This is the default content for Link 5.</p>
+        </div>
+        <div id="manager reports">
+          <div id="reports">
+            <div class="sales">
+              <h2>Sales Report Generator</h2>
+  
+              <div id="reportForm">
+                <div class="fieldBox">
+                  <label>
+                    <input type="checkbox" id="fieldAmount" /> Amount
+                  </label>
+                  <select id="amountComparison" name="amountComparison">
+                    <option value="equal">Equal to</option>
+                    <option value="greater">Greater than</option>
+                    <option value="less">Less than</option>
+                  </select>
+                  <input type="number" id="amount" name="amount" />
+                </div>
+  
+                <div class="fieldBox">
+                  <label>
+                    <input type="checkbox" id="fieldLocation" /> Location
+                  </label>
+                  <select id="location" name="location">
+                    <option disabled selected value="">Select a location</option>
+                    <option value="location1">
+                      4516 Burleson Rd, Austin, TX 78744
+                    </option>
+                    <option value="location2">
+                      3740 Greenbriar Dr, Houston, TX 77098
+                    </option>
+                    <option value="location3">
+                      515 Centre St, Dallas, TX 75208
+                    </option>
+                    <option value="location4">
+                      219 E Mills Ave, El Paso, TX 79901
+                    </option>
+                    <option value="location5">
+                      5001 Avenue L, Lubbock, TX 79452
+                    </option>
+                    <option value="location6">
+                      3903 Melear Dr, Arlington, TX 76015
+                    </option>
+                    <option value="location7">
+                      1140 S Laredo St, San Antonio, TX 78204
+                    </option>
+                    <option value="location8">
+                      5200 W University Blvd, Odessa, TX 79764
+                    </option>
+                    <option value="location9">
+                      10515 Stonewall Blvd, Corpus Christi, TX 78410
+                    </option>
+                    <option value="location10">
+                      423 Los Alamos Dr, Alamo, TX 78516
+                    </option>
+                  </select>
+                </div>
+  
+                <div class="fieldBox">
+                  <label> <input type="checkbox" id="fieldDate" /> Date </label>
+                  <select id="dateComparison" name="dateComparison">
+                    <option value="on">On</option>
+                    <option value="before">Before</option>
+                    <option value="after">After</option>
+                  </select>
+                  <input type="date" id="date" name="date" />
+                </div>
+  
+                <div class="fieldBox">
+                  <label>
+                    <input type="checkbox" id="fieldEmployeeId" /> Employee ID
+                  </label>
+                  <input type="text" id="employeeId" name="employeeId" />
+                </div>
+  
+                <button onclick="generateReport()">Generate Report</button>
+              </div>
+  
+              <div id="result">
+                <h3>Generated Report:</h3>
+                <ul id="reportList"></ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="contact">
+          <p>This is the default content for Link 7.</p>
+        </div>
+      </main>
+    </div>
+
+    <script>
+      // Your JavaScript code here
+      const links = document.querySelectorAll(".side-nav a");
+
+      links.forEach((link) => {
+        link.addEventListener("click", (event) => {
+          event.preventDefault(); // Prevent the default link behavior (optional)
+
+          // Remove the "clicked" class from all links
+          links.forEach((otherLink) => {
+            otherLink.classList.remove("clicked");
+          });
+
+          // Add the "clicked" class to the clicked link
+          link.classList.add("clicked");
+        });
+      });
+
+      function loadContent(contentId) {
+        // Hide all content divs
+        const contentDivs = document.querySelectorAll(".content > div");
+        contentDivs.forEach((div) => {
+          div.style.display = "none";
+        });
+
+        // Show the selected content
+        document.getElementById(contentId).style.display = "block";
+      }
+
+      //TRY TO GENERATE PACKAGE OVERVIEW TABLE
+      document.getElementById('package-overview-form').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent default form submission behavior
+
+      const startDate = document.getElementById('startDate').value;
+      const endDate = document.getElementById('endDate').value;
+      const packageType = document.getElementById('packageType').value;
+      const status = document.getElementById('status').value;
+
+      const queryParams = `?startDate=${startDate}&endDate=${endDate}&packageType=${packageType}&status=${status}`;
+
+      fetch(`/generate-overview/${queryParams}`)
+          .then(response => response.text())
+          .then(htmlTable => {
+            if(typeof data.alert === 'undefined'){
+              const htmlTable = generateHTMLTable(result.recordset);
+                    res.send(htmlTable);
+					}
+					else{
+						alert('Bad Input'); 
+					}
+          })
+          .catch(error => console.error('Fetch error:', error));
+      });
+      function generateHTMLTable(data) {
+    let table = '<table border="1">';
+    const headers = Object.keys(data[0]);
+
+    table += '<tr>';
+    headers.forEach(header => {
+        table += `<th>${header}</th>`;
+    });
+    table += '</tr>';
+
+    data.forEach(row => {
+        table += '<tr>';
+        headers.forEach(header => {
+            table += `<td>${row[header]}</td>`;
+        });
+        table += '</tr>';
+    });
+
+    table += '</table>';
+    return table;
+}
+
+
+        
+
+      // Set the "Home" link to be lit up by default
+      const homeLink = document.querySelector(".side-nav a[href='#']");
+      homeLink.classList.add("clicked");
+      loadContent("home");
+    </script>
+    <script src="./js/employee_home.js"></script>
+  </body>
+</html>
