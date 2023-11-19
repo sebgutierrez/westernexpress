@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Western Express: Employee Portal</title>
     <link rel="stylesheet" href="\css\employees\employee_home.css" />
+    <link rel="stylesheet" href="\css\customer\cust_create_label.css" />
   </head>
   <body>
     <div class="transparent-background"></div>
@@ -33,9 +34,8 @@
       <nav class="side-nav">
         <ul>
           <li><a href="#" onclick="loadContent('home')">Home</a></li>
-          <li><a href="#" onclick="loadContent('shipping')">Shipping</a></li>
           <li>
-            <a href="#" onclick="loadContent('packages')">Packages Overview</a>
+            <a href="#" onclick="loadContent('shipping/packages')">Shipping</a>
           </li>
           <li><a href="#" onclick="loadContent('support')">Support</a></li>
           <li>
@@ -105,11 +105,145 @@
             </div>
           </div>
         </div>
-        <div id="shipping">
-          <p>This is the default content for Link 2.</p>
-        </div>
-        <div id="packages">
-          <p>This is the default content for Link 3.</p>
+        <div id="shipping/packages">
+          <div class="container">
+            <h2>Shipping Label Form</h2>
+            <form id="shipping-form">
+              <label for="date">Date:</label>
+              <input type="date" id="date" name="date" /><br />
+
+              <label for="recipientName">Recipient Name:</label>
+              <input
+                type="text"
+                id="recipientName"
+                name="recipientName"
+                value="Default Computer"
+              /><br />
+
+              <h3>Sender Details</h3>
+              <label for="senderName">Sender Name:</label>
+              <input type="text" id="senderName" name="senderName" /><br />
+
+              <label for="senderAddress">Sender Address:</label><br />
+              <input
+                type="text"
+                id="senderStreet"
+                name="senderStreet"
+                placeholder="Street"
+              /><br />
+              <input
+                type="text"
+                id="senderCity"
+                name="senderCity"
+                placeholder="City"
+              /><br />
+              <select id="senderState" name="senderState">
+                <option value="">Select a state</option>
+                <!-- Add all USA states dynamically using JavaScript --></select
+              ><br />
+              <input
+                type="text"
+                id="senderCountry"
+                name="senderCountry"
+                value="USA"
+                disabled
+              /><br />
+
+              <h3>Receiver Details</h3>
+              <label for="receiverName">Receiver Name:</label>
+              <input type="text" id="receiverName" name="receiverName" /><br />
+
+              <label for="receiverPhone">Receiver Phone:</label>
+              <input
+                type="text"
+                id="receiverPhone"
+                name="receiverPhone"
+              /><br />
+
+              <label for="receiverAddress">Receiver Address:</label><br />
+              <input
+                type="text"
+                id="receiverStreet"
+                name="receiverStreet"
+                placeholder="Street"
+              /><br />
+              <input
+                type="text"
+                id="receiverCity"
+                name="receiverCity"
+                placeholder="City"
+              /><br />
+              <select id="receiverState" name="receiverState">
+                <option value="">Select a state</option>
+                <!-- Add all USA states dynamically using JavaScript --></select
+              ><br />
+              <input
+                type="text"
+                id="receiverCountry"
+                name="receiverCountry"
+                value="USA"
+                disabled
+              /><br />
+
+              <h3>Package Details</h3>
+              <label for="description">Description:</label>
+              <input type="text" id="description" name="description" /><br />
+
+              <label for="size">Size:</label>
+              <input type="text" id="size" name="size" /><br />
+
+              <label for="weight">Weight:</label>
+              <input type="text" id="weight" name="weight" /><br />
+
+              <label for="class">Class:</label>
+              <select id="class" name="class" onchange="calculateCost()">
+                <option value="1st class">1st class</option>
+                <option value="2nd day air">2nd day air</option>
+                <option value="economy">economy</option></select
+              ><br />
+
+              <label for="cost">Cost:</label>
+              <input type="text" id="cost" name="cost" readonly /><br />
+
+              <label for="postOffice">Select Post Office:</label>
+              <select id="postOffice" name="postOffice">
+                <option value="1">4516 Burleson Rd, Austin, TX, 78744</option>
+                <option value="2">
+                  3740 Greenbriar Dr, Houston, TX, 77098
+                </option>
+                <option value="3">515 Centre St, Dallas, TX, 75208</option>
+                <option value="4">219 E Mills Ave, El Paso, TX, 79901</option>
+                <option value="5">5001 Avenue L, Lubbock, TX, 79452</option>
+                <option value="6">3903 Melear Dr, Arlington, TX, 76015</option>
+                <option value="7">
+                  1140 S Laredo St, San Antonio, TX, 78204
+                </option>
+                <option value="8">
+                  5200 W University Blvd, Odessa, TX, 79764
+                </option>
+                <option value="9">
+                  10515 Stonewall Blvd, Corpus Christi, TX, 78410
+                </option>
+                <option value="10">
+                  423 Los Alamos Dr, Alamo, TX, 78516
+                </option></select
+              ><br />
+
+              <label for="status">Status:</label>
+              <select id="status" name="status">
+                <option value="Created Label">Created Label</option>
+                <option value="Shipped">Shipped</option>
+                <option value="In Transit">In Transit</option>
+                <option value="Delivered">Delivered</option></select
+              ><br />
+
+              <input
+                type="button"
+                value="Generate Label"
+                onclick="generateLabel()"
+              />
+            </form>
+          </div>
         </div>
         <div id="support">
           <h2>Support Tickets</h2>
