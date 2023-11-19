@@ -4,14 +4,14 @@ const url = require('url');
 const { StringDecoder } = require('string_decoder');
 const sql = require('mssql');
 
-// Your database configuration
 const config = {
-    user: 'systemauthore',
-    password: 'westernexpress2023_',
-    server: 'westernexpressserver.database.windows.net',
-    database: 'westernexpressdb',
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    server: process.env.DB_SERVER,
+    database: process.env.DB_NAME,
     options: {
-        encrypt: true // Use this if you're on Windows Azure
+        encrypt: true, 
+        trustServerCertificate: true 
     }
 };
 

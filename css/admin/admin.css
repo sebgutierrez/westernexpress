@@ -1,0 +1,312 @@
+/* CSS for Admin Home Page */
+
+body {
+	margin: 0;
+	padding: 0;
+	height: auto;
+	font-family: 'DM Sans', serif;
+  }
+  
+  header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+  
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+  
+	padding: 10px;
+	z-index: 2;
+	background-color: #023047;
+	color: white;
+  }
+  
+  header h1 {
+	margin: 0;
+	font-size: 20px;
+  }
+  
+  /*DROP DOWN MENU*/
+  .top-icons img {
+	margin-top: 2px;
+	margin-right: 20px;
+	width: 30px;
+	height: 30px;
+  }
+  .icon {
+	color: white;
+  }
+  
+  .dropdown {
+	position: relative;
+	display: inline-block;
+  }
+  
+  .dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: #cd8585;
+	min-width: 160px;
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+	z-index: 1;
+  }
+  
+  .icon {
+	cursor: pointer;
+  }
+  
+  /* Style for dropdown items (links) */
+  .dropdown-content a {
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
+	color: black;
+  }
+  
+  /* Horizontal line */
+  .horizontal-line {
+	position: fixed;
+	top: 42px; /* Start at the same position as the side navigation bar */
+	left: 0;
+	width: 100%;
+	border: none;
+	border-top: 1px solid #555; /* Add a top border as the horizontal line */
+	z-index: 1;
+	box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.721);
+  }
+  
+  .container {
+	display: flex;
+	justify-content: flex-start;
+	align-items: flex-start;
+	padding: 10px; /* Adjust padding as needed */
+  }
+  
+  /*SIDE NAV BAR*/
+  .side-nav {
+	width: 250px;
+	height: 55%;
+	top: 50px;
+	left: 0;
+	color: black;
+	background-color: rgb(255, 255, 255);
+	position: fixed;
+	overflow-y: auto;
+  }
+  
+  .side-nav ul {
+	list-style: none;
+	padding: 0;
+	margin: 0; /* Remove margin to span the entire horizontal width */
+  }
+  
+  .side-nav ul li {
+	padding: 10px 0;
+	border-bottom: 1px solid rgb(255, 255, 255);
+  }
+  
+  .side-nav ul li:last-child {
+	border-bottom: none;
+  }
+  
+  /* Remove underlines from links and change the text color */
+  .side-nav a {
+	display: block;
+	padding: 10px 20px;
+	text-decoration: none;
+	color: black;
+  }
+  
+  /* Gray out the background on hover and round the right side */
+  .side-nav a:hover {
+	background-color: #ccc;
+	border-radius: 0 10px 10px 0; /* Add rounded corners on the right side */
+  }
+  
+  /* Apply the pale blue color when clicked */
+  .side-nav a:active {
+	background-color: #b0e0e6;
+  }
+  
+  .side-nav a.clicked {
+	background-color: #b0e0e6;
+	border-radius: 0 10px 10px 0; /* Add rounded corners on the right side */
+  }
+  
+  .content {
+	flex-grow: 1; /* Allow the content area to grow and take available space */
+	background-color: #f0f0f0; /* Set a background color for the content area */
+	padding: 20px; /* Add padding as needed */
+	margin-left: 270px; /* Ensure content is positioned to the right of the side-nav */
+	margin-top: 60px;
+  }
+  
+  .content > div {
+	display: none; /* Add this rule to hide all content divs */
+  }
+  
+  /* CSS for dashboard overview */
+  .dashboard-card {
+	background-color: #b0e0e6; /* Pale blue container background color */
+	width: 30%;
+	margin: 10px;
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+	text-align: center;
+	display: inline-block;
+	vertical-align: top;
+  }
+  
+  .dashboard-card h2 {
+	color: #023047;
+  }
+  
+  .dashboard-card p {
+	margin: 10px 0;
+	color: #000; /* Text color */
+  }
+  
+  .dashboard-card ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	text-align: left;
+  }
+  
+  .dashboard-card li {
+	margin: 5px 0;
+	color: #000; /* Text color */
+  }
+  
+  /* CSS for the shipment table here */
+  #shipmentTable {
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 20px;
+  }
+  
+  #shipmentTable th,
+  #shipmentTable td {
+	border: 1px solid #ccc;
+	padding: 8px;
+	text-align: center;
+  }
+  
+  #shipmentTable th {
+	background-color: rgba;
+  }
+  
+  /*   PACKAGE TRACKER CONTAINER   */
+  .p-container {
+	background-color: #219ebc; /* Pale blue container background color */
+	width: 400px;
+	padding: 20px;
+	margin: 0 auto;
+	border-radius: 10px;
+	margin-top: 50px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .form-group {
+	margin-bottom: 20px;
+	padding-right: 20px;
+  }
+  
+  label {
+	display: block;
+	margin-bottom: 5px;
+  }
+  
+  input[type="text"],
+  input[type="date"] {
+	width: 100%;
+	padding: 10px;
+	border: none;
+	border-radius: 5px;
+  }
+  
+  button[type="submit"] {
+	background-color: #023047; /* Dark blue submit button color */
+	color: white;
+	border: none;
+	padding: 10px 20px;
+	border-radius: 5px;
+	cursor: pointer;
+  }
+  
+  button[type="submit"]:hover {
+	background-color: #03256c; /* Darker blue on hover */
+  }
+  
+  /******  Employee PAGE    ********/
+  .e-container {
+	background-color: #219ebc; /* Pale blue container background color */
+	width: 450px;
+	padding: 20px;
+	margin: 0 auto;
+	border-radius: 10px;
+	margin-top: 50px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .request-group {
+	margin-bottom: 20px;
+	padding-right: 10px;
+	margin-right: 20px;
+  }
+  
+  label {
+	display: block;
+	margin-bottom: 10px;
+	margin-top: 10px;
+  }
+  
+  input[type="text"],
+  input[type="date"] {
+	width: 100%;
+	padding: 10px;
+	border: none;
+	border-radius: 5px;
+  }
+  
+  button[type="submit"] {
+	background-color: #023047; /* Dark blue submit button color */
+	color: white;
+	border: none;
+	padding: 10px 20px;
+	border-radius: 5px;
+	cursor: pointer;
+	margin-top: 10px;
+  }
+  
+  button[type="submit"]:hover {
+	background-color: #03256c; /* Darker blue on hover */
+  }
+  
+  h2 {
+	text-align: center;
+	color: #023047;
+	margin-top: 20px;
+  }
+  
+  #employeeTable {
+	background-color: #b0e0e6; /* Light blue background color */
+	width: 100%;
+	border-collapse: collapse;
+	border-radius: 10px; /* Rounded corners */
+  }
+  
+  table th,
+  table td {
+	border: 1px solid #023047;
+	padding: 10px;
+	text-align: center;
+  }
+  
+  table th {
+	background-color: #023047; /* Dark blue header background color */
+	color: white;
+  }

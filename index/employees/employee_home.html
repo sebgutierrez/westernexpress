@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Western Express: Employee Portal</title>
+    <link rel="stylesheet" href="\css\employees\employee_home.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=DM Sans">
+  </head>
+  <body>
+    <div class="transparent-background"></div>
+    <header>
+      <h1>Welcome, <strong>Jane Doe</strong>!</h1>
+      <div class="top-icons">
+        <div class="dropdown">
+          <div class="icon">
+            <img
+              src="/images/employee_images/account_circle.svg"
+              alt="user logo"
+            />
+          </div>
+          <div class="dropdown-content">
+            <a href="#">Profile</a>
+            <a href="#">Settings</a>
+            <a href="#">Sign Out</a>
+          </div>
+        </div>
+      </div>
+    </header>
+    <hr class="horizontal-line" />
+
+    <div class="container">
+      <nav class="side-nav">
+        <ul>
+          <li><a href="#" onclick="loadContent('home')">Home</a></li>
+          <li><a href="#" onclick="loadContent('tracking')">Tracking</a></li>
+          <li><a href="#" onclick="loadContent('packages')">Packages Overview</a></li>
+          <li><a href="#" onclick="loadContent('support')">Support</a></li>
+          <!--<li><a href="#" onclick="loadContent('post office')">Post-Offices</a></li>-->
+          <li><a href="/index/employees/financial_report.html">Financial Report</a></li>
+          <li><a href="#" onclick="loadContent('contact')">Contact</a></li>
+        </ul>
+      </nav>
+      <main class="content">
+        <div id="home">
+          <div class="background-container">
+            <h1>Western Express Postal: Employee Portal</h1>
+            <!--<div class="track-package">
+              <input type="text" placeholder="Enter tracking number" />
+              <button>Track</button>
+            </div>-->
+          </div>
+          <div class="services">
+            <h2>Services Overview</h2>
+            <h3>Priority Mail Express</h3>
+            <p>
+              Perfect for sending urgent mails or packages within 1-2 days.
+              Money back guaranteed if it doesn’t arrive by delivery date Price:
+              Starts at $27.75 Delivery Speed: Next day to 2 days Weight: Up to
+              70lbs
+            </p>
+            <h3>Priority Mail</h3>
+            <p>
+              You need to send something important that need to arrive within 1
+              to 3 business days Price: Flat Rate Envelop: From $8.65 Mailing
+              Box: From $9.20 Your Own Box by Weight: From $9.35 Delivery Speed:
+              1-2 days Weight: Up to 70lbs
+            </p>
+            <h3>Ground</h3>
+            <p>
+              Low rates for packages that only need to be delivered within 2-5
+              days. Good option for HAZMAT items that can’t travel by air.
+              Price: From $4.25 Delivery Speed: 2-5 days Weight: Up to 70lbs
+              inside the US. Packages up to 15.999 oz is priced by ounces.
+            </p>
+            <h3>First Class</h3>
+            <p>
+              For sending letter envelops (below 3.5oz) or large envelop (below
+              13 oz) that can flatten and bend. Price: Postcards: $0.41 Letters:
+              $0.56 Large Envelops: $1.25 Delivery Speed: 2-5 days Weight:
+              Single-piece envelops weighs up 10 3.5oz, and large envelops up to
+              13oz.
+            </p>
+            <h3>Media Class</h3>
+            <p>
+              Sending books, medias, and educational materials for an affordable
+              price. Can only be shipped in store. Items are subjected to be
+              inspected at Postal Service Price: From $3.75 Delivery Speed: 2-8
+              days Weight: Up to 70lbs
+            </p>
+            <div class="contactinfo">
+              <p>Western Express Postal Service</p>
+              <p>CONTACT INFORMATION</p>
+              <p>Email: westernexpresspostal@outlook.net</p>
+              <p>Location's Phone Number: (888) 777 6666</p>
+              <p>Manager's Phone Number: (666) 555 4444</p>
+            </div>
+          </div>
+        </div>
+        <div id="tracking">
+          <span style="display: none;">Tracking ID:<span id="tracking-id"></span></span>
+          <!--<div>
+            <button id="view-tracking-btn">View Tracking History</button>
+            <button id="update-tracking-btn">Update Tracking History</button>
+          </div>-->
+          <div class="view-tracking">
+            <h1 class="view-tracking-header">View Tracking History</h1>
+            <form class="" id="view-tracking-form" action="#" style="display: block;">
+              <label for="view-tracking-input" class="view-tracking-label">Tracking ID:</label>
+              <input type="text" name="view-tracking-input" id="view-tracking-input" class="" placeholder="" required />
+              <button id="view-tracking-submit" onClick="viewTracking(); return false" class="">View</button>
+            </form>
+            <div id="tracking-table"></div>
+          </div>
+          <div class="update-tracking">
+            <h1 class="update-tracking-header">Update Tracking History</h1>
+            <form class="" id="upate-tracking-form" action="#" style="display: block;">
+              <label for="update-tracking-employee" class="update-employee-label">Employee ID:</label>
+              <input type="text" name="update-tracking-employee" id="update-tracking-employee" class="" placeholder="" required />
+              <label for="update-tracking-input" class="update=tracking-label">Tracking ID:</label>
+              <input type="text" name="update-tracking-input" id="update-tracking-input" class="" placeholder="" required />
+              <label for="update-tracking-status" class="update-status-label">Status:</label>
+              <select name="update-tracking-status" id="update-tracking-status"> 
+                <option value="PROCESSED">PROCESSED</option> 
+                <option value="SHIPPED">SHIPPED</option> 
+                <option value="IN TRANSIT">IN TRANSIT</option>
+                <option value="ARRIVED">ARRIVED</option> 
+                <option value="DELAY">DELAY</option> 
+              </select>
+              <!--<input type="text" name="update-tracking-status" id="update-tracking-status" class="" placeholder="" required />-->
+              <button id="update-tracking-submit" onClick="updateTracking(); return false" class="">Update</button>
+            </form>
+          </div>
+        </div>
+        <div id="packages">
+          <p>This is the default content for Link 3.</p>
+        </div>
+        <div id="support">
+          <h2>Support Tickets</h2>
+          <div id="support">
+            <table id="supportTable">
+              <thead>
+                <tr>
+                  <th>Ticket ID</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Subject</th>
+                  <th>Category</th>
+                  <th>Status</th>
+                  <th>Created</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Table rows will be added dynamically via JavaScript -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div id="post office">
+          <p>This is the default content for Link 5.</p>
+        </div>
+        <div id="manager reports">
+          <div id="reports">
+            <div class="sales">
+              <h2>Sales Report Generator</h2>
+  
+              <div id="reportForm">
+                <div class="fieldBox">
+                  <label>
+                    <input type="checkbox" id="fieldAmount" /> Amount
+                  </label>
+                  <select id="amountComparison" name="amountComparison">
+                    <option value="equal">Equal to</option>
+                    <option value="greater">Greater than</option>
+                    <option value="less">Less than</option>
+                  </select>
+                  <input type="number" id="amount" name="amount" />
+                </div>
+  
+                <div class="fieldBox">
+                  <label>
+                    <input type="checkbox" id="fieldLocation" /> Location
+                  </label>
+                  <select id="location" name="location">
+                    <option disabled selected value="">Select a location</option>
+                    <option value="location1">
+                      4516 Burleson Rd, Austin, TX 78744
+                    </option>
+                    <option value="location2">
+                      3740 Greenbriar Dr, Houston, TX 77098
+                    </option>
+                    <option value="location3">
+                      515 Centre St, Dallas, TX 75208
+                    </option>
+                    <option value="location4">
+                      219 E Mills Ave, El Paso, TX 79901
+                    </option>
+                    <option value="location5">
+                      5001 Avenue L, Lubbock, TX 79452
+                    </option>
+                    <option value="location6">
+                      3903 Melear Dr, Arlington, TX 76015
+                    </option>
+                    <option value="location7">
+                      1140 S Laredo St, San Antonio, TX 78204
+                    </option>
+                    <option value="location8">
+                      5200 W University Blvd, Odessa, TX 79764
+                    </option>
+                    <option value="location9">
+                      10515 Stonewall Blvd, Corpus Christi, TX 78410
+                    </option>
+                    <option value="location10">
+                      423 Los Alamos Dr, Alamo, TX 78516
+                    </option>
+                  </select>
+                </div>
+  
+                <div class="fieldBox">
+                  <label> <input type="checkbox" id="fieldDate" /> Date </label>
+                  <select id="dateComparison" name="dateComparison">
+                    <option value="on">On</option>
+                    <option value="before">Before</option>
+                    <option value="after">After</option>
+                  </select>
+                  <input type="date" id="date" name="date" />
+                </div>
+  
+                <div class="fieldBox">
+                  <label>
+                    <input type="checkbox" id="fieldEmployeeId" /> Employee ID
+                  </label>
+                  <input type="text" id="employeeId" name="employeeId" />
+                </div>
+  
+                <button onclick="generateReport()">Generate Report</button>
+              </div>
+  
+              <div id="result">
+                <h3>Generated Report:</h3>
+                <ul id="reportList"></ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="contact">
+          <p>This is the default content for Link 7.</p>
+        </div>
+      </main>
+    </div>
+
+    <script>
+      // Your JavaScript code here
+      const links = document.querySelectorAll(".side-nav a");
+
+      links.forEach((link) => {
+        link.addEventListener("click", (event) => {
+          event.preventDefault(); // Prevent the default link behavior (optional)
+
+          // Remove the "clicked" class from all links
+          links.forEach((otherLink) => {
+            otherLink.classList.remove("clicked");
+          });
+
+          // Add the "clicked" class to the clicked link
+          link.classList.add("clicked");
+        });
+      });
+
+      function loadContent(contentId) {
+        // Hide all content divs
+        const contentDivs = document.querySelectorAll(".content > div");
+        contentDivs.forEach((div) => {
+          div.style.display = "none";
+        });
+
+        // Show the selected content
+        document.getElementById(contentId).style.display = "block";
+      }
+      // Set the "Home" link to be lit up by default
+      const homeLink = document.querySelector(".side-nav a[href='#']");
+      homeLink.classList.add("clicked");
+      loadContent("home");
+    </script>
+    <script src="./js/employee_home.js"></script>
+  </body>
+</html>

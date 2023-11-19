@@ -1,0 +1,219 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins',sans-serif;
+    }
+    body{
+      margin: 0;
+      padding: 0;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background: #E1FAFF;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      position: relative;
+      padding: 2rem 2rem 0 3rem;
+    }
+    
+    .website-name {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #081B4B;
+    }
+    
+    .website-homepage-link {
+      color: #081B4B;
+    }
+    
+    .website-homepage-link:link {
+      text-decoration: none;
+    }
+    
+    .website-homepage-link:visited {
+      text-decoration: none;
+    }
+    
+    .navbar {
+      display: flex;
+      width: min-content;
+    }
+    
+    .navlist {
+      display: flex;
+      list-style: none;
+      padding: 0.2rem 0 0 2rem;
+    }
+    
+    .navlist-item {
+      margin: 0 1rem 0 1rem;
+    }
+    
+    .navlist-link {
+      color: #081B4B;
+      font-size: 1rem;
+      font-weight: bold;
+    }
+    
+    .navlist-link:link {
+      text-decoration: none;
+    }
+    
+    .navlist-link:visited {
+      text-decoration: none;
+    }
+    
+    .account-buttons {
+      display: flex;
+      position: absolute;
+      top: 2rem;
+      right: 3rem;
+    }
+    
+    .sign-in-button {
+      border: none;
+      background-color: white;
+      margin-right: 2rem;
+        padding: 0.75rem 1.5rem;
+        border: 1.5px solid black;
+        border-radius: 5px;
+    }
+    
+    .sign-in-link {
+      color:#081B4B;
+      font-size: 1rem;
+      font-weight: bold;
+    }
+    
+    .sign-in-link:link {
+      text-decoration: none;
+    }
+    
+    .sign-in-link:visited {
+      text-decoration: none;
+    }
+    
+    .sign-up-button {
+      background-color: #081B4B;
+      border-radius: 0.5rem;
+      border: none;
+      padding: 0.75rem 1.5rem 0.75rem 1.5rem;
+    }
+    
+    .sign-up-link {
+      color: white;
+      font-size: 1rem;
+      font-weight: bold;
+    }
+    
+    .sign-up-link:link {
+      text-decoration: none;
+    }
+    
+    .sign-up-link:visited {
+      text-decoration: none;
+    }
+    .center{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      min-width: 375px;
+      width: 25vw;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px lightgray;
+    }
+    
+    .center h1{
+      text-align: center;
+      padding: 50px 0 30px 0;
+    }
+    
+    .center form{
+      padding: 0 40px;
+      box-sizing: border-box;
+    }
+    
+    form .input_field{
+      position: relative;
+      margin: 30px 0;
+    }
+    
+    .input_field input{
+      background: #f2f2f2;
+      width: calc(100%);
+      padding: 30px 10px;
+      height: 40px;
+      font-size: 16px;
+      border: 1px solid black;
+      border-radius: 10px;
+    }
+    
+    .input_field label{
+      position: absolute;
+      top: 50%;
+      left: 5px;
+      padding: 0 10px;
+      color: #adadad;
+      transform: translateY(-50%);
+      font-size: 16px;
+      pointer-events: none;
+      transition: .5s;
+    }
+    
+    .input_field input:focus ~ label,
+    .input_field input:valid ~ label{
+      top: 10px;
+      left: -5px;
+      font-size: 13px;
+      color: black;
+    }
+    
+    .links {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: -10px;
+    }
+    
+    .links a{
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+    }
+    
+    .links a:nth-child(2){
+    color: black;
+    font-weight: bold;
+    text-decoration: underline;
+    }
+    
+    input[type="Submit"]{
+      width: 100%;
+      height: 50px;
+      border: 1px solid;
+      border-radius: 10px;
+      font-size: 18px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 40px;
+      margin-bottom: 70px;
+      background-color: #081B4B;
+      color: white;
+      transition: .7s;
+    }
+    
+    input[type="Submit"]:hover{
+      background: #E1FAFF;
+      color: black;
+      border: 2px solid #081B4B;
+      transition: .5s;
+    }
+    
