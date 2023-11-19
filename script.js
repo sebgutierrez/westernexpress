@@ -9,7 +9,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const app = express();
 const router = express.Router();
-const PORT = process.env.PORT;
+const PORT = 443;
 
 console.log(PORT);
 /* server static files */
