@@ -4,7 +4,8 @@
 //mkaes the shadow appear when scrolling
 const horizontalLine = document.querySelector(".horizontal-line");
 
-const BASE_URL = 'https://westernexpresspostal.azurewebsites.net';
+const BASE_URL = '';
+//const BASE_URL = 'https://westernexpresspostal.azurewebsites.net';
 
 window.addEventListener("scroll", () => {
   // Check if the user has scrolled down a certain distance (e.g., 100px)
@@ -171,3 +172,65 @@ const view_tracking_btn = document.getElementById('view-tracking-btn');
 const update_tracking_btn = document.getElementById('update-tracking-btn');*/
 
 /**************************** EMPLOYEE CLOCKIN / CLOCKOUT **********************************************************/
+
+function clockIn(){
+  let username = document.getElementById('clockin-user-input').value;
+  let password = document.getElementById('clockin-pass-input').value;
+
+  const data = {
+    'username': username,
+    'password': password
+  };
+
+  console.log(data);
+  fetch(`${BASE_URL}/clockin`, {
+    headers : {
+      "Content-type": "application/json; charset=UTF-8"
+    },
+    method : 'POST',
+    body : JSON.stringify(data)
+  })
+  .then(response => response.json())
+  .then(data => {
+    if(typeof data.alert === 'undefined'){
+      console.log(data)
+      alert(`You successfully clocked in!`);
+    }
+    else{
+      console.log(data)
+      alert('The username and/or password is incorrect!'); 
+    }
+  })
+  .catch(error => (console.error('Fetch error:', error)));	
+}
+
+function clockOut(){
+  let username = document.getElementById('clockout-user-input').value;
+  let password = document.getElementById('clockout-pass-input').value;
+
+  const data = {
+    'username': username,
+    'password': password
+  };
+
+  console.log(data);
+  fetch(`${BASE_URL}/clockout`, {
+    headers : {
+      "Content-type": "application/json; charset=UTF-8"
+    },
+    method : 'POST',
+    body : JSON.stringify(data)
+  })
+  .then(response => response.json())
+  .then(data => {
+    if(typeof data.alert === 'undefined'){
+      console.log(data)
+      alert(`You successfully clocked out!`);
+    }
+    else{
+      console.log(data)
+      alert('The username and/or password is incorrect!'); 
+    }
+  })
+  .catch(error => (console.error('Fetch error:', error)));	
+}

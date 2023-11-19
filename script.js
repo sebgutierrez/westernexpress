@@ -1,7 +1,7 @@
 const sql = require('mssql');
 const config = require('./server/config.js');
 const tracking = require('./server/backend_files/tracking.js');
-
+const shift = require('./server/backend_files/shifts.js');
 require('dotenv').config();
 
 const express = require('express');
@@ -42,6 +42,23 @@ app.get('/track/package/:id', (req, res) => {
         res.send(result);
     })
 })
+
+app.post('/clockin', (req, res) => {
+    console.log(req.body.username, req.body.password);
+    shift.clockIn(req.body.username, req.body.password)
+    .then(result => {
+        res.send(result);
+    })
+})
+
+
+app.post('/clockout', (req, res) => {
+    shift.clockOut(req.body.username, req.body.password)
+    .then(result => {
+        res.send(result);
+    })
+})
+
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
