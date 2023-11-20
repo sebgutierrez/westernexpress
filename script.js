@@ -95,6 +95,11 @@ app.post("/generateReport", async (req, res) => {
   });
 
 
+<<<<<<< HEAD
+=======
+  //test 1
+
+>>>>>>> Ali-Javaid
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 })
