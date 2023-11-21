@@ -1,71 +1,90 @@
-
-<!-- CUSTOMER LOGIN VIEW -->
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User</title>
-    <link rel="stylesheet" href="\css\customer\customer.css"> <!-- customer login homepage css -->
-    <link rel="stylesheet" href="\images\homepage_images"> <!-- Link to your homepage CSS file -->
-
-
+    <title>Your Postal Service Business Name</title>
+    <link rel="stylesheet" href="/css/index.css"> <!-- Link to your homepage CSS file -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=DM Sans">
 </head>
 <body>
-    <header>
-        <h1>Western Express Logistics</h1>
-
-        
-        <nav class="top-menu">
-            <ul>
-                <li><a href="about.html">About</a></li>                     <!--  link about in html here -->
-                <li><a href="services.html">Services</a></li>               <!-- link services in html here -->
-                <li><a href="locations.html">Locations</a></li>             <!-- link locations in html here -->
-                <li><a href="home_signup.html">Sign Up</a></li>                  <!-- link signup in html here -->
-                <li><a href="home_signIn.html">Sign In</a></li>             <!-- link sign in html here -->
+    <header class="header">
+        <h1 class="website-name"><a class="website-homepage-link" href="/index.html">Western Express</a></h1>
+        <nav class="navbar">
+            <ul class="navlist">
+				<li class="navlist-item"><a class="navlist-link" href="/index/customer/cust_service.html">Shipping</a></li>
+				<li class="navlist-item"><a class="navlist-link" href="/index/tracking.html">Tracking</a></li>
+                <li class="navlist-item"><a class="navlist-link" href="/index/locations.html">Locations</a></li>                     
+                <li class="navlist-item"><a class="navlist-link" href="/index/customer/customer_support.html">Support</a></li>
+                <li class="navlist-item"><a class="navlist-link" href="/index/guest/guest-view.html">Guest</a></li>
+                <li class="navlist-item"><a class="navlist-link" href="/index/employees/employee_home.html">Employee</a></li>
+                <li class="navlist-item"><a class="navlist-link" href="/index/admin/admin_home.html">Admin</a></li>                                     
             </ul>
         </nav>
+        <div class="account-buttons">
+            <button class="sign-in-button"><a class="sign-in-link" href="/index/customer/cust_login.html">Log In</a></button>                  
+            <button class="sign-up-button"><a class="sign-up-link" href="/index/customer/cust_signup.html">Sign Up</a></button>
+        </div>
     </header>
-
-    
-    <div class="track-package">
-        <input type="text" placeholder="Enter tracking number">
-        <button>Track</button>
-    </div>
-
-    
-    <div class="homepage-images">
-        <h2>Texas Fastest Delivery Service</h2>
-        <img src="C:\Users\iStar\Desktop\UH\Database\WesternExpress\Code\images\homepage_images\image1 (4).jpg" alt="Image 4">
-        <img src="C:\Users\iStar\Desktop\UH\Database\WesternExpress\Code\images\homepage_images\image1 (5).jpg" alt="Image 5">
-    </div>
-
-    
-    
-
-    <div class="footerbuttons">
-        <div class="left-buttons">
-            <button>Tracking</button>
-            <button>Fastest Shipment</button>
-            <button>Location Near Me</button>
-            <button>Support</button>
+    <section class="homepage-section">
+        <div class="hero-banner"> 
+            <img class="hero-image" src="/images/homepage_images/Austin Skyline.jpg">
+            <span class="slogan">Delivering Happiness One<br>Package at a Time</span>
+            <div class="tracking-form-container">
+                <form class="tracking-form" id="tracking-form" method="POST">
+                    <label for="tracking-input" class="tracking-label">Have a tracking number with us?</label>
+                    <input type="text" name="tracking-input" id="tracking-input" class="tracking-input" placeholder="Enter Tracking Number"/>
+                    <button id="tracking-submit" class="tracking-search-button">Track</button>
+                </form>
+            </div>
         </div>
-        <div class="center-buttons">
-            <button>About</button>
-            <button>Team</button>
-            <button>Jobs</button>
+        <div class="mission-statement-container">
+            <span class="mission-statement-header"><b>Our Commitment to Serving Texans</b></span>
+            <span class="mission-statement-text">Western Express is a postal service operating in Texas for Texans. Our team of professionals prioritize speed and efficiency above all else to meet your needs.</span>
         </div>
-        <div class="right-buttons">
-            <button>Facebook</button>
-            <button>Instagram</button>
-            <button>Youtube</button>
+        <div class="website-navigation-container">
+            <a class="service-link" href="/index/customer/cust_service.html">
+                <div class="website-service-container">
+                    <svg class="svg-icon" fill="#081B4B" width="50" height="50" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="60 50 140 140" xml:space="preserve">
+                        <g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)" >
+                        <path d="M 71.787 59.762 c -0.008 0 -0.016 0 -0.024 0 l -4.066 -0.099 c -0.543 -0.014 -0.976 -0.457 -0.976 -1 V 34.067 c 0 -0.552 0.447 -1 1 -1 H 80.12 c 0.338 0 0.653 0.171 0.838 0.454 l 8.88 13.618 C 89.943 47.301 90 47.49 90 47.685 v 10.979 c 0 0.548 -0.44 0.993 -0.987 1 l -7.968 0.099 c -0.005 0 -0.009 0 -0.013 0 c -0.547 0 -0.993 -0.439 -1 -0.987 c -0.007 -0.553 0.436 -1.006 0.987 -1.013 L 88 57.676 v -9.694 l -8.422 -12.915 H 68.721 v 22.621 l 3.091 0.074 c 0.552 0.014 0.988 0.472 0.976 1.024 C 72.773 59.33 72.328 59.762 71.787 59.762 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: #081B4B; fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                        <path d="M 67.721 59.663 H 42.313 c -0.552 0 -1 -0.447 -1 -1 s 0.448 -1 1 -1 h 24.408 V 27.616 H 26.456 v 30.047 h 6.611 c 0.552 0 1 0.447 1 1 s -0.448 1 -1 1 h -7.611 c -0.552 0 -1 -0.447 -1 -1 V 26.616 c 0 -0.552 0.448 -1 1 -1 h 42.265 c 0.553 0 1 0.448 1 1 v 32.047 C 68.721 59.216 68.273 59.663 67.721 59.663 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: #081B4B; fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                        <path d="M 37.689 64.385 c -3.1 0 -5.623 -2.522 -5.623 -5.623 s 2.522 -5.623 5.623 -5.623 c 3.101 0 5.623 2.522 5.623 5.623 S 40.79 64.385 37.689 64.385 z M 37.689 55.139 c -1.998 0 -3.623 1.625 -3.623 3.623 s 1.625 3.623 3.623 3.623 s 3.623 -1.625 3.623 -3.623 S 39.687 55.139 37.689 55.139 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: #081B4B; fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                        <path d="M 18.782 51.433 H 7.701 c -0.552 0 -1 -0.447 -1 -1 s 0.448 -1 1 -1 h 11.081 c 0.552 0 1 0.447 1 1 S 19.334 51.433 18.782 51.433 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: #081B4B; fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                        <path d="M 18.782 45.351 H 4.183 c -0.552 0 -1 -0.448 -1 -1 s 0.448 -1 1 -1 h 14.599 c 0.552 0 1 0.448 1 1 S 19.334 45.351 18.782 45.351 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: #081B4B; fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                        <path d="M 18.782 39.27 H 1 c -0.552 0 -1 -0.448 -1 -1 s 0.448 -1 1 -1 h 17.782 c 0.552 0 1 0.448 1 1 S 19.334 39.27 18.782 39.27 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: #081B4B; fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                        <path d="M 89 48.685 H 72.899 c -0.553 0 -1 -0.447 -1 -1 V 38.27 c 0 -0.552 0.447 -1 1 -1 h 9.961 c 0.553 0 1 0.448 1 1 s -0.447 1 -1 1 h -8.961 v 7.415 H 89 c 0.553 0 1 0.447 1 1 S 89.553 48.685 89 48.685 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: #081B4B; fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                        <path d="M 89 54.532 h -3.818 c -0.553 0 -1 -0.447 -1 -1 s 0.447 -1 1 -1 H 89 c 0.553 0 1 0.447 1 1 S 89.553 54.532 89 54.532 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: #081B4B; fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                        <path d="M 76.409 64.385 c -3.1 0 -5.622 -2.522 -5.622 -5.623 s 2.522 -5.623 5.622 -5.623 c 3.101 0 5.623 2.522 5.623 5.623 S 79.51 64.385 76.409 64.385 z M 76.409 55.139 c -1.997 0 -3.622 1.625 -3.622 3.623 s 1.625 3.623 3.622 3.623 c 1.998 0 3.623 -1.625 3.623 -3.623 S 78.407 55.139 76.409 55.139 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: #081B4B; fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                        <circle cx="37.69" cy="58.76" r="1.32" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: #081B4B; fill-rule: nonzero; opacity: 1;" transform="  matrix(1 0 0 1 0 0) "/>
+                        <circle cx="76.41" cy="58.76" r="1.32" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: #081B4B; fill-rule: nonzero; opacity: 1;" transform="  matrix(1 0 0 1 0 0) "/>
+                        <path d="M 67.721 54.532 H 45.933 c -0.552 0 -1 -0.447 -1 -1 s 0.448 -1 1 -1 h 21.788 c 0.553 0 1 0.447 1 1 S 68.273 54.532 67.721 54.532 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: #081B4B; fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                        <path d="M 29.274 54.532 h -3.818 c -0.552 0 -1 -0.447 -1 -1 s 0.448 -1 1 -1 h 3.818 c 0.552 0 1 0.447 1 1 S 29.826 54.532 29.274 54.532 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: #081B4B; fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                        </g>
+                    </svg>
+                <span class="service-name">Shipping</span>
+                </div>
+            </a>
+            <a class="service-link" href="/index/tracking.html">
+                <div class="website-service-container">
+                    <svg class="svg-icon" width="50" height="50" viewBox="0 0 50 50" fill="#081B4B" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8.65625 39.8438H14.9062C15.1134 39.8438 15.3122 39.7614 15.4587 39.6149C15.6052 39.4684 15.6875 39.2697 15.6875 39.0625C15.6875 38.8553 15.6052 38.6566 15.4587 38.5101C15.3122 38.3636 15.1134 38.2812 14.9062 38.2812H8.65625C8.44905 38.2812 8.25034 38.3636 8.10382 38.5101C7.95731 38.6566 7.875 38.8553 7.875 39.0625C7.875 39.2697 7.95731 39.4684 8.10382 39.6149C8.25034 39.7614 8.44905 39.8438 8.65625 39.8438ZM8.65625 35.9375H14.9062C15.1134 35.9375 15.3122 35.8552 15.4587 35.7087C15.6052 35.5622 15.6875 35.3635 15.6875 35.1562C15.6875 34.949 15.6052 34.7503 15.4587 34.6038C15.3122 34.4573 15.1134 34.375 14.9062 34.375H8.65625C8.44905 34.375 8.25034 34.4573 8.10382 34.6038C7.95731 34.7503 7.875 34.949 7.875 35.1562C7.875 35.3635 7.95731 35.5622 8.10382 35.7087C8.25034 35.8552 8.44905 35.9375 8.65625 35.9375ZM4.6875 37.5V36.7188C4.6875 36.5115 4.60519 36.3128 4.45868 36.1663C4.31216 36.0198 4.11345 35.9375 3.90625 35.9375C3.69905 35.9375 3.50034 36.0198 3.35382 36.1663C3.20731 36.3128 3.125 36.5115 3.125 36.7188V37.5C3.125 37.7072 3.20731 37.9059 3.35382 38.0524C3.50034 38.1989 3.69905 38.2812 3.90625 38.2812C4.11345 38.2812 4.31216 38.1989 4.45868 38.0524C4.60519 37.9059 4.6875 37.7072 4.6875 37.5Z" fill="#081B4B" stroke="#081B4B"/>
+                        <path d="M39.0623 23.4766C39.0623 10.8437 39.0623 11.6328 38.9764 11.375C38.8904 11.1172 39.4139 11.9766 33.4529 3.46094C33.1092 2.96094 34.1873 3.125 14.8435 3.125C14.6363 3.125 14.4376 3.20731 14.2911 3.35382C14.1446 3.50034 14.0623 3.69905 14.0623 3.90625C14.0623 4.11345 14.1446 4.31216 14.2911 4.45868C14.4376 4.60519 14.6363 4.6875 14.8435 4.6875H17.7967L16.5467 10.9375H5.40604L9.78104 4.6875H11.7185C11.9257 4.6875 12.1245 4.60519 12.271 4.45868C12.4175 4.31216 12.4998 4.11345 12.4998 3.90625C12.4998 3.69905 12.4175 3.50034 12.271 3.35382C12.1245 3.20731 11.9257 3.125 11.7185 3.125H9.37479C8.78886 3.125 9.10136 2.92969 3.26542 11.2734C3.06229 11.5625 3.12479 10.5547 3.12479 33.5938C3.12479 33.801 3.2071 33.9997 3.35362 34.1462C3.50013 34.2927 3.69884 34.375 3.90604 34.375C4.11324 34.375 4.31196 34.2927 4.45847 34.1462C4.60498 33.9997 4.68729 33.801 4.68729 33.5938V12.5H16.406V17.9687C16.406 18.176 16.4884 18.3747 16.6349 18.5212C16.7814 18.6677 16.9801 18.75 17.1873 18.75H24.9998C25.207 18.75 25.4057 18.6677 25.5522 18.5212C25.6987 18.3747 25.781 18.176 25.781 17.9687V12.5H27.3435C27.5507 12.5 27.7495 12.4177 27.896 12.2712C28.0425 12.1247 28.1248 11.926 28.1248 11.7188C28.1248 11.5116 28.0425 11.3128 27.896 11.1663C27.7495 11.0198 27.5507 10.9375 27.3435 10.9375H25.6404L24.3904 4.6875H32.406L36.781 10.9375H30.4685C30.2613 10.9375 30.0626 11.0198 29.9161 11.1663C29.7696 11.3128 29.6873 11.5116 29.6873 11.7188C29.6873 11.926 29.7696 12.1247 29.9161 12.2712C30.0626 12.4177 30.2613 12.5 30.4685 12.5H37.4998V23.4375C36.5341 23.5459 35.5922 23.8097 34.7107 24.2187C29.4842 26.6172 27.1639 33.2891 33.7654 42.1875H4.68729V40.625C4.68729 40.4178 4.60498 40.2191 4.45847 40.0726C4.31196 39.9261 4.11324 39.8438 3.90604 39.8438C3.69884 39.8438 3.50013 39.9261 3.35362 40.0726C3.2071 40.2191 3.12479 40.4178 3.12479 40.625V42.9688C3.12479 43.176 3.2071 43.3747 3.35362 43.5212C3.50013 43.6677 3.69884 43.75 3.90604 43.75H34.9998C35.8565 44.7811 36.7777 45.757 37.7576 46.6719C37.9012 46.8014 38.0877 46.8732 38.281 46.8732C38.4744 46.8732 38.6609 46.8014 38.8045 46.6719C40.2188 45.349 41.5129 43.9032 42.6717 42.3516C42.797 42.1837 42.8506 41.973 42.8205 41.7657C42.7905 41.5583 42.6793 41.3714 42.5115 41.2461C42.3437 41.1207 42.1329 41.0672 41.9256 41.0972C41.7183 41.1273 41.5314 41.2384 41.406 41.4063C40.4501 42.6786 39.4059 43.8821 38.281 45.0078C34.9764 41.7422 31.2498 36.6484 31.2498 32.0234C31.2498 30.1586 31.9906 28.3702 33.3092 27.0516C34.6278 25.733 36.4162 24.9922 38.281 24.9922C40.1458 24.9922 41.9343 25.733 43.2529 27.0516C44.5715 28.3702 45.3123 30.1586 45.3123 32.0234C45.1969 34.4657 44.4397 36.8344 43.117 38.8906C43.0527 38.979 43.0077 39.08 42.9848 39.1869C42.962 39.2938 42.9618 39.4043 42.9844 39.5112C43.0069 39.6182 43.0516 39.7192 43.1157 39.8078C43.1797 39.8964 43.2616 39.9706 43.3561 40.0255C43.4506 40.0805 43.5556 40.115 43.6643 40.1268C43.773 40.1386 43.8829 40.1275 43.987 40.0942C44.0911 40.0608 44.1871 40.006 44.2687 39.9333C44.3503 39.8605 44.4157 39.7715 44.4607 39.6719C45.9273 37.3835 46.7603 34.7469 46.8748 32.0313C46.8739 29.8879 46.0722 27.8222 44.6268 26.2395C43.1814 24.6569 41.1968 23.6714 39.0623 23.4766ZM24.2185 17.1875H17.9685V12.5H24.2185V17.1875ZM24.0467 10.9375H18.1404L19.3904 4.6875H22.7967L24.0467 10.9375Z" fill="#081B4B" stroke="#081B4B"/>
+                        <path d="M34.375 32.0312C34.3772 32.8157 34.6154 33.5813 35.0588 34.2284C35.5022 34.8756 36.1302 35.3742 36.8609 35.6594C37.5917 35.9447 38.3914 36.0033 39.1559 35.8276C39.9205 35.6519 40.6144 35.2502 41.1474 34.6746C41.6804 34.099 42.0277 33.3763 42.1442 32.6005C42.2607 31.8248 42.1409 31.0319 41.8004 30.3252C41.46 29.6185 40.9146 29.0306 40.2354 28.6382C39.5561 28.2458 38.7745 28.067 37.9922 28.125C37.785 28.1478 37.5953 28.252 37.4649 28.4146C37.3345 28.5772 37.2741 28.785 37.2969 28.9922C37.3197 29.1994 37.4238 29.389 37.5865 29.5194C37.7491 29.6498 37.9569 29.7103 38.1641 29.6875C38.6778 29.6616 39.1858 29.8055 39.6097 30.0969C40.0336 30.3883 40.3499 30.811 40.5097 31.3C40.6696 31.7889 40.6641 32.3168 40.4942 32.8024C40.3243 33.2879 39.9994 33.7041 39.5696 33.9867C39.1398 34.2693 38.6289 34.4026 38.1158 34.3661C37.6027 34.3297 37.1159 34.1254 36.7303 33.7848C36.3448 33.4443 36.082 32.9864 35.9825 32.4817C35.883 31.977 35.9523 31.4536 36.1797 30.9922C36.7578 29.8359 34.375 28.7969 34.375 32.0312Z" fill="#081B4B"/>
+                    </svg>
+                <span class="service-name">Tracking</span>
+                </div>
+            </a>
+            <a class="service-link" href="/index/locations.html">
+                <div class="website-service-container">
+                    <svg class="svg-icon" width="50" height="50" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                    </svg>
+                <span class="service-name">Locations</span>
+                </div>
+            </a>
         </div>
-    </div>
-
-
-   
-    
+    </section>
 </body>
 </html>
