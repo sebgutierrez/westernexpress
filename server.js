@@ -9,8 +9,7 @@ const sql = require('mssql');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const session = require('express-session');
-const crypto = require('crypto');
-const bcrypt = require('bcrypt');
+//const crypto = require('crypto');
 
 const app = express();
 const router = express.Router();
