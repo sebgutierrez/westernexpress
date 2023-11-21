@@ -6,13 +6,13 @@ async function checkCredentials(username, password){
 		console.log('check creds');
 		console.log(username, password);
 		let pool = await sql.connect(config);
-        let exists = await pool.request()
+        let query = await pool.request()
         .query(`SELECT COUNT(1)
                 FROM credentials
                 WHERE usernames='${username}' AND passwords='${password}';`);
         pool.close();
-		console.log(exists.recordset[0]['']);
-		if (exists.recordset[0][''] === 1){
+		let exists = query.recordset[0][''];
+		if (exists === 1){
 			return true;
 		} 
 		else{
@@ -32,11 +32,6 @@ async function getEmployeeId(username){
                 FROM employees_new 
                 WHERE username='${username}';`);
         pool.close();
-		console.log('employee');
-		console.log(record.recordset[0]['emp_id']);
-		console.log(record.recordsets);
-		console.log(record.recordset[0].emp_id);
-		console.log(record.recordset[0].emp_id);
 		return record.recordset[0].emp_id;
 	} catch (error) {
 		console.log(error);
@@ -47,9 +42,7 @@ async function clockIn(username, password){
 	try {
 		let exists = await checkCredentials(username, password);
 		if(exists === true){
-			console.log('cred exists')
 			let employee_id = await getEmployeeId(username);
-			console.log(`credentials exist ${employee_id}`);
 			let pool = await sql.connect(config);
 			let query = await pool.request()
 			.query(`DECLARE @record_id INT;
@@ -57,8 +50,8 @@ async function clockIn(username, password){
 					DECLARE @date DATE;
                     DECLARE @time TIME;
 					DECLARE @clock_in_time TIME;
-                    SET @date = CAST(SYSDATETIME() AS date);
-			        SET @clock_in_time = CAST(SYSDATETIME() AS time);
+                    SET @date = CAST(SYSDATETIME() AS DATE);
+			        SET @clock_in_time = CAST(SYSDATETIME() AS TIME);
 
 					INSERT INTO employee_hours(record_id, FK_employee_id, clock_in, clock_out, date, total_hours)
 					VALUES (@record_id, '${employee_id}', @clock_in_time, @clock_in_time, @date, 0);`);
@@ -78,35 +71,30 @@ async function clockOut(username, password){
 		let exists = await checkCredentials(username, password);
 		if(exists === true){
 			let employee_id = await getEmployeeId(username);
-			console.log(`credentials exist ${employee_id}`);
 			let pool = await sql.connect(config);
 			let query = await pool.request()
 			.query(`DECLARE @date DATE;
 					SET @date = CAST(SYSDATETIME() AS DATE);
-					DECLARE @clock_in TIME;
-					DECLARE @clock_out TIME;
+					DECLARE @clock_in TIME(7);
+					DECLARE @clock_out TIME(7);
+					SET @clock_out = CAST(SYSDATETIME() AS TIME);
 					DECLARE @total_hours decimal(4,2);
 
-					SELECT @clock_in = clock_in, @total_hours = (DATEDIFF(mi, CAST(@clock_in AS TIME), CAST(@clock_out AS TIME))/CAST(60 AS FLOAT))
+					SELECT @clock_in = clock_in, @total_hours = (DATEDIFF(mi, @clock_in, @clock_out)/CAST(60 AS FLOAT))
 					FROM employee_hours
-					WHERE FK_employee_id='${employee_id}' AND date='@date';
-
-					PRINT @clock_in;
+					WHERE FK_employee_id='${employee_id}' AND date=@date;
 					
 					SELECT @total_hours AS total_hours;`);
 			pool.close();
-			console.log('total hours');
-			console.log(query.recordsets);
-			console.log(query.recordset[0].total_hours);
-			
+			let total_hours = query.recordset[0].total_hours;
 			let exists = await checkWeeklyHoursExists(employee_id);
-			console.log('check weekly');
-			console.log(exists);
-			if (exists.recordset[0][''] === 1 === 1){
-				updateWeeklyHours(employee_id, query.recordset[0].total_hours);
+			if (exists){
+				console.log('update');
+				updateWeeklyHours(employee_id, total_hours);
 			} 
 			else{
-				insertWeeklyHours(employee_id, query.recordset[0].total_hours);
+				console.log('insert');
+				insertWeeklyHours(employee_id, total_hours);
 			} 
 			return {'success' : 'clockOut was successful'}
 		}
@@ -122,7 +110,7 @@ async function clockOut(username, password){
 async function checkWeeklyHoursExists(employee_id){
 	try {
 		let pool = await sql.connect(config);
-        let exists = await pool.request()
+        let query = await pool.request()
         .query(`DECLARE @current_date DATE;
 				SET @current_date = CAST(SYSDATETIME() AS DATE);
 
@@ -133,11 +121,10 @@ async function checkWeeklyHoursExists(employee_id){
 
 				SELECT COUNT(1)
 				FROM weekly_hours
-				WHERE FK_employee_id = '${employee_id}' AND week_start = '@week_start' AND week_end = '@week_end';`);
+				WHERE FK_employee_id = '${employee_id}' AND week_start = @week_start AND week_end = @week_end;`);
         pool.close();
-		console.log(`weeklyhour record exist`);
-		console.log(exists.recordset[0].length);
-		if (exists.recordset[0].length === 1){
+		let exists = query.recordset[0][''];
+		if (exists === 1){
 			return true;
 		} 
 		else{
@@ -153,7 +140,7 @@ async function insertWeeklyHours(employee_id, total_hours){
 		let pool = await sql.connect(config);
         let query = await pool.request()
         .query(`DECLARE @record_id INT;
-				SELECT @record_id = COUNT(*) + 1 FROM employee_hours;
+				SELECT @record_id = COUNT(*) + 1 FROM weekly_hours;
 
 				DECLARE @current_date DATE;
 				SET @current_date = CAST(SYSDATETIME() AS DATE);
@@ -186,9 +173,8 @@ async function updateWeeklyHours(employee_id, total_hours){
 		
 				UPDATE weekly_hours
 				SET weekly_hours.weekly_hours = weekly_hours.weekly_hours + ${total_hours}
-				WHERE FK_employee_id = '${employee_id}' AND week_start = '@week_start' AND week_end = '@week_end';`);
+				WHERE FK_employee_id = '${employee_id}' AND week_start = @week_start AND week_end = @week_end;`);
         pool.close();
-
 		return {'success' : 'updateWeeklyHours was successful'}
 	} catch (error) {
 		console.log(error);

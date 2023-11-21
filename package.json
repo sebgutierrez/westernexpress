@@ -1,10 +1,10 @@
 {
   "name": "westernexpresspostal",
   "version": "1.0.0",
-  "main": "script.js",
+  "main": "server.js",
   "scripts": {
-    "start": "start script.js",
-    "devStart": "nodemon script.js"
+    "start": "start server.js",
+    "devStart": "nodemon server.js"
   },
   "dependencies": {
     "body-parser": "^1.20.2",

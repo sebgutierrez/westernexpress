@@ -4,6 +4,7 @@
 //mkaes the shadow appear when scrolling
 const horizontalLine = document.querySelector(".horizontal-line");
 
+// const BASE_URL = 'http://localhost:5500';
 const BASE_URL = 'https://westernexpresspostal.azurewebsites.net';
 
 window.addEventListener("scroll", () => {
