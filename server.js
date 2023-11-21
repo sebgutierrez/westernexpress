@@ -10,15 +10,14 @@ const cors = require('cors');
 const app = express();
 const router = express.Router();
 const PORT = process.env.PORT;
+app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser.json());
+app.use(cors());
 
 console.log(PORT);
 /* server static files */
 const path = require('path')
 app.use(express.static(path.join(__dirname, 'public')))
-
-app.use(bodyParser.urlencoded({extended: true}))
-app.use(bodyParser.json());
-app.use(cors());
 
 // Middleware to handle CORS headers
 app.use((req, res, next) => {
