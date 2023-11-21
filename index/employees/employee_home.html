@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Western Express: Employee Portal</title>
     <link rel="stylesheet" href="\css\employees\employee_home.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=DM Sans">
   </head>
   <body>
     <div class="transparent-background"></div>
-
     <header>
       <h1>Welcome, <strong>Jane Doe</strong>!</h1>
       <div class="top-icons">
@@ -39,16 +39,17 @@
           <!--<li><a href="#" onclick="loadContent('post office')">Post-Offices</a></li>-->
           <li><a href="/index/employees/financial_report.html">Financial Report</a></li>
           <li><a href="#" onclick="loadContent('contact')">Contact</a></li>
+          <li><a href="#" onclick="loadContent('clockin-clockout')">Clock In/Clock Out</a></li>
         </ul>
       </nav>
       <main class="content">
         <div id="home">
           <div class="background-container">
             <h1>Western Express Postal: Employee Portal</h1>
-            <div class="track-package">
+            <!--<div class="track-package">
               <input type="text" placeholder="Enter tracking number" />
               <button>Track</button>
-            </div>
+            </div>-->
           </div>
           <div class="services">
             <h2>Services Overview</h2>
@@ -98,20 +99,39 @@
           </div>
         </div>
         <div id="tracking">
-          <div>
+          <span style="display: none;">Tracking ID:<span id="tracking-id"></span></span>
+          <!--<div>
             <button id="view-tracking-btn">View Tracking History</button>
             <button id="update-tracking-btn">Update Tracking History</button>
+          </div>-->
+          <div class="view-tracking">
+            <h1 class="view-tracking-header">View Tracking History</h1>
+            <form class="" id="view-tracking-form" action="#" style="display: block;">
+              <label for="view-tracking-input" class="view-tracking-label">Tracking ID:</label>
+              <input type="text" name="view-tracking-input" id="view-tracking-input" class="" placeholder="" required />
+              <button id="view-tracking-submit" onClick="viewTracking(); return false" class="">View</button>
+            </form>
+            <div id="tracking-table"></div>
           </div>
-          <form class="" id="view-tracking-form">
-            <label for="view-tracking-input" class=""></label>
-            <input type="text" name="view-tracking-input" id="view-tracking-input" class="" placeholder="Enter a 12-digit tracking number" required />
-            <button id="view-tracking-submit" onClick="viewTracking()" class="">View</button>
-          </form>
-          <form class="" id="upate-tracking-form">
-            <label for="update-tracking-input" class=""></label>
-            <input type="text" name="update-tracking-input" id="update-tracking-input" class="" placeholder="Enter a 12-digit tracking number" required />
-            <button id="update-tracking-submit" onClick="updateTracking()" class="">Update</button>
-          </form>
+          <div class="update-tracking">
+            <h1 class="update-tracking-header">Update Tracking History</h1>
+            <form class="" id="update-tracking-form" action="#" style="display: block;">
+              <label for="update-tracking-employee" class="update-employee-label">Employee ID:</label>
+              <input type="text" name="update-tracking-employee" id="update-tracking-employee" class="" placeholder="" required />
+              <label for="update-tracking-input" class="update=tracking-label">Tracking ID:</label>
+              <input type="text" name="update-tracking-input" id="update-tracking-input" class="" placeholder="" required />
+              <label for="update-tracking-status" class="update-status-label">Status:</label>
+              <select name="update-tracking-status" id="update-tracking-status"> 
+                <option value="PROCESSED">PROCESSED</option> 
+                <option value="SHIPPED">SHIPPED</option> 
+                <option value="IN TRANSIT">IN TRANSIT</option>
+                <option value="ARRIVED">ARRIVED</option> 
+                <option value="DELAY">DELAY</option> 
+              </select>
+              <!--<input type="text" name="update-tracking-status" id="update-tracking-status" class="" placeholder="" required />-->
+              <button id="update-tracking-submit" onClick="updateTracking(); return false" class="">Update</button>
+            </form>
+          </div>
         </div>
         <div id="packages">
           <h2>Packages Overview</h2>
@@ -119,9 +139,9 @@
                 <div class="page">
                   <div class="container1">
                       <h3>From</h3>
-                      <input type="date" id="startDate">
+                      <input type="text" id="startDate" pattern="\d{4}-\d{2}-\d{2}" placeholder="(YYYY-MM-DD)">
                       <h3>To</h3>
-                      <input type="date" id="endDate">
+                      <input type="text" id="endDate" pattern="\d{4}-\d{2}-\d{2}" placeholder="(YYYY-MM-DD)">
                   </div>
                   <div class="container2">
                       <h3>Class Types</h3>
@@ -136,22 +156,22 @@
                         </select>
                       <h3>Status</h3>
                       <label>
-                        <select id="status" name="status">
+                        <select id="package_status" name="status">
                           <option value="">Choose an option</option>
-                          <option value="Processed">Processed</option>
-                          <option value="Shipped">Shipped</option>
-                          <option value="On The Way ">On The Way</option>
-                          <option value="Delivered">Delivered</option>
-                          <option value="Delay">Delay</option>
+                          <option value="PROCESSED">Processed</option>
+                          <option value="SHIPPED">Shipped</option>
+                          <option value="ON THE WAY">On The Way</option>
+                          <option value="DELIVERED">Delivered</option>
+                          <option value="DELAY">Delay</option>
                       </select>
                     </label>
                   </div>
               </div>
               <div class="submit_button">
-                <input type= "submit" id="package_submit" onClick="generateOverview()" class="package_submit" value="Generate">
-            </div>
-            <div id="packageOverview"></div>
+                <button type="button" id="package_button" onClick="formSubmission()" class="package_button">Search</button>
+              </div>
             </form>
+            <div id="package_overview"></div>
         </div>
         <div id="support">
           <h2>Support Tickets</h2>
@@ -264,6 +284,28 @@
         <div id="contact">
           <p>This is the default content for Link 7.</p>
         </div>
+        <div id="clockin-clockout">
+          <div class="clockin">
+            <h1 class="clockin-header">Clock In</h1>
+            <form class="" id="clockin-form" action="#" style="display: block;">
+              <label for="clockin-user-input" class="clockin-user-label">Enter username:</label>
+              <input type="text" name="clockin-user-input" id="clockin-user-input" class="" placeholder="" required />
+              <label for="clockin-pass-input" class="clockin-pass-label">Enter password:</label>
+              <input type="text" name="clockin-pass-input" id="clockin-pass-input" class="" placeholder="" required />
+              <button id="clockin-submit" onClick="clockIn(); return false" class="">Clock In</button>
+            </form>
+          </div>
+          <div class="clockout">
+            <h1 class="clockout-header">Clock Out</h1>
+            <form class="" id="clockout-form" action="#" style="display: block;">
+              <label for="clockout-user-input" class="clockout-user-label">Enter username:</label>
+              <input type="text" name="clockout-user-input" id="clockout-user-input" class="" placeholder="" required />
+              <label for="clockout-pass-input" class="clockout-pass-label">Enter password:</label>
+              <input type="text" name="clockout-pass-input" id="clockout-pass-input" class="" placeholder="" required />
+              <button id="clockout-submit" onClick="clockOut(); return false" class="">Clock Out</button>
+            </form>
+          </div>
+        </div>
       </main>
     </div>
 
@@ -286,7 +328,7 @@
       });
 
       function loadContent(contentId) {
-        // Hide all content divs
+        // Hide all content div
         const contentDivs = document.querySelectorAll(".content > div");
         contentDivs.forEach((div) => {
           div.style.display = "none";
@@ -295,60 +337,76 @@
         // Show the selected content
         document.getElementById(contentId).style.display = "block";
       }
-
-      //TRY TO GENERATE PACKAGE OVERVIEW TABLE
-      document.getElementById('package-overview-form').addEventListener('submit', function(event) {
-      event.preventDefault(); // Prevent default form submission behavior
-
-      const startDate = document.getElementById('startDate').value;
-      const endDate = document.getElementById('endDate').value;
-      const packageType = document.getElementById('packageType').value;
-      const status = document.getElementById('status').value;
-
-      const queryParams = `?startDate=${startDate}&endDate=${endDate}&packageType=${packageType}&status=${status}`;
-
-      fetch(`/generate-overview/${queryParams}`)
-          .then(response => response.text())
-          .then(htmlTable => {
-            if(typeof data.alert === 'undefined'){
-              const htmlTable = generateHTMLTable(result.recordset);
-                    res.send(htmlTable);
-					}
-					else{
-						alert('Bad Input'); 
-					}
-          })
-          .catch(error => console.error('Fetch error:', error));
-      });
-      function generateHTMLTable(data) {
-    let table = '<table border="1">';
-    const headers = Object.keys(data[0]);
-
-    table += '<tr>';
-    headers.forEach(header => {
-        table += `<th>${header}</th>`;
-    });
-    table += '</tr>';
-
-    data.forEach(row => {
-        table += '<tr>';
-        headers.forEach(header => {
-            table += `<td>${row[header]}</td>`;
-        });
-        table += '</tr>';
-    });
-
-    table += '</table>';
-    return table;
-}
-
-
-        
-
       // Set the "Home" link to be lit up by default
       const homeLink = document.querySelector(".side-nav a[href='#']");
       homeLink.classList.add("clicked");
       loadContent("home");
+
+function formSubmission(){
+
+// https://main.d2xbxyr9nuopel.amplifyapp.com
+//https://westernexpresspostal.azurewebsites.net
+let startDate = document.getElementById('startDate');
+let endDate = document.getElementById('endDate');
+let packageType = document.getElementById('startDate');
+let package_status = document.getElementById('startDate');
+
+let url = 'http://localhost:5500/package/overview/';
+
+if (startDate){url += '${startDate}/'};
+if (endDate){url += '${endDate}/'};
+if (packageType){url += '${packageType}/'};
+if (package_status){url += '${package_status}'};
+
+fetch(url)
+  .then(response => response.json())
+  .then(data => {
+    if(typeof data.alert === 'undefined'){
+      JSONToHTMLTable(data[0], "package_overview");
+    }
+    else{
+      alert('Invalid!'); 
+    }
+  })
+}
+
+function JSONToHTMLTable(data, elementToBind) {           
+var col = [];
+for (var i = 0; i < data.length; i++) {
+  for (var key in data[i]) {
+    if (col.indexOf(key) === -1) {
+      col.push(key);
+    }
+  }
+}
+
+//This Code creates HTML table
+var table = document.createElement("table");
+
+//This Code getsrows for header creader above.
+var tr = table.insertRow(-1);
+
+for (var i = 0; i < col.length; i++) {
+  var th = document.createElement("th");
+  th.innerHTML = col[i];
+  tr.appendChild(th);
+}
+
+//This Code adds data to table as rows
+for (var i = 0; i < data.length; i++) {
+
+  tr = table.insertRow(-1);
+
+  for (var j = 0; j < col.length; j++) {
+    var tabCell = tr.insertCell(-1);
+    tabCell.innerHTML = data[i][col[j]];
+  }
+}
+
+//This Code gets the all columns for header
+var divContainer = document.getElementById(elementToBind);
+divContainer.appendChild(table);
+}
     </script>
     <script src="./js/employee_home.js"></script>
   </body>

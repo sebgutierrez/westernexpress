@@ -19,7 +19,7 @@
 		  padding: 10px;
 		  text-align: left;
 		}
-	  </style>
+	</style>
 </head>
 <body>
     <header class="header">
@@ -136,7 +136,9 @@
 		</div>
 	</section>
 	<script>
-
+		
+		const BASE_URL = '';
+		//const BASE_URL = 'https://westernexpresspostal.azurewebsites.net';
 		const track_box = document.getElementById('track-box')
 		const search_form = document.getElementById('tracking-search-form')
 		const tracking_info = document.getElementById('tracking-info-container')
@@ -161,7 +163,9 @@
 			const tracking_id_span = document.getElementById('tracking-id');
 			tracking_id_span.innerHTML = tracking_id;
 
-			fetch(`/track/history/${tracking_id}`)
+			// https://main.d2xbxyr9nuopel.amplifyapp.com
+			//https://westernexpresspostal.azurewebsites.net
+			fetch(`${BASE_URL}/track/history/${tracking_id}`)
 				.then(response => response.json())
 				.then(data => {
 					if(typeof data.alert === 'undefined'){
@@ -171,10 +175,9 @@
 						alert('The tracking ID you sent does not exist!'); 
 					}
 				})
-				.catch(error => (console.error('Fetch error:', error)));	
-
+				.catch(error => (console.error('Fetch error:', error)));
 		}
-		
+
 		function JSONToHTMLTable(data, elementToBind) {           
 			var col = [];
 			for (var i = 0; i < data.length; i++) {

@@ -4,6 +4,9 @@
 //mkaes the shadow appear when scrolling
 const horizontalLine = document.querySelector(".horizontal-line");
 
+const BASE_URL = '';
+//const BASE_URL = 'https://westernexpresspostal.azurewebsites.net';
+
 window.addEventListener("scroll", () => {
   // Check if the user has scrolled down a certain distance (e.g., 100px)
   if (window.scrollY > 100) {
@@ -73,19 +76,12 @@ function addTicketToTable(data) {
 // Adding the sample ticket data to the table
 addTicketToTable(ticketData);
 /**************************** EMPLOYEE TRACKING PAGE**********************************************************/
-
-const view_tracking_form = document.getElementById('view-tracking-form');
-const update_tracking_form= document.getElementById('update-tracking-form');
-const view_tracking_btn = document.getElementById('view-tracking-btn');
-const update_tracking_btn = document.getElementById('update-tracking-btn');
-
 function viewTracking(){
-
-  let tracking_id = document.getElementById('tracking-input').value
+  let tracking_id = document.getElementById('view-tracking-input').value;
   const tracking_id_span = document.getElementById('tracking-id');
   tracking_id_span.innerHTML = tracking_id;
-
-  fetch(`/track/history/${tracking_id}`)
+  // https://main.d2xbxyr9nuopel.amplifyapp.com
+  fetch(`${BASE_URL}/track/history/${tracking_id}`)
     .then(response => response.json())
     .then(data => {
       if(typeof data.alert === 'undefined'){
@@ -96,52 +92,41 @@ function viewTracking(){
       }
     })
     .catch(error => (console.error('Fetch error:', error)));	
-
 }
 
 function updateTracking(){
 
-  let tracking_id = document.getElementById('tracking-input').value
-  const tracking_id_span = document.getElementById('tracking-id');
-  tracking_id_span.innerHTML = tracking_id;
+  let tracking_id = document.getElementById('update-tracking-input').value;
+  let employee_id = document.getElementById('update-tracking-employee').value;
+  let status = document.getElementById('update-tracking-status').value;
 
-  fetch(`/track/update/${tracking_id}`)
-    .then(response => response.json())
-    .then(data => {
-      if(typeof data.alert === 'undefined'){
-        alert(`Tracking for #${tracking_id} was successfully updated!`);
-      }
-      else{
-        alert('The tracking ID you sent does not exist!'); 
-      }
-    })
-    .catch(error => (console.error('Fetch error:', error)));	
+  const data = {
+    'tracking_id': tracking_id,
+    'employee_id': employee_id,
+    'status': status
+  };
 
+  console.log(data);
+  fetch(`${BASE_URL}/track/update`, {
+    headers : {
+      "Content-type": "application/json; charset=UTF-8"
+    },
+    method : 'POST',
+    body : JSON.stringify(data)
+  })
+  .then(response => response.json())
+  .then(data => {
+    if(typeof data.alert === 'undefined'){
+      console.log(data)
+      alert(`Tracking for #${tracking_id} was successfully updated!`);
+    }
+    else{
+      console.log(data)
+      alert('The tracking ID you sent does not exist!'); 
+    }
+  })
+  .catch(error => (console.error('Fetch error:', error)));	
 }
-
-/*Package overview*/
-document.getElementById('package-overview-point').addEventListener('submit', function(event) {
-  event.preventDefault(); // Prevent default form submission behavior
-
-  const startDate = document.getElementById('startDate').value;
-  const endDate = document.getElementById('endDate').value;
-  const packageType = document.getElementById('packageType').value;
-  const status = document.getElementById('status').value;
-
-  const queryParams = `?startDate=${startDate}&endDate=${endDate}&packageType=${packageType}&status=${status}`;
-
-  fetch(`/generate-overview/${queryParams}`)
-      .then(response => response.text())
-      .then(htmlTable => {
-        if(typeof data.alert === 'undefined'){
-        JSONToHTMLTable(data[0], "packageOverview");
-      }
-      else{
-        alert('Bad Input'); 
-      }
-      })
-      .catch(error => console.error('Fetch error:', error));
-});
 
 function JSONToHTMLTable(data, elementToBind) {           
   var col = [];
@@ -156,7 +141,7 @@ function JSONToHTMLTable(data, elementToBind) {
   //This Code creates HTML table
   var table = document.createElement("table");
 
-  //This Code getsrows for header creader above.
+  //This Code getsrows for header creator above.
   var tr = table.insertRow(-1);
 
   for (var i = 0; i < col.length; i++) {
@@ -181,36 +166,71 @@ function JSONToHTMLTable(data, elementToBind) {
   divContainer.appendChild(table);
 }
 
-function toggleForms() {
-  if (view_tracking_form.classList.contains('hidden')) {
-      view_tracking_form.classList.remove('hidden');
-      update_tracking_form.classList.add('hidden');
-  } else {
-      view_tracking_form.classList.add('hidden');
-      update_tracking_form.classList.remove('hidden');
-  }
-}
-/*
-view_tracking_btn.onclick = () => {
-  var display_value = window.getComputedStyle(view_tracking_form).display;
-  if(display_value === 'block'){
-    view_tracking_form.style.display = 'none';
-    update_tracking_form.style.display = 'block';
-  }
-  else{
-     view_tracking_form.style.display = 'block';
-     update_tracking_form.style.display = 'none';
-  }
+/*const view_tracking_form = document.getElementById('view-tracking-form');
+const update_tracking_form= document.getElementById('update-tracking-form');
+const view_tracking_btn = document.getElementById('view-tracking-btn');
+const update_tracking_btn = document.getElementById('update-tracking-btn');*/
+
+/**************************** EMPLOYEE CLOCKIN / CLOCKOUT **********************************************************/
+
+function clockIn(){
+  let username = document.getElementById('clockin-user-input').value;
+  let password = document.getElementById('clockin-pass-input').value;
+
+  const data = {
+    'username': username,
+    'password': password
+  };
+
+  console.log(data);
+  fetch(`${BASE_URL}/clockin`, {
+    headers : {
+      "Content-type": "application/json; charset=UTF-8"
+    },
+    method : 'POST',
+    body : JSON.stringify(data)
+  })
+  .then(response => response.json())
+  .then(data => {
+    if(typeof data.alert === 'undefined'){
+      console.log(data)
+      alert(`You successfully clocked in!`);
+    }
+    else{
+      console.log(data)
+      alert('The username and/or password is incorrect!'); 
+    }
+  })
+  .catch(error => (console.error('Fetch error:', error)));	
 }
 
-update_tracking_btn.onclick = () => {
-  var display_value = window.getComputedStyle(update_tracking_form).display;
-  if(display_value === 'block'){
-    update_tracking_form.style.display = 'none';
-    view_tracking_form.style.display = 'block';
-  }
-  else{
-    update_tracking_form.style.display = 'block';
-    view_tracking_form.style.display = 'none';
-  }
-}*/
+function clockOut(){
+  let username = document.getElementById('clockout-user-input').value;
+  let password = document.getElementById('clockout-pass-input').value;
+
+  const data = {
+    'username': username,
+    'password': password
+  };
+
+  console.log(data);
+  fetch(`${BASE_URL}/clockout`, {
+    headers : {
+      "Content-type": "application/json; charset=UTF-8"
+    },
+    method : 'POST',
+    body : JSON.stringify(data)
+  })
+  .then(response => response.json())
+  .then(data => {
+    if(typeof data.alert === 'undefined'){
+      console.log(data)
+      alert(`You successfully clocked out!`);
+    }
+    else{
+      console.log(data)
+      alert('The username and/or password is incorrect!'); 
+    }
+  })
+  .catch(error => (console.error('Fetch error:', error)));	
+}
