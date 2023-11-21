@@ -32,28 +32,28 @@ app.use((req, res, next) => {
     );
     res.setHeader("Access-Control-Allow-Credentials", true);
     next();
-  });
+});
 
 app.get('/track/history/:id', (req, res) => {
     tracking.customerTracking(req.params.id)
     .then(result => {
         res.send(result);
     })
-})
+});
 
 app.post('/track/update', (req, res) => {
     tracking.employeePackageUpdate(req.body)
     .then(result => {
         res.send(result);
     })
-})
+});
 
 app.get('/track/package/:id', (req, res) => {
     tracking.customerPackage(req.params.id)
     .then(result => {
         res.send(result);
     })
-})
+});
 
 app.post('/clockin', (req, res) => {
     console.log(req.body.username, req.body.password);
@@ -61,7 +61,7 @@ app.post('/clockin', (req, res) => {
     .then(result => {
         res.send(result);
     })
-})
+});
 
 
 app.post('/clockout', (req, res) => {
@@ -69,7 +69,7 @@ app.post('/clockout', (req, res) => {
     .then(result => {
         res.send(result);
     })
-})
+});
 
 app.post("/generateReport", async (req, res) => {
     try {
@@ -91,8 +91,8 @@ app.post("/generateReport", async (req, res) => {
       res.status(500).send("Internal Server Error");
     } finally {
       await mssql.close();
-    }S
-  });
+    }
+});
 
 
 app.get('/', (req, res) => {
@@ -100,13 +100,13 @@ app.get('/', (req, res) => {
     console.log(req);
     console.log(`${PORT}`);
     res.sendFile(path.join(__dirname, 'index.html'));
-})
+});
 
 app.get('/index.html', (req, res) => {
     console.log('listened');
     console.log(req);
     console.log(`${PORT}`);
-    res.sendFile(path.join(__dirname, '/index.html'));
+    res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 app.listen(PORT, () => {
