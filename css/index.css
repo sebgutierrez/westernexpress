@@ -239,14 +239,14 @@ body {
 }
 
 .website-service-container {
-	background-color: #E1FAFF;
+	background-color: #222E50;
 	border: none;
 	border-radius: 0.5rem;
 	padding: 2rem 8rem 2rem 8rem;
 }
 
 .website-service-container:hover {
-	background-color: #70D4FF;
+	background-color: #222E50;
 	/*display: inline-block;
     vertical-align: middle;
     transform: perspective(1px) translateZ(0);
@@ -266,7 +266,7 @@ body {
 .service-link {
 	font-size: 2rem;
 	font-weight: bold;
-	color: #081B4B;
+	color: #f5f5f5;
 	text-decoration: none;
 }
 

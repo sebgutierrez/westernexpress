@@ -1,43 +1,98 @@
-/* CSS for top menu */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    background-color: #222E50;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+}
+
 .top-menu {
-    background-color: #f2f2f2;
-    overflow: hidden;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 999; /* Ensures the menu is on top of other elements */
+    display: flex;
+    justify-content: center;
 }
 
 .top-menu ul {
-    list-style-type: none;
+    list-style: none;
     margin: 0;
     padding: 0;
-    overflow: hidden;
+    display: flex;
 }
 
-.top-menu li {
-    float: right;
+.top-menu ul li {
+    margin: 0 10px;
 }
 
-.top-menu li a {
-    display: block;
-    color: #333;
-    text-align: center;
-    padding: 14px 16px;
+.top-menu ul li a {
+    color: #fff;
     text-decoration: none;
 }
 
-.top-menu li a:hover {
-    background-color: #ddd;
+.top-menu ul li a:hover {
+    text-decoration: underline;
 }
 
-/* Adjusted styles to ensure header is not covered by the nav bar */
-header {
-    padding-top: 40px; /* Adjust the padding as necessary to prevent the header from being covered by the navbar */
+.track-package {
+    text-align: center;
+    margin: 20px 0;
 }
 
-/* Adjusted image size */
-img {
-    max-width: 100px; /* Adjust the width as needed */
-    height: auto; /* Ensures the aspect ratio is maintained */
+.track-package input {
+    padding: 8px;
+    margin-right: 5px;
 }
+
+.track-package button {
+    padding: 8px 15px;
+    background-color: #222E50;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+}
+
+.homepage-images {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.homepage-images h2 {
+    margin-bottom: 10px;
+}
+
+.homepage-images img {
+    width: 100%;
+    max-width: 500px;
+    margin-bottom: 10px;
+}
+
+
+
+
+.footer-buttons {
+    background-color: #000000;
+    color: #f30000;
+    padding: 20px;
+    text-align: center;
+}
+
+.footer-buttons .button-group {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 0 auto;
+}
+
+.footer-buttons button {
+    padding: 8px 15px;
+    color: #000000;
+    border: none;
+    margin: 5px;
+    cursor: pointer;
+}
+
+

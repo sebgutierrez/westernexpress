@@ -1,0 +1,54 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+form {
+    max-width: 600px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    margin-bottom: 10px;
+    color: #3498db; /* Dark blueish color */
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+input[type="submit"] {
+    background-color: #3498db;
+    color: #fff;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #2980b9;
+}
+
+#labelContainer {
+    display: none;
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #e0f7fa; /* Light blue background for label container */
+    border-radius: 8px;
+}
+
+/* Add more styles as needed */

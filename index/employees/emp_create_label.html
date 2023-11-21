@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css/employees/create_label_emp.css">
+
+    <title>Western Express Employee</title>
+</head>
+<body>
+
+    <form action="/employee/createlabel" method="post">
+
+        <h2>Ship From:</h2>
+        <label for="fromCountry">Country:</label>
+        <select id="fromCountry" name="fromCountry" defaultValue="USA">
+            <option value="USA">USA</option>
+            <!-- Add other countries if needed -->
+        </select><br>
+        <label for="fromFirstName">First Name:</label>
+        <input type="text" id="fromFirstName" name="fromFirstName" required><br>
+        <label for="fromLastName">Last Name:</label>
+        <input type="text" id="fromLastName" name="fromLastName" required><br>
+        <label for="fromAddress">Address Line:</label>
+        <input type="text" id="fromAddress" name="fromAddress" required><br>
+        <label for="fromZip">Zipcode:</label>
+        <input type="text" id="fromZip" name="fromZip" required><br>
+        <label for="fromCity">City:</label>
+        <input type="text" id="fromCity" name="fromCity" required><br>
+        <label for="fromState">State:</label>
+        <select id="fromState" name="fromState">
+            <!-- Add all USA states -->
+            <option value="AL">Alabama</option>
+            <option value="AK">Alaska</option>
+            <option value="AL">Alabama</option>
+            <option value="AK">Alaska</option>
+            <option value="AZ">Arizona</option>
+            <option value="AR">Arkansas</option>
+            <option value="CA">California</option>
+            <option value="CO">Colorado</option>
+            <option value="CT">Connecticut</option>
+            <option value="DE">Delaware</option>
+            <option value="FL">Florida</option>
+            <option value="GA">Georgia</option>
+            <option value="HI">Hawaii</option>
+            <option value="ID">Idaho</option>
+            <option value="IL">Illinois</option>
+            <option value="IN">Indiana</option>
+            <option value="IA">Iowa</option>
+            <option value="KS">Kansas</option>
+            <option value="KY">Kentucky</option>
+            <option value="LA">Louisiana</option>
+            <option value="ME">Maine</option>
+            <option value="MD">Maryland</option>
+            <option value="MA">Massachusetts</option>
+            <option value="MI">Michigan</option>
+            <option value="MN">Minnesota</option>
+            <option value="MS">Mississippi</option>
+            <option value="MO">Missouri</option>
+            <option value="MT">Montana</option>
+            <option value="NE">Nebraska</option>
+            <option value="NV">Nevada</option>
+            <option value="NH">New Hampshire</option>
+            <option value="NJ">New Jersey</option>
+            <option value="NM">New Mexico</option>
+            <option value="NY">New York</option>
+            <option value="NC">North Carolina</option>
+            <option value="ND">North Dakota</option>
+            <option value="OH">Ohio</option>
+            <option value="OK">Oklahoma</option>
+            <option value="OR">Oregon</option>
+            <option value="PA">Pennsylvania</option>
+            <option value="RI">Rhode Island</option>
+            <option value="SC">South Carolina</option>
+            <option value="SD">South Dakota</option>
+            <option value="TN">Tennessee</option>
+            <option value="TX">Texas</option>
+            <option value="UT">Utah</option>
+            <option value="VT">Vermont</option>
+            <option value="VA">Virginia</option>
+            <option value="WA">Washington</option>
+            <option value="WV">West Virginia</option>
+            <option value="WI">Wisconsin</option>
+            <option value="WY">Wyoming</option>
+        </select><br>
+
+
+        <label for="fromEmail">Email:</label>
+        <input type="email" id="fromEmail" name="fromEmail" required><br>
+  
+
+    
+    
+    
+    
+        <h2>Ship To:</h2>
+        <!-- Similar fields for Ship To -->
+        <label for="toCountry">Country:</label>
+        <select id="toCountry" name="toCountry" defaultValue="USA">
+            <option value="USA">USA</option>
+            <!-- Add other countries if needed -->
+        </select><br>
+        <label for="toFirstName">First Name:</label>
+        <input type="text" id="toFirstName" name="toFirstName" required><br>
+        <label for="toLastName">Last Name:</label>
+        <input type="text" id="toLastName" name="toLastName" required><br>
+        <label for="toAddress">Address Line:</label>
+        <input type="text" id="toAddress" name="toAddress" required><br>
+        <label for="toZip">Zipcode:</label>
+        <input type="text" id="toZip" name="toZip" required><br>
+        <label for="toCity">City:</label>
+        <input type="text" id="toCity" name="toCity" required><br>
+        <label for="toState">State:</label>
+        <select id="toState" name="toState">
+            <!-- Add all USA states -->
+            <option value="AL">Alabama</option>
+            <option value="AK">Alaska</option>
+            <!-- Add other states here -->
+        </select><br>
+        <label for="toEmail">Email:</label>
+        <input type="email" id="toEmail" name="toEmail" required><br>
+    
+
+    
+    
+    
+    
+        <h2>Details:</h2>
+        <label for="description">Description:</label>
+        <input type="text" id="description" name="description" required><br>
+        <label for="dimensions">Dimensions:</label>
+        <input type="text" id="dimensions" name="dimensions" required><br>
+        <label for="weight">Weight:</label>
+        <input type="text" id="weight" name="weight" required><br>
+
+        <h2>Method:</h2>
+        <label for="method">Select Method:</label>
+        <select id="method" name="method">
+            <option value="first">First</option>
+            <option value="2nd day">2nd Day</option>
+            <option value="economy">Economy</option>
+        </select><br>
+
+        <h2>Cost:</h2>
+        <!-- Display cost based on the selected method -->
+        <label for="cost">Cost:</label>
+        <input type="text" id="cost" name="cost" readonly><br>
+
+        
+        
+        
+        <script>
+            // Function to update cost based on the selected method
+            document.getElementById('method').addEventListener('change', function() {
+                var method = this.value;
+                var costInput = document.getElementById('cost');
+                
+                if (method === 'first') {
+                    costInput.value = '44.00';
+                } else if (method === '2nd day') {
+                    costInput.value = '34.00';
+                } else if (method === 'economy') {
+                    costInput.value = '19.00';
+                }
+            });
+        </script>
+
+        <input type="submit" value="Submit">
+    </form>
+
+
+
+
+<!-- Display label after submission -->
+<div id="labelContainer" style="display: none;">
+    <h1>Thank you for choosing Western Express</h1>
+    <!-- Display other label information here -->
+</div>
+
+</body>
+</html>

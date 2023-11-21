@@ -8,23 +8,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User</title>
-    <link rel="stylesheet" href="\css\customer\customer.css"> <!-- customer login homepage css -->
-    <link rel="stylesheet" href="\images\homepage_images"> <!-- Link to your homepage CSS file -->
+    <link rel="stylesheet" href="/css/customer/customer.css"> <!-- customer login homepage css -->
+    <link rel="stylesheet" href="/images/homepage_images/"> <!-- Link to your homepage CSS file -->
 
 
 </head>
 <body>
     <header>
         <h1>Western Express Logistics</h1>
+        <h2>Welcome User</h2>
 
         
         <nav class="top-menu">
             <ul>
-                <li><a href="about.html">About</a></li>                     <!--  link about in html here -->
-                <li><a href="services.html">Services</a></li>               <!-- link services in html here -->
-                <li><a href="locations.html">Locations</a></li>             <!-- link locations in html here -->
-                <li><a href="home_signup.html">Sign Up</a></li>                  <!-- link signup in html here -->
-                <li><a href="home_signIn.html">Sign In</a></li>             <!-- link sign in html here -->
+                <li><a href="create_label.html">Create label</a></li>  
+                <li><a href="#">Support</a></li>  
+                <li><a href="about.html">About</a></li>  
+                <li><a href="services.html">Services</a></li> 
+                <li><a href="locations.html">Locations</a></li> 
+                <li><a href="#" onclick="signOut()">Sign Out</a></li>        
+                 
+                               
+                           
             </ul>
         </nav>
     </header>
@@ -38,31 +43,43 @@
     
     <div class="homepage-images">
         <h2>Texas Fastest Delivery Service</h2>
-        <img src="C:\Users\iStar\Desktop\UH\Database\WesternExpress\Code\images\homepage_images\image1 (4).jpg" alt="Image 4">
-        <img src="C:\Users\iStar\Desktop\UH\Database\WesternExpress\Code\images\homepage_images\image1 (5).jpg" alt="Image 5">
+        <img src="images\homepage_images\image1 (4).jpg" alt="Image 4">
+        <img src="images\homepage_images\image1 (5).jpg" alt="Image 5">
     </div>
 
     
+    <script>
+        function signOut() {
+            // Perform logout logic here, e.g., clearing session storage, etc.
+    
+            // Redirect to index.html after logout
+            window.location.href = "index.html";
+        }
+    </script>
+
+
+
     
 
-    <div class="footerbuttons">
-        <div class="left-buttons">
+    <div class="footer-buttons">
+        <div class="button-group left-buttons">
             <button>Tracking</button>
             <button>Fastest Shipment</button>
             <button>Location Near Me</button>
             <button>Support</button>
         </div>
-        <div class="center-buttons">
+        <div class="button-group center-buttons">
             <button>About</button>
             <button>Team</button>
             <button>Jobs</button>
         </div>
-        <div class="right-buttons">
+        <div class="button-group right-buttons">
             <button>Facebook</button>
             <button>Instagram</button>
             <button>Youtube</button>
         </div>
     </div>
+
 
 
    
