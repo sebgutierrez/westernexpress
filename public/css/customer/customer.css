@@ -5,6 +5,7 @@
     position: fixed;
     top: 0;
     width: 100%;
+    z-index: 999; /* Ensures the menu is on top of other elements */
 }
 
 .top-menu ul {
@@ -28,4 +29,15 @@
 
 .top-menu li a:hover {
     background-color: #ddd;
+}
+
+/* Adjusted styles to ensure header is not covered by the nav bar */
+header {
+    padding-top: 40px; /* Adjust the padding as necessary to prevent the header from being covered by the navbar */
+}
+
+/* Adjusted image size */
+img {
+    max-width: 100px; /* Adjust the width as needed */
+    height: auto; /* Ensures the aspect ratio is maintained */
 }
