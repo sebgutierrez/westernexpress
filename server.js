@@ -353,7 +353,7 @@ const getRandomInt = (min, max) => {
           
            ////////////////////////////////////////////////////////////////////////////////////////
            //generate tracking number
-           tracking_ready=getRandomInt(100000000000000,900000000000000)
+           tracking_ready=getRandomInt(10000000,90000000)
            //const sendDate = new Date();
           // Insert data into package
           const packageResult = await pool
