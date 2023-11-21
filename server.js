@@ -75,16 +75,8 @@ app.post('/clockout', (req, res) => {
 app.post("/generateReport", async (req, res) => {
     try {
       const requestData = req.body;
-      await mssql.connect({
-        user: process.env.DB_USER,
-        password: process.env.DB_PASSWORD,
-        server: String(process.env.DB_SERVER),
-        database: process.env.DB_DATABASE,
-        encrypt: true,
-      });
-  
+      await mssql.connect(config);
       const result = await mssql.query(requestData.query); // Using the received SQL query
-  
       res.json(result.recordset);
     } catch (error) {
       console.error(error);
@@ -206,17 +198,23 @@ const getRandomInt = (min, max) => {
         const employeeResult = await pool.request()
         .input('username', sql.VarChar, req.body.username)
         .input('password', sql.VarChar, req.body.password)
-        .query('SELECT emp_id FROM employees_new WHERE login_emp = @username AND password_emp = @password');
+        .query('SELECT emp_id, username FROM employees_new WHERE login_emp = @username AND password_emp = @password');
   
         console.log(employeeResult.recordsets);
         // Check if there is at least one record
         if (employeeResult.recordset.length > 0) {
             const emp_id = employeeResult.recordset[0].emp_id;
-    
+            const username = employeeResult.recordset[0].username;
+
             // Store employerIDNumber in the session
             req.session.emp_id = emp_id;
 
             console.log(emp_id);
+
+            shift.sendAlertMessage(username)
+            .then(result => {
+                res.send(result);
+            })
     
             // Employee login
             res.sendFile(path.join(__dirname, 'public', 'index', 'employees', 'employee_home.html'));

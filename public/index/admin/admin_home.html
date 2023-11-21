@@ -56,6 +56,9 @@
           <li>
             <a href="#" onclick="loadContent('supportreport')">Support Ticket Report</a>
           </li>
+          <li>
+            <a href="#" onclick="signOut()">Sign Out</a>
+          </li>
         </ul>
       </nav>
       <main class="content">
@@ -302,6 +305,14 @@
           </div>
         </div>
         <div id="supportreport"></div>
+        <script>
+          function signOut() {
+              // Perform logout logic here, e.g., clearing session storage, etc.
+      
+              // Redirect to index.html after logout
+              window.location.href = "/index.html";
+          }
+        </script>
       </main>
     </div>
     <script>

@@ -101,7 +101,7 @@ z-index: -1;
 /*SIDE NAV BAR*/
 .side-nav {
 	width: 250px;
-	height: 55%;
+	height: max-content;
 	top: 50px;
 	left: 0;
 	color: black;

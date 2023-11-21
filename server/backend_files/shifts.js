@@ -1,3 +1,4 @@
+const { sensitiveHeaders } = require('http2');
 const config = require('../config.js');
 const sql = require('mssql');
 
@@ -181,7 +182,48 @@ async function updateWeeklyHours(employee_id, total_hours){
 	}
 }
 
+async function sendAlertMessage(username){
+	try {
+		let pool = await sql.connect(config);
+        let query = await pool.request()
+        .query(`
+				SELECT alert_id, alert_message, date, FORMAT(CAST(time as DATETIME), 'hh:mm tt') AS time
+				FROM alerts
+				WHERE FK_username = '${username}' AND alert_sent = 0;`);
+        pool.close();
+
+		console.log(query.recordset[0].trigger_name);
+		let alert_message = query.recordset[0].alert_message;
+		let date = query.recordset[0].date;
+		let time = query.recordset[0].time;
+		let trigger_message = `${alert_message} (Sent on ${date} at ${time})`;
+		console.log(trigger_message);
+		let mark_sent = await markAlertSent(query.recordset[0].alert_id);
+		return {'trigger_message' : trigger_message}
+	} catch (error) {
+		console.log(error);
+	}
+}
+
+async function markAlertSent(alert_id){
+	try {
+		let pool = await sql.connect(config);
+        let query = await pool.request()
+        .query(`
+				UPDATE alerts
+				SET alert_sent = 1
+				WHERE alert_id = ${alert_id};`);
+        pool.close();
+		
+		return {'alert message' : 'alert marked as sent'}
+	} catch (error) {
+		console.log(error);
+	}
+}
+
 module.exports = {
 	clockIn: clockIn,
-	clockOut: clockOut
+	clockOut: clockOut,
+	sendAlertMessage : sendAlertMessage,
+	markAlertSent : markAlertSent
 }

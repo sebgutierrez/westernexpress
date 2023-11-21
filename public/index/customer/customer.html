@@ -19,10 +19,17 @@
                 <li class="navlist-item"><a class="navlist-link" href="/index/customer/customer_support.html">Support</a></li>                                  
             </ul>
         </nav>
-        <div class="account-buttons">
-            <button class="sign-in-button"><a class="sign-in-link" href="/index/sign_in.html">Log In</a></button>                  
-            <button class="sign-up-button"><a class="sign-up-link" href="/index/sign_up.html">Sign Up</a></button>
+        <div class="account-buttons">               
+            <button class="sign-up-button"><a class="sign-up-link" href="#" onclick="signOut()">Sign Out</a></button>
         </div>
+        <script>
+            function signOut() {
+                // Perform logout logic here, e.g., clearing session storage, etc.
+                
+                // Redirect to index.html after logout
+                window.location.href = "/index.html";
+            }
+        </script>
     </header>
     <section class="homepage-section">
         <div class="hero-banner"> 
