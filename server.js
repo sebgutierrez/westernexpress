@@ -14,9 +14,7 @@ const PORT = process.env.PORT;
 console.log(PORT);
 /* server static files */
 const path = require('path')
-app.use(express.static(path.join(__dirname, 'index')))
-app.use(express.static(path.join(__dirname, 'images')))
-app.use(express.static(path.join(__dirname, 'css')))
+app.use(express.static(path.join(__dirname, 'public')))
 
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json());
