@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "script.js",
   "scripts": {
+    "start": "start script.js",
     "devStart": "nodemon script.js"
   },
   "dependencies": {

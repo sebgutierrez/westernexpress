@@ -9,7 +9,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const app = express();
 const router = express.Router();
-const PORT = 443;
+const PORT = process.env.PORT;
 
 console.log(PORT);
 /* server static files */
@@ -91,15 +91,21 @@ app.post("/generateReport", async (req, res) => {
       res.status(500).send("Internal Server Error");
     } finally {
       await mssql.close();
-    }
+    }S
   });
 
 
 app.get('/', (req, res) => {
+    console.log('listened');
+    console.log(req);
+    console.log(`${PORT}`);
     res.sendFile(path.join(__dirname, 'index.html'));
 })
 
 app.get('/index.html', (req, res) => {
+    console.log('listened');
+    console.log(req);
+    console.log(`${PORT}`);
     res.sendFile(path.join(__dirname, '/index.html'));
 });
 

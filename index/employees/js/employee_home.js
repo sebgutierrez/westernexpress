@@ -79,7 +79,7 @@ function viewTracking(){
   let tracking_id = document.getElementById('view-tracking-input').value;
   const tracking_id_span = document.getElementById('tracking-id');
   tracking_id_span.innerHTML = tracking_id;
-  // https://main.d2xbxyr9nuopel.amplifyapp.com
+
   fetch(`${BASE_URL}/track/history/${tracking_id}`)
     .then(response => response.json())
     .then(data => {
