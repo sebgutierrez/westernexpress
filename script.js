@@ -277,19 +277,23 @@ app.post('/login', async (req, res) => {
       const employeeResult = await pool.request()
       .input('username', sql.VarChar, req.body.username)
       .input('password', sql.VarChar, req.body.password)
-      .query('SELECT emp_id FROM employees_new WHERE login_emp = @username AND password_emp = @password');
+      .query('SELECT emp_id,postoffice_id FROM employees_new WHERE login_emp = @username AND password_emp = @password');
 
       // Check if there is at least one record
       if (employeeResult.recordset.length > 0) {
       const emp_id = employeeResult.recordset[0].emp_id;
-
-      // Store employerIDNumber in the session
+      const postoffice_id = employeeResult.recordset[0].postoffice_id;
       req.session.emp_id = emp_id;
+      req.session.postoffice_id = postoffice_id;
+
 
       // Employee login
       res.sendFile(path.join(__dirname, 'index', 'employees', 'employee_home.html'));
       return;
       }
+
+
+
 
       ///////////////////////////////////////////////////////////
       /////////////////////////////////////////////////////////// Check for admin login
@@ -424,12 +428,13 @@ app.post('/createlabel', async (req, res) => {
         
          ////////////////////////////////////////////////////////////////////////////////////////
          //generate tracking number
-         tracking_ready=getRandomInt(100000000000000,900000000000000)
+        tracking_ready=getRandomInt(100000000000000,900000000000000)
          //const sendDate = new Date();
         // Insert data into package
         const packageResult = await pool
         .request()
         .input('trackingNumber',sql.BigInt,tracking_ready)
+        
         .input('senderID',sql.Int,senderId)
         .input('receiverID',sql.Int,receiver_id_uui)
         .input('description',sql.VarChar,req.body.description)
@@ -439,8 +444,9 @@ app.post('/createlabel', async (req, res) => {
         .input('class',sql.VarChar,req.body.class)
         .input('createdBy',sql.Int,customerID)
         .query(`
-            INSERT INTO package (tracking_number, sender_id, receiver_id, description, FK_dimensions, weight, cost, class,package_createdby)
-            VALUES (@trackingNumber, @senderID, @receiverID, @description, @fkdimension, @weight, @cost, @class, @createdBy);
+            INSERT INTO package (tracking_number, send_date,sender_id, receiver_id, description, FK_dimensions, weight, cost, class,package_createdby)
+        .input('sendDate', sql.Date,sendDate)
+        VALUES (@trackingNumber,@senderID, @receiverID, @description, @fkdimension, @weight, @cost, @class, @createdBy);
           `);
         
         
@@ -664,6 +670,58 @@ app.post('/employee/createlabel', async (req, res) => {
   });
 
 
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////// 
+// Route to handle updating the status in the database
+app.post('/incomingpackages', async (req, res) => {
+
+  try {
+
+    // Create a SQL Server connection pool
+    const pool = await sql.connect(config);
+
+    // Begin a new transaction
+    const transaction = await pool.transaction();
+
+
+    // get the postal_id- employee is working in
+    const postalID = req.session.postoffice_id;
+    const empID = req.session.emp_id;
+    console.log(empID)
+    console.log(postalID)
+
+    // Use the transaction for both queries
+    await transaction.begin();
+    
+
+    // Insert the new package into the incoming_packages table
+    await pool.request()
+        .input('trackingNumber', sql.BigInt, req.body.trackingNumberInput)
+        .input('postalId', sql.Int, postalID)
+        .input('empID', sql.Int, empID)
+        .query('INSERT INTO incoming_packages (tracking_number, postoffice_id, emp_id) VALUES (@trackingNumber, @postalId, @empID)');
+
+
+    // Update the status of the package in the package table to "In Transit"
+    await pool.request()
+        .input('trackingNumber', sql.BigInt, req.body.trackingNumberInput)
+        .query('UPDATE package SET package_status = \'In Transit\' WHERE tracking_number = @trackingNumber');
+
+    // Commit the transaction
+    await transaction.commit(); 
+
+
+
+    // Send a success response to the client
+    res.json({ success: true, message: 'Package information saved successfully!!' });
+
+} catch (error) {
+    console.error('Error saving package information:', error);
+    res.status(500).send('Internal server error');
+}
+});
 
 
 

@@ -34,7 +34,7 @@
       <nav class="side-nav">
         <ul>
           <li><a href="#" onclick="loadContent('home')">Home</a></li>
-          <li><a href="#" onclick="loadContent('create_label')">Create label</a></li>
+          <li><a href="#" onclick="loadContent('create_label')">Create label</a></li>  
           <li><a href="#" onclick="loadContent('tracking')">Tracking</a></li>
           <li><a href="#" onclick="loadContent('packages')">Packages Overview</a></li>
           <li><a href="#" onclick="loadContent('support')">Support</a></li>
@@ -43,6 +43,9 @@
           <li><a href="#" onclick="loadContent('contact')">Contact</a></li>
           <li><a href="#" onclick="loadContent('clockin-clockout')">Clock In/Clock Out</a></li>
           <li><a href="#" onclick="signOut()">Sign Out</a></li>
+        </ul>
+        <ul>
+          <li><a href="#" onclick="loadContent('ReceivePackage')">Receive Package</a></li>
         </ul>
       </nav>
       <main class="content">
@@ -273,6 +276,12 @@
           </div>
         </div>
 
+        <!-- AJ CODE START-->> 
+        <!-- AJ CODE START-->> 
+        <!-- AJ CODE START-->> 
+
+
+
         <div id="create_label">
           <form action="/employee/createlabel" method="post">
 
@@ -437,6 +446,29 @@
 
         </div>
 
+        <div id="ReceivePackage">
+          <form id="receivepackage_" action="/incomingpackages" method="POST">
+              <label for="trackingNumberInput">Enter Tracking Number:</label>
+              <input type="text" id="trackingNumberInput" name="trackingNumberInput" placeholder="Scan tracking number">
+              <button type="button" onclick="scanPackage()">Scan Package</button>
+          </form>
+        </div>
+      
+
+
+
+
+        <!-- AJ CODE START-->  
+        <!-- AJ CODE end--> 
+        <!-- AJ CODE end--> 
+
+
+
+
+
+
+
+
       </main>
     </div>
 
@@ -482,7 +514,60 @@
           // Redirect to index.html after logout
           window.location.href = "index.html";
       }
-  </script>
+    </script>
+
+    <script>
+      function scanPackage() {
+          // Get the tracking number from the input field
+          const trackingNumber = document.getElementById('trackingNumberInput').value;
+
+          // Make sure the tracking number is not empty
+          if (!trackingNumber) {
+              alert('Please enter a tracking number');
+              return;
+          }
+
+          // Create a FormData object and append the tracking number to it
+          const formData = new URLSearchParams();
+          formData.append('trackingNumberInput', trackingNumber);
+
+          // Make an AJAX request to submit the form
+          fetch('/incomingpackages', {
+              method: 'POST',
+              headers: {'Content-Type': 'application/x-www-form-urlencoded',},
+              body: formData
+          })
+          .then(response => response.json())
+          .then(data => {
+              if (data.success) {
+                  // Show a success message on the screen
+                  displaySuccessMessage(data.message);
+              } else {
+                  // Show an error message on the screen
+                  displayErrorMessage('Operation failed: ' + data.message);
+              }
+          })
+          .catch(error => {
+              console.error(error);
+              // Show an error message on the screen
+              displayErrorMessage('The tracking number already exists');
+          });
+      }
+
+      function displaySuccessMessage(message) {
+          // Customize how you want to display the success message
+          alert(message);
+      }
+
+      function displayErrorMessage(message) {
+          // Customize how you want to display the error message
+          alert(message);
+      }
+    </script>
+
+
+
+
 
   </body>
 </html>
