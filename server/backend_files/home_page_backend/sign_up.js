@@ -2,24 +2,14 @@ const http = require('http');
 const fs = require('fs');
 const url = require('url');
 const sql = require('mssql');
+const config = require('../../config.js');
 
-const dbConfig = {
-    user: 'systemauthor',
-    password: 'westernexpress2023_',
-    server: 'westernexpressserver.database.windows.net',
-    database: 'westernexpressdb',
-    options: {
-        encrypt: true, // Use this if you're on Windows Azure
-        enableArithAbort: true,
-    },
-};
-
-const PORT = 5500;
+const PORT = process.env.PORT;
 
 http.createServer(function (req, res) {
     const { pathname, query } = url.parse(req.url, true);
 
-    if (pathname === 'http://localhost:5500/signup' && req.method === 'POST') {
+    if (pathname === 'https://westernexpresspostal.azurewebsites.net/signup' && req.method === 'POST') {
         let body = '';
         req.on('data', (chunk) => {
             body += chunk.toString();
@@ -28,7 +18,7 @@ http.createServer(function (req, res) {
             const data = JSON.parse(body);
 
             try {
-                const pool = await sql.connect(dbConfig);
+                const pool = await sql.connect(config);
                 const transaction = new sql.Transaction(pool);
                 await transaction.begin();
 
@@ -62,7 +52,7 @@ http.createServer(function (req, res) {
 
                 await transaction.commit();
                 res.writeHead(302, {
-                    'Location': 'http://localhost:5500/index/customer/customer.html',
+                    'Location': 'https://westernexpresspostal.azurewebsites.net/index/customer/customer.html',
                     // add other headers here...
                   });
                   res.end();
@@ -75,7 +65,7 @@ http.createServer(function (req, res) {
         });
     } else {
         // Serve the sign_up.html file here
-        fs.readFile('C:/Users/iStar/Desktop/UH/Database/WesternExpress/Code/index/sign_up.html', function (err, data) {
+        fs.readFile('https://westernexpresspostal.azurewebsites.net/index/sign_up.html', function (err, data) {
             if (err) {
                 res.writeHead(404, { 'Content-Type': 'text/html' });
                 return res.end('404 Not Found');

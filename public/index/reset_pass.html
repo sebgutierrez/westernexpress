@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="\css\reset_pass_style.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=DM Sans"> 
+        <title>Reset Password Page</title>
+    </head>
+    <body>
+        <div class="page">
+            <div class="container">
+                <form id="forgetPasswordForm" onsubmit="checkUserName(); return false;"action="" method="post">
+                    <h1 id="reset_pass">Reset Password</h1>
+                    <div class="input_field">
+                        <p>Password</p>
+                        <input type="password" name="text" required>
+                    </div>
+                    <div class="input_field">
+                        <p>Confirm Password</p>
+                        <input type="password" name="text" required>
+                    </div>
+                    <input type="submit" value="Submit">
+                    <div class="back_home"><a id="back_home_link" href="/index/sign_in.html">Back to Sign In</a></div>                                                                                                                                                   
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

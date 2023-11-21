@@ -50,7 +50,7 @@ body {
 .navbar {
 	display: flex;
 	position: relative;
-	width: min-content;
+	width: max-content;
 }
 
 .navlist {
