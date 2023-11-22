@@ -25,6 +25,75 @@ async function checkCredentials(username, password){
 	}
 }
 
+async function checkCredentialsCustomer(username, password){
+	try {
+		console.log('check creds');
+		console.log(username, password);
+		let pool = await sql.connect(config);
+        let query = await pool.request()
+        .query(`SELECT COUNT(1)
+                FROM customer
+                WHERE login='${username}' AND password_='${password}';`);
+        pool.close();
+		let exists = query.recordset[0][''];
+		if (exists === 1){
+			return true;
+		} 
+		else{
+			return false;
+		} 
+
+	} catch (error) {
+		console.log(error);
+	}
+}
+
+async function checkCredentialsEmployee(username, password){
+	try {
+		console.log('check creds');
+		console.log(username, password);
+		let pool = await sql.connect(config);
+        let query = await pool.request()
+        .query(`SELECT COUNT(1)
+                FROM employees_new
+                WHERE login_emp='${username}' AND password_emp='${password}';`);
+        pool.close();
+		let exists = query.recordset[0][''];
+		if (exists === 1){
+			return true;
+		} 
+		else{
+			return false;
+		} 
+
+	} catch (error) {
+		console.log(error);
+	}
+}
+
+async function checkCredentialsAdmin(username, password){
+	try {
+		console.log('check creds');
+		console.log(username, password);
+		let pool = await sql.connect(config);
+        let query = await pool.request()
+        .query(`SELECT COUNT(1)
+                FROM admins
+                WHERE login_ad='${username}' AND password_ad='${password}';`);
+        pool.close();
+		let exists = query.recordset[0][''];
+		if (exists === 1){
+			return true;
+		} 
+		else{
+			return false;
+		} 
+
+	} catch (error) {
+		console.log(error);
+	}
+}
+
 async function getEmployeeId(username){
 	try {
 		let pool = await sql.connect(config);
@@ -184,6 +253,7 @@ async function updateWeeklyHours(employee_id, total_hours){
 
 async function sendAlertMessage(username){
 	try {
+		console.log('alert message pinged');
 		let pool = await sql.connect(config);
         let query = await pool.request()
         .query(`

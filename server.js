@@ -67,10 +67,41 @@ app.post('/clockin', (req, res) => {
 
 
 app.post('/clockout', (req, res) => {
+    console.log(req.body.username, req.body.password);
     shift.clockOut(req.body.username, req.body.password)
     .then(result => {
         res.send(result);
     })
+});
+
+  //////////////////////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////////////////////
+  // Add this middleware to enable sessions
+  app.use(session({
+    secret: 'adsfadsreqwrsdfdsafdsfete', // Change this to a secure random key
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        sameSite: true,
+        secure: false,
+        expires: false
+      }
+  }));
+
+app.get('/alerts', (req, res) => {
+    console.log(req.session);
+    if(typeof req.session.customer_username != 'undefined'){
+        shift.sendAlertMessage(req.session.customer_username)
+        .then(result => {
+            res.send(result);
+        })
+    }
+    else if(typeof req.session.emp_username != 'undefined'){
+        shift.sendAlertMessage(req.session.emp_username)
+        .then(result => {
+            res.send(result);
+        })
+    }
 });
 
 app.post("/generateReport", async (req, res) => {
@@ -103,14 +134,6 @@ const getRandomInt = (min, max) => {
     return Math.floor(Math.random() * range) + min;
   };
   
-  //////////////////////////////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////////////////////////////
-  // Add this middleware to enable sessions
-  app.use(session({
-    secret: 'adsfadsreqwrsdfdsafdsfete', // Change this to a secure random key
-    resave: false,
-    saveUninitialized: true,
-  }));
   
   //////////////////////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////////////////////
@@ -168,7 +191,6 @@ const getRandomInt = (min, max) => {
   app.post('/login', async (req, res) => {
     try {
 
-        console.log('login pinged');
         const pool = await sql.connect(config);
   
         ///////////////////////////////////////////////////////////
@@ -176,19 +198,20 @@ const getRandomInt = (min, max) => {
         const customerResult = await pool.request()
         .input('username', sql.VarChar, req.body.username)
         .input('password', sql.VarChar, req.body.password)
-        .query('SELECT customer_id FROM customer WHERE login = @username AND password_ = @password');
+        .query('SELECT customer_id, username FROM customer WHERE login = @username AND password_ = @password');
   
         console.log(customerResult.recordsets);
 
         // Check if there is at least one record
         if (customerResult.recordset.length > 0) {
             const customer_id = customerResult.recordset[0].customer_id;
-
-            console.log(customer_id);
+            const username = customerResult.recordset[0].username;
     
             // Store customer_id in the session
             req.session.customer_id = customer_id;
-            
+            // Stor customer_username in the session
+            req.session.customer_username = username;
+
             // Customer login
             res.sendFile(path.join(__dirname, 'public', 'index', 'customer', 'customer.html'));
             return;
@@ -209,13 +232,8 @@ const getRandomInt = (min, max) => {
 
             // Store employerIDNumber in the session
             req.session.emp_id = emp_id;
+            req.session.emp_username = username;
 
-            console.log(emp_id);
-
-            shift.sendAlertMessage(username)
-            .then(result => {
-                res.send(result);
-            })
     
             // Employee login
             res.sendFile(path.join(__dirname, 'public', 'index', 'employees', 'employee_home.html'));
@@ -227,17 +245,17 @@ const getRandomInt = (min, max) => {
         const adminResult = await pool.request()
         .input('username', sql.VarChar, req.body.username)
         .input('password', sql.VarChar, req.body.password)
-        .query('SELECT ad_id FROM admins WHERE login_ad = @username AND password_ad = @password');
+        .query('SELECT ad_id, username FROM admins WHERE login_ad = @username AND password_ad = @password');
   
         console.log(adminResult.recordsets);
         // Check if there is at least one record
         if (adminResult.recordset.length > 0) {
             const ad_id = adminResult.recordset[0].ad_id;
+            const username = adminResult.recordset[0].username;
     
             // Store adminIDNumber in the session
             req.session.ad_id = ad_id;
-
-            console.log(ad_id);
+            req.session.ad_username = username;
     
             // Admin login
             res.sendFile(path.join(__dirname, 'public', 'index', 'admin', 'admin_home.html'));
