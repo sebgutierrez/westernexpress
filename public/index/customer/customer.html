@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/css/index.css"> <!-- Link to your homepage CSS file -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=DM Sans">
 </head>
-<body>
+<body onload="checkForAlert()">
     <header class="header">
         <h1 class="website-name"><a class="website-homepage-link" href="/index/customer/customer.html">Western Express</a></h1>
         <nav class="navbar">
@@ -90,6 +90,21 @@
                 </div>
             </a>
         </div>
+        <script>
+            // const BASE_URL = 'http://localhost:5500';
+		    const BASE_URL = 'https://westernexpresspostal.azurewebsites.net';
+
+            async function checkForAlert(){
+                fetch(`${BASE_URL}/alerts`)
+                .then(response => response.json())
+                .then(data => {
+                    if(typeof data.trigger_message != 'undefined'){
+                        alert(data.trigger_message);
+                    }
+                })
+            }
+
+        </script>
     </section>
 </body>
 </html>
