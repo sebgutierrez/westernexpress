@@ -144,7 +144,45 @@
           </div>
         </div>
         <div id="packages">
-          <p>This is the default content for Link 3.</p>
+          <h2>Packages Overview</h2>
+            <form class="package-overview-form" id="package-overview-form">
+                <div class="page">
+                  <div class="container1">
+                      <h3>From</h3>
+                      <input type="text" id="startDate" pattern="\d{2}-\d{2}-\d{4}" placeholder="(MM-DD-YYYY)">
+                      <h3>To</h3>
+                      <input type="text" id="endDate" pattern="\d{2}-\d{2}-\d{4}" placeholder="(MM-DD-YYYY)">
+                  </div>
+                  <div class="container2">
+                      <h3>Class Types</h3>
+                      <label>
+                        <select id="packageType" name="packageType">
+                          <option value="">Choose an option</option>
+                          <option value="Priority Mail Express">Priority Mail Express</option>
+                          <option value="Priority Mail">Priority Mail</option>
+                          <option value="Ground">Ground</option>
+                          <option value="First Class">First Class</option>
+                          <option value="Media Class">Media Class</option>
+                        </select>
+                      <h3>Status</h3>
+                      <label>
+                        <select id="packageStatus" name="status">
+                          <option value="">Choose an option</option>
+                          <option value="PROCESSED">Processed</option>
+                          <option value="SHIPPED">Shipped</option>
+                          <option value="ON THE WAY">On The Way</option>
+                          <option value="DELIVERED">Delivered</option>
+                          <option value="DELAY">Delay</option>
+                      </select>
+                    </label>
+                  </div>
+              </div>
+              <div class="submit_button">
+                <button type="button" id="package_button" onClick="overviewReport()" class="package_button">View</button>
+              </div>
+            </form>
+            <div id="package_overview"></div>
+
         </div>
         <div id="support">
           <h2>Support Tickets</h2>
@@ -482,8 +520,8 @@
 //mkaes the shadow appear when scrolling
 const horizontalLine = document.querySelector(".horizontal-line");
 
-// const BASE_URL = 'http://localhost:5500';
-const BASE_URL = 'https://westernexpresspostal.azurewebsites.net';
+const BASE_URL = 'http://localhost:5500';
+//const BASE_URL = 'https://westernexpresspostal.azurewebsites.net';
 
 window.addEventListener("scroll", () => {
   // Check if the user has scrolled down a certain distance (e.g., 100px)
@@ -712,6 +750,61 @@ function clockOut(){
   })
   .catch(error => (console.error('Fetch error:', error)));	
 }
+
+////////////package overview//////////////
+function overviewReport() {
+  const startDate = document.getElementById('startDate').value;
+  const endDate = document.getElementById('endDate').value;
+  const packageType = document.getElementById('package_type').value;
+  const packageStatus = document.getElementById('package_status').value;
+
+
+  const packageInfo = {};
+
+
+  // Add non-empty attributes to the packageInfo object
+  if (startDate.trim() !== '') {
+    packageInfo.startDate = startDate;
+  }
+  if (endDate.trim() !== '') {
+    packageInfo.endDate = endDate;
+  }
+  if (packageType.trim() !== '') {
+    packageInfo.packageType = packageType;
+  }
+  if (status.trim() !== '') {
+    packageInfo.status = packageStatus;
+  }
+
+
+  console.log(packageInfo);
+ 
+  if (Object.keys(packageInfo).length > 0) {
+    fetch(`${BASE_URL}/login/overview`, {
+      headers: {
+        "Content-type": "application/json; charset=utf-8"
+      },
+      method: 'POST',
+      body: JSON.stringify(packageInfo)
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (typeof data.alert === 'undefined') {
+        // Assuming data is an array, if you're accessing data[0]
+        // and using JSONToHTMLTable, ensure data[0] is an object/array
+        JSONToHTMLTable(data[0], "package_overview");
+      } else {
+        alert('Invalid');
+      }
+    })
+    .catch(error => console.error('Fetch error:', error));
+  } else {
+    console.log('No data to send');
+  }
+}
+
+
+
     </script>
     <!--<script src="./js/employee_home.js"></script>-->
   </body>

@@ -302,3 +302,44 @@ th, td {
 .update-tracking-input {
 	display: flex;
 }
+/*package overview*/
+.page{
+    display: flex;
+    justify-content: center;
+   
+  }
+  .container1{
+    text-align: left;
+    width: 55%;
+  }
+  .container1 h3, .container2 h3{
+    margin-bottom: 3px;
+  }
+  #startDate, #endDate{
+    height: 30px;
+    width: 55%;
+  }
+  .container2{
+    text-align: left;
+    width: 30%;
+  }
+  #packageType{
+    height: 35px;
+    width: 100%;
+    font-weight: 550;
+  }
+  #packageStatus{
+    height: 35px;
+    width: 100%;
+    font-weight: 550;
+  }
+  .submit_button{
+    display: flex;
+    justify-content: center;
+    margin: 3rem;
+  }
+  .package_button{
+    width: 30%;
+    height: 3rem;
+    background-color: #e2e2e2;
+  }
