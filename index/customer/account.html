@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Account Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+    }
+
+    #menu {
+      width: 200px;
+      background-color: #f1f1f1;
+      padding: 20px;
+      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    #content {
+      flex: 1;
+      padding: 20px;
+    }
+
+    #past-shipments {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    #past-shipments th, #past-shipments td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    #past-shipments th {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+
+<div id="menu">
+  <h3>Account Menu</h3>
+  <ul>
+    <li><a href="#" onclick="showPastShipments()">View Past Shipments</a></li>
+    <li><a href="#" onclick="deleteAccount()">Delete Account</a></li>
+  </ul>
+</div>
+
+<div id="content">
+  <h2>Past Shipments</h2>
+  <table id="past-shipments">
+    <thead>
+      <tr>
+        <th>sendDate</th>
+        <th>tracking_number</th>
+        <th>sender_id</th>
+        <th>postoffice_id</th>
+        <th>package_status</th>
+      </tr>
+    </thead>
+    <tbody id="shipment-data">
+      <!-- Data will be dynamically inserted here -->
+    </tbody>
+  </table>
+</div>
+
+
+
+
+
+<script>
+    async function showPastShipments() {
+      try {
+        const response = await fetch('/past-shipments'); // Assuming your server is running locally on the default port (http://localhost:3000)
+        const pastShipmentsData = await response.json();
+  
+        // Reference to the tbody where data will be inserted
+        const tbody = document.getElementById('shipment-data');
+  
+        // Clear existing data
+        tbody.innerHTML = '';
+  
+        // Insert new data into the table
+        pastShipmentsData.forEach((shipment) => {
+          const row = document.createElement('tr');
+          Object.values(shipment).forEach((value) => {
+            const cell = document.createElement('td');
+            cell.textContent = value;
+            row.appendChild(cell);
+          });
+          tbody.appendChild(row);
+        });
+      } catch (error) {
+        console.error('Error fetching past shipments:', error.message);
+        // Handle the error as needed, e.g., display an error message to the user
+      }
+    }
+  
+    function deleteAccount() {
+      // Placeholder function for deleting account
+      alert("Deleting Account...");
+    }
+</script>
+
+</body>
+</html>

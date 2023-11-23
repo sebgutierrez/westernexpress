@@ -150,6 +150,11 @@ app.get('/index.html', (req, res) => {
 
 
 
+
+
+
+
+
 // user authen + create label
 //////////////////////////////////////////////////////////////////////////////////////////////AJ CODE START
 //////////////////////////////////////////////////////////////////////////////////////////////
@@ -444,8 +449,7 @@ app.post('/createlabel', async (req, res) => {
         .input('class',sql.VarChar,req.body.class)
         .input('createdBy',sql.Int,customerID)
         .query(`
-            INSERT INTO package (tracking_number, send_date,sender_id, receiver_id, description, FK_dimensions, weight, cost, class,package_createdby)
-        .input('sendDate', sql.Date,sendDate)
+            INSERT INTO package (tracking_number,sender_id, receiver_id, description, FK_dimensions, weight, cost, class,package_createdby)
         VALUES (@trackingNumber,@senderID, @receiverID, @description, @fkdimension, @weight, @cost, @class, @createdBy);
           `);
         
@@ -674,7 +678,7 @@ app.post('/employee/createlabel', async (req, res) => {
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////// 
-// Route to handle updating the status in the database
+// Route when a package is receved at a postal office by customer, this modifes the status
 app.post('/incomingpackages', async (req, res) => {
 
   try {
@@ -727,6 +731,77 @@ app.post('/incomingpackages', async (req, res) => {
 
 
 
+//////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////// 
+// Route customer page/user view past shippment
+// Route to retrieve past shipments
+
+// 1. Function to query past shipments
+async function queryPastShipments(customerID) {
+  let pool;
+  try {
+    // Request a connection from the pool using the global config
+    pool = await sql.connect(config);
+
+    // Begin a database transaction
+    const transaction = new sql.Transaction();
+    await transaction.begin();
+
+    
+    // Log the customerID to the console
+    console.log('Customer ID shippments:', customerID);
+
+
+    const result = await pool
+      .request(transaction)
+      .input('customeriD', sql.Int, customerID)
+      .query(`
+        SELECT
+          p.sendDate,
+          p.tracking_number,
+          p.sender_id,
+          p.postoffice_id,
+          p.package_status
+        FROM
+          package p
+        INNER JOIN
+          sender s ON p.sender_id = s.sender_id
+        WHERE
+          s.FK_customer_id = @customeriD
+        ORDER BY
+          p.sendDate DESC;
+      `);
+
+    // Commit the transaction
+    await transaction.commit();
+
+    // Return the result set
+    return result.recordset;
+  } catch (err) {
+    // Handle errors during the query
+    console.error('Error querying past shipments:', err.message);
+    throw err;
+  } finally {
+    // Release the connection back to the pool
+    if (pool) {
+      await pool.close();
+    }
+  }
+}
+
+
+// 2. Your route handler
+app.get('/past-shipments', async (req, res) => {
+  try {
+    const customerID_past_shippment1 = req.session.customer_id;
+    const pastShipmentsData = await queryPastShipments(customerID_past_shippment1);
+    res.json(pastShipmentsData);
+  } catch (err) {
+    console.error('Error handling request:', err.message);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
 
 
 
@@ -739,7 +814,7 @@ app.post('/incomingpackages', async (req, res) => {
 //////////////////////////////////////////////////////////////////////////////////////////////AJ CODE END
 
 
-
+// you were working on view shipment history customer, ensure every user see their only
 
 
 
