@@ -574,7 +574,8 @@ const getRandomInt = (min, max) => {
     });
 //////////////package overview///////////////////
 app.post('/login/overview', (req, res) => {
-  overview.employeePackageOverview(req.body.startDate,req.body.endDate,req.body.packageType,req.body.packageStatus)
+  console.log(req.body);
+  overview.employeePackageOverview(req.body.firstDate, req.body.secDate ,req.body.packageType, req.body.status)
   .then(result => {
       res.send(result);
   })
