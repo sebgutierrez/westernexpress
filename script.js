@@ -200,6 +200,7 @@ app.get('/signup', (req, res) => {
 });
 
 
+// Signup route customer
 app.post('/signup', async (req, res) => {
   try {
       const pool = await sql.connect(config);
@@ -327,6 +328,14 @@ app.post('/login', async (req, res) => {
               res.send('Error while connecting to the database');
           }
       });
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////// 
+
+
+
 
 
 
@@ -733,10 +742,7 @@ app.post('/incomingpackages', async (req, res) => {
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////// 
-// Route customer page/user view past shippment
-// Route to retrieve past shipments
-
-// 1. Function to query past shipments
+// Route to retrieve past shipments for customer page
 async function queryPastShipments(customerID) {
   let pool;
   try {
@@ -756,24 +762,32 @@ async function queryPastShipments(customerID) {
       .request(transaction)
       .input('customeriD', sql.Int, customerID)
       .query(`
-        SELECT
-          p.sendDate,
-          p.tracking_number,
-          p.sender_id,
-          p.postoffice_id,
-          p.package_status
-        FROM
+      SELECT
+        p.sendDate,
+        p.tracking_number,
+        a.address AS sender_address,
+        p.postoffice_id,
+        p.package_status
+      FROM
           package p
-        INNER JOIN
+      INNER JOIN
           sender s ON p.sender_id = s.sender_id
-        WHERE
+      INNER JOIN
+          customer c ON s.FK_customer_id = c.customer_id
+      INNER JOIN
+          addresses a ON c.address_id = a.address_id
+      WHERE
           s.FK_customer_id = @customeriD
-        ORDER BY
+      ORDER BY
           p.sendDate DESC;
       `);
 
     // Commit the transaction
     await transaction.commit();
+
+
+    
+ 
 
     // Return the result set
     return result.recordset;
@@ -804,6 +818,129 @@ app.get('/past-shipments', async (req, res) => {
 
 
 
+//////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////
+// Route customer page/edit profile
+app.post('/user/update', async (req, res) => {
+  try {
+    await sql.connect(config);
+
+    const customerID_editprofile = req.session.customer_id;
+
+    // Log the form data
+    console.log("Request Body:", req.body);
+
+    // Construct the SQL query based on the form data
+    const query = `
+      -- Update the address details in the addresses table
+      UPDATE addresses
+      SET
+        address = COALESCE(@address, address),
+        city = COALESCE(@city, city),
+        state = COALESCE(@state, state),
+        zip = COALESCE(@zip, zip)
+      WHERE
+        address_id = (SELECT address_id FROM customer WHERE customer_id = @customer_id);
+
+      -- Update customer information
+      UPDATE customer
+      SET
+        first_name = COALESCE(@firstname, first_name),
+        last_name = COALESCE(@lastname, last_name),
+        phone = COALESCE(@phone, phone),
+        email = COALESCE(@email, email)
+      WHERE
+        customer_id = @customer_id;
+    `;
+
+    // Define input parameters
+    const params = new sql.Request();
+    params.input('firstname', sql.VarChar, req.body.firstname);
+    params.input('lastname', sql.VarChar, req.body.lastname);
+    params.input('phone', sql.VarChar, req.body.phone);
+    params.input('email', sql.VarChar, req.body.email);
+    params.input('customer_id', sql.Int, customerID_editprofile);
+    params.input('address', sql.VarChar, req.body.address);
+    params.input('city', sql.VarChar, req.body.city);
+    params.input('state', sql.Char(2), req.body.state);
+    params.input('zip', sql.Int, req.body.zip);
+
+    // Log for error if the SQL query and parameters
+    //console.log("SQL Query:", query);
+    //console.log("Parameters:", params);
+
+    // Execute the query with parameters
+    await params.query(query);
+
+    res.send('Profile updated successfully');
+
+
+  } catch (err) {
+    console.error(err);
+
+  } finally {
+    sql.close();
+  }
+});
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////
+// Endpoint for deleting customer account
+app.post('/user/delete', async (req, res) => {
+  try {
+    await sql.connect(config);
+
+    const customerIDToDelete = req.session.customer_id;
+    const passwordToDelete = req.body.password;
+
+    // Verify the password before proceeding with the deletion
+    const passwordCheckQuery = `
+      SELECT customer_id
+      FROM customer
+      WHERE customer_id = @customer_id AND password_ = @password;
+    `;
+
+    const passwordCheckParams = new sql.Request();
+    passwordCheckParams.input('customer_id', sql.Int, customerIDToDelete);
+    passwordCheckParams.input('password', sql.VarChar, passwordToDelete);
+
+    const passwordCheckResult = await passwordCheckParams.query(passwordCheckQuery);
+
+    if (passwordCheckResult.recordset.length === 0) {
+      // Incorrect password
+      return res.status(401).send('Incorrect password. Account deletion failed.');
+    }
+
+    // Password is correct, proceed with deletion
+    const deleteQuery = `
+      DELETE FROM customer
+      WHERE customer_id = @customer_id;
+    `;
+
+    const deleteParams = new sql.Request();
+    deleteParams.input('customer_id', sql.Int, customerIDToDelete);
+
+    await deleteParams.query(deleteQuery);
+
+    // You can add additional queries here to delete related information in other tables
+
+    
+    res.redirect('/index.html');
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error deleting account.');
+  } finally {
+    sql.close();
+  }
+});
+
+
+
+
+
 
 
 
@@ -814,7 +951,7 @@ app.get('/past-shipments', async (req, res) => {
 //////////////////////////////////////////////////////////////////////////////////////////////AJ CODE END
 
 
-// you were working on view shipment history customer, ensure every user see their only
+
 
 
 
