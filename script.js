@@ -200,6 +200,8 @@ app.get('/signup', (req, res) => {
 });
 
 
+//////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////
 // Signup route customer
 app.post('/signup', async (req, res) => {
   try {
@@ -333,6 +335,55 @@ app.post('/login', async (req, res) => {
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////// 
+// Signup route customer
+app.post('/employee/signup', async (req, res) => {
+  try {
+    const pool = await sql.connect(config);
+
+    // Generate a unique emp ID
+    const lastemp_idIdResult = await pool.request().query('SELECT MAX(emp_id) AS max_emp_id FROM employees_new');
+    const lastemp_idId = lastemp_idIdResult.recordset[0].max_emp_id || 99; // Set to 99 to start from 100
+    const empId = parseInt(lastemp_idId) + 1;
+
+    // Generate a unique emp address ID
+    const lastAddressIdResult = await pool.request().query('SELECT MAX(address_id) AS max_address_id FROM addresses');
+    const lastAddressId = lastAddressIdResult.recordset[0].max_address_id || 100;
+    const addressId = lastAddressId + 1;
+
+    // Insert into the address table
+    await pool.request()
+      .input('addressId', sql.Int, addressId)
+      .input('address', sql.VarChar, req.body.address)
+      .input('city', sql.VarChar, req.body.city)
+      .input('state', sql.Char, req.body.state)
+      .input('zipcode', sql.Int, req.body.zipcode)
+      .query('INSERT INTO addresses (address_id, address, city, state, zip) VALUES (@addressId, @address, @city, @state, @zipcode)');
+
+    // Insert into the employees_new table
+    
+    await pool.request()
+      .input('empId', sql.BigInt, empId)
+      .input('firstname', sql.VarChar(255), req.body.firstname)
+      .input('lastname', sql.VarChar(255), req.body.lastname)
+      .input('username', sql.NVarChar(255), req.body.username)
+      .input('password', sql.NVarChar(255), req.body.password)
+      .input('phoneNumber', sql.VarChar(20), req.body.phoneNumber) // Adjust the length based on your needs
+      .input('email', sql.VarChar(255), req.body.email)
+      .input('addressId', sql.Int, addressId)
+      .input('postalOfficeId', sql.Int, req.body.postOfficeLocation)
+      .query(`
+        INSERT INTO employees_new 
+        (emp_id, first_name, last_name, login_emp, password_emp, number, email, address_id,postoffice_id) 
+        VALUES 
+        (@empId, @firstname, @lastname, @username, @password, @phoneNumber, @email, @addressId,@postalOfficeId)
+      `);
+
+    res.redirect('/login.html');
+  } catch (err) {
+    console.error('Error occurred:', err);
+    res.status(500).send('Error while processing your request');
+  }
+});
 
 
 
