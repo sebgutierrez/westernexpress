@@ -992,6 +992,77 @@ app.post('/user/delete', async (req, res) => {
 
 
 
+//////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////
+// Customer support - create a ticket
+app.post('/customer/support', async (req, res) =>{
+
+  const { title, description, department, priority } = req.body;
+
+  try {
+    // Connect to the database
+    const pool = await sql.connect(config);
+    const customerSupportID = req.session.customer_id
+    const ticket_status = 'Open'
+
+    // Insert data into the database using parameters
+    const result = await pool.request()
+    .input("customerID", sql.Int, customerSupportID)
+    .input('title', sql.NVarChar, title)
+    .input('description', sql.NVarChar, description)
+    .input('department', sql.NVarChar, department)
+    .input('priority', sql.NVarChar, priority)
+    .input('status', sql.NVarChar, ticket_status)
+    .query(`
+      INSERT INTO customer_support (customer_id,title, description, department, priorit,status)
+      VALUES (@customerID,@title, @description, @department, @priority,@status)
+    `);
+
+    console.log('Ticket submitted successfully.');
+    res.status(200).json({ success: true, message: 'Ticket submitted successfully' });
+  } catch (error) {
+    console.error('Error submitting ticket:', error.message);
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
+  } finally {
+    // Close the SQL connection
+    await sql.close();
+  }
+
+  
+
+
+
+})
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// Customer support - view tickets
+app.get('/customer/viewTickets', async (req, res) => {
+  try {
+    // Assuming you have a user ID in the request query
+    const pool = await sql.connect(config);
+    const customerid = req.session.customer_id;
+    console.log('view tickets', customerid)
+
+    // Perform a database query using the pool
+    const result = await pool.request()
+      .input('customer_id', sql.Int, customerid) // Corrected parameter name
+      .query('SELECT ticket_number, description, department, priorit, title, status FROM customer_support WHERE customer_id = @customer_id'); // Corrected parameter name
+
+    // Send the results back to the client
+    res.json(result.recordset);
+    console.log(result.recordset);
+  } catch (error) {
+    console.error('Error in /customer/viewTickets:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+
+
+
 
 
 
