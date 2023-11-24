@@ -72,8 +72,10 @@ async function employeePackageOverview(date1, date2, classVal, statusVal) {
                 whereClause += ` AND P.class = @pclass`;
             }
 
-            query = await query.query(`SELECT P.tracking_number, P.class, P.status, CAST(P.send_date AS DATE) AS Date
+            query = await query.query(`SELECT P.tracking_number, S.sender_id, R.receiver_id, P.class, P.status, CAST(P.send_date AS DATE) AS date
                 FROM dbo.package AS P 
+                INNER JOIN dbo.sender as S ON S.sender_id = P.sender_id
+                INNER JOIN dbo.receiver as R on R.receiver_id = P.receiver_id
                 ${whereClause}
                 ORDER BY date ASC`);
 
