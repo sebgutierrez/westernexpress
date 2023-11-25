@@ -1,6 +1,7 @@
 const config = require('./server/config.js');
 const tracking = require('./server/backend_files/tracking.js');
 const shift = require('./server/backend_files/shifts.js');
+const support = require('./server/backend_files/support.js');
 
 require('dotenv').config();
 
@@ -56,6 +57,27 @@ app.get('/track/package/:id', (req, res) => {
     })
 });
 
+app.post('/employee-support', (req, res) => {
+    support.getSupportTickets(req.body.password)
+    .then(result => {
+        res.send(result);
+    })
+});
+
+app.post('/viewTicket', (req, res) => {
+    support.viewTicket(req.body.ticket_number)
+    .then(result => {
+        res.send(result);
+    })
+});
+
+app.post('/updateTicket', (req, res) => {
+    support.updateTicket(req.body.status, req.body.reply, req.body.ticket_number)
+    .then(result => {
+        res.send(result);
+    })
+});
+
 app.post('/clockin', (req, res) => {
     console.log(req.body.username, req.body.password);
     shift.clockIn(req.body.username, req.body.password)
@@ -82,7 +104,7 @@ app.post('/clockout', (req, res) => {
     saveUninitialized: false,
     cookie: {
         sameSite: true,
-        secure: false,
+        secure: false, //make sure to make this true when deploying
         expires: false
       }
   }));
@@ -212,7 +234,8 @@ const getRandomInt = (min, max) => {
             req.session.customer_username = username;
 
             // Customer login
-            res.sendFile(path.join(__dirname, 'public', 'index', 'customer', 'customer.html'));
+            // res.sendFile(path.join(__dirname, 'public', 'index', 'customer', 'customer.html'));
+            res.redirect('http://localhost:5500/index/customer/customer.html');
             return;
         }  
   
@@ -223,7 +246,6 @@ const getRandomInt = (min, max) => {
         .input('password', sql.VarChar, req.body.password)
         .query('SELECT emp_id, username FROM employees_new WHERE login_emp = @username AND password_emp = @password');
   
-        console.log(employeeResult.recordsets);
         // Check if there is at least one record
         if (employeeResult.recordset.length > 0) {
             const emp_id = employeeResult.recordset[0].emp_id;
@@ -233,9 +255,9 @@ const getRandomInt = (min, max) => {
             req.session.emp_id = emp_id;
             req.session.emp_username = username;
 
-    
             // Employee login
-            res.sendFile(path.join(__dirname, 'public', 'index', 'employees', 'employee_home.html'));
+            //res.sendFile(path.join(__dirname, 'public', 'index', 'employees', 'employee_home.html'));
+            res.redirect('http://localhost:5500/index/employees/employee_home.html');
             return;
         }
   
@@ -244,20 +266,19 @@ const getRandomInt = (min, max) => {
         const adminResult = await pool.request()
         .input('username', sql.VarChar, req.body.username)
         .input('password', sql.VarChar, req.body.password)
-        .query('SELECT ad_id, username FROM admins WHERE login_ad = @username AND password_ad = @password');
+        .query('SELECT ad_id FROM admins WHERE login_ad = @username AND password_ad = @password');
   
         console.log(adminResult.recordsets);
         // Check if there is at least one record
         if (adminResult.recordset.length > 0) {
             const ad_id = adminResult.recordset[0].ad_id;
-            const username = adminResult.recordset[0].username;
     
             // Store adminIDNumber in the session
             req.session.ad_id = ad_id;
-            req.session.ad_username = username;
     
             // Admin login
-            res.sendFile(path.join(__dirname, 'public', 'index', 'admin', 'admin_home.html'));
+            // res.sendFile(path.join(__dirname, 'public', 'index', 'admin', 'admin_home.html'));
+            res.redirect('http://localhost:5500/index/admin/admin_home.html');
             return;
         }
   

@@ -351,7 +351,8 @@
       /***************************************** REPORTS PAGE **********************************************************/
       /* will send the POST Request once generate report button is clicked based off of user input SQL query based on user input  */
 
-      const BASE_URL = 'https://westernexpresspostal.azurewebsites.net'
+      const BASE_URL = 'http://localhost:5500';
+      //const BASE_URL = 'https://westernexpresspostal.azurewebsites.net';
       if (typeof require !== "undefined") {
         const path = require("path");
         require("dotenv").config({ path: path.resolve(__dirname, "../../.env") });
