@@ -4,8 +4,6 @@ const sql = require('mssql');
 
 async function checkCredentials(username, password){
 	try {
-		console.log('check creds');
-		console.log(username, password);
 		let pool = await sql.connect(config);
         let query = await pool.request()
         .query(`SELECT COUNT(1)
@@ -27,8 +25,6 @@ async function checkCredentials(username, password){
 
 async function checkCredentialsCustomer(username, password){
 	try {
-		console.log('check creds');
-		console.log(username, password);
 		let pool = await sql.connect(config);
         let query = await pool.request()
         .query(`SELECT COUNT(1)
@@ -50,8 +46,6 @@ async function checkCredentialsCustomer(username, password){
 
 async function checkCredentialsEmployee(username, password){
 	try {
-		console.log('check creds');
-		console.log(username, password);
 		let pool = await sql.connect(config);
         let query = await pool.request()
         .query(`SELECT COUNT(1)
@@ -73,8 +67,6 @@ async function checkCredentialsEmployee(username, password){
 
 async function checkCredentialsAdmin(username, password){
 	try {
-		console.log('check creds');
-		console.log(username, password);
 		let pool = await sql.connect(config);
         let query = await pool.request()
         .query(`SELECT COUNT(1)

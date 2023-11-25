@@ -35,13 +35,13 @@
         <div class="hero-banner"> 
             <img class="hero-image" src="/images/homepage_images/Austin Skyline.jpg">
             <span class="slogan">Delivering Happiness One<br>Package at a Time</span>
-            <div class="tracking-form-container">
+            <!--<div class="tracking-form-container">
                 <form class="tracking-form" id="tracking-form" method="POST">
                     <label for="tracking-input" class="tracking-label">Have a tracking number with us?</label>
                     <input type="text" name="tracking-input" id="tracking-input" class="tracking-input" placeholder="Enter Tracking Number"/>
                     <button id="tracking-submit" class="tracking-search-button">Track</button>
                 </form>
-            </div>
+            </div>-->
         </div>
         <div class="mission-statement-container">
             <span class="mission-statement-header"><b>Our Commitment to Serving Texans</b></span>
@@ -91,8 +91,8 @@
             </a>
         </div>
         <script>
-            // const BASE_URL = 'http://localhost:5500';
-		    const BASE_URL = 'https://westernexpresspostal.azurewebsites.net';
+            const BASE_URL = 'http://localhost:5500';
+		    //const BASE_URL = 'https://westernexpresspostal.azurewebsites.net';
 
             async function checkForAlert(){
                 fetch(`${BASE_URL}/alerts`)

@@ -101,13 +101,15 @@ z-index: -1;
 /*SIDE NAV BAR*/
 .side-nav {
 	width: 250px;
-	height: max-content;
+	height: 100%;
 	top: 50px;
 	left: 0;
 	color: black;
 	background-color: rgb(255, 255, 255);
 	position: fixed;
 	overflow-y: auto;
+	padding-right: 1rem;
+	border-right: 1px solid lightgray;
 }
 
 .side-nav ul {
@@ -151,7 +153,8 @@ border-radius: 0 10px 10px 0; /* Add rounded corners on the right side */
 
 .content {
 flex-grow: 1; /* Allow the content area to grow and take available space */
-background-color: #f0f0f0; /* Set a background color for the content area */
+/*background-color: #f0f0f0;*/ /* Set a background color for the content area */
+background-color: white;
 padding: 20px; /* Add padding as needed */
 margin-left: 270px; /* Ensure content is positioned to the right of the side-nav */
 margin-top: 60px;
@@ -194,113 +197,502 @@ color: white;
 padding: 10px; /* Optional padding */
 width: 220px; /* Optional width */
 }
-/* CSS for the support table here */
-#supportTable {
-width: 100%;
-border-collapse: collapse;
-margin-top: 20px;
-}
-
-#supportTable th,
-#supportTable td {
-border: 1px solid #ccc;
-padding: 8px;
-text-align: center;
-}
-
-#supportTable th {
-background-color: #f0f0f0;
-}
 
 /* css for tracking page */
-
-#view-tracking-form,
-#update-tracking-form {
-  display: block;
-}
 
 table {
 	border-collapse: collapse;
 	width: 100%;
 	padding: 2rem;
-	margin-top: 1rem;
-}
-
-table, th, td {
-	border: 1px solid black;
+	border-left: 1px solid black;
+	border-right: 1px solid black;
+	border-bottom: 1px solid black;
 }
 
 th, td {
+	border: 1px solid black;
 	padding: 10px;
 	text-align: left;
+}
+/*
+.support-table {
+	border: none;
+	border-collapse: separate;
+	border-spacing: 0 1rem;
+	width: 100%;
+	padding: 2rem;
+}
+
+.support-th, .support-td {
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+	padding: 10px;
+	text-align: left;
+}
+
+.support-tr {
+	border: 1px solid black;
+	position: relative;
+	margin: 1rem 0 1rem 0;
+}
+
+.support-tr-header {
+	position: relative;
+	margin-top: 0;
+}
+*/
+
+.support-table {
+	border-collapse: collapse;
+	width: 100%;
+	padding: 2rem;
+	border-left: 1px solid black;
+	border-right: 1px solid black;
+	border-bottom: 1px solid black;
+	height: 20rem;
+	overflow-y: scroll;
+}
+
+.support-th {
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+	padding: 10px;
+	white-space: nowrap;
+	min-width: 6rem;
+	text-align: left;
+}
+
+.support-td {
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+	padding: 10px;
+	text-align: left;
+}
+
+.support-tr {
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+	padding: 10px;
+	text-align: left;
+}
+
+.support-tr-header {
+	position: relative;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+	padding: 10px;
+	text-align: left;
+}
+
+.support-view-btn, .support-update-btn {
+	position: relative;
+	padding: 0.25rem 0 0.25rem 0;
+	font-size: 1rem;
+	width: 8rem;
+	background-color: #023047;
+	border-color: #023047;
+	border-style: solid;
+	border-radius: 0.25rem;
+	color: white;
+}
+
+#tracking {
+	background-color: white;
+}
+
+.tracking-nav {
+	background-color: white;
+	/*border-bottom: 1px solid black;*/
+
+}
+
+.view-tracking-btn {
+	font-size: 1.25rem;
+	background-color: white;
+	border-color: white;
+	color: #303645;
+	border-style: solid;
+	padding: 0.5rem 0.75rem 0.5rem 0.75rem;
+}
+
+.update-tracking-btn {
+	font-size: 1.25rem;
+	background-color: white;
+	border-color: white;
+	color: #303645;
+	border-style: solid;
+	padding: 0.5rem 0.75rem 0.5rem 0.75rem;
+}
+
+.update-tracking-input {
+	display: flex;
+}
+
+.clicked-button {
+	background-color: #023047;
+	border-color: #023047;
+	color: white;
+}
+
+#support {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+
+.support-tickets-container {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
+.support-table-header {
+	display: flex;
+	justify-content: flex-start;
+	border: 1px solid black;
+}
+
+.support-name {
+	color: black;
+	font-size: 1.5rem;
+	text-align: left;
+	padding: 1rem 0 0 0.5rem;
+}
+.support-box {
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	justify-content: center;
+	width: 40rem;
+	background-color: white;
+	border: 1px solid black;
 }
 
 .view-tracking {
 	display: flex;
 	flex-direction: column;
 	position: relative;
-	width: 100%;
-	padding-bottom: 2rem;
-	border-bottom: 2px solid black;
+	justify-content: center;
+	width: 40rem;
+	background-color: white;
+	border: 1px solid black;
+}
+
+.view-tracking-form, .clockin-form, .support-credentials-form {
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	padding: 0.5rem 0.75rem 0.5rem 0.75rem;
+	border-bottom: 1px solid lightgray;
+	border-top: 1px solid lightgray;
 }
 
 .view-tracking-header {
 	font-weight: bold;
-	font-size: 2.5rem;
+	font-size: 1rem;
+	text-align: left;
+	color: #303645;
+	padding: 0.25rem 0 0.75rem 0.75rem;
+}
+
+.view-tracking-label, .clockin-label, .support-credentials-form {
+	font-size: 1rem;
+	color: #303645;
+	font-weight: bold;
+}
+
+.view-tracking-input, .clockin-user-input, .clockin-pass-input, .support-credentials-input {
+	font-size: 1rem;
+	margin: 0 0 0.5rem 0;
+	border-color: #dde1eb;
+	background-color: #f7f9fc;
+	border-style: solid;
+	border-radius: 0.25rem;
+	padding: 0.25rem 0 0.25rem 0.75rem;
+}
+
+.view-tracking-submit-container {
+	display: flex;
+	justify-content: flex-end;
+	position: relative;
+	width: 100%;
+}
+
+.view-tracking-submit {
+	margin: 0.25rem 0.25rem 0.25rem 0;
+	position: relative;
+	padding: 0.25rem 0 0.25rem 0;
+	font-size: 1rem;
+	width: 9rem;
+	background-color: #023047;
+	border-color: #023047;
+	border-style: solid;
+	border-radius: 0.25rem;
+	color: white;
+}
+
+.clockin-submit, .clockout-submit {
+	margin: 0.25rem 0.25rem 0.25rem 0;
+	position: relative;
+	padding: 0.5rem 0 0.5rem 0;
+	font-size: 1rem;
+	width: 14rem;
+	background-color: #023047;
+	border-color: #023047;
+	border-style: solid;
+	border-radius: 0.25rem;
+	color: white;
+}
+
+.support-credentials-submit-container {
+	display: flex;
+	justify-content: flex-end;
+	position: relative;
 	text-align: center;
-	padding-bottom: 2rem;
+	width: 100%;
+}
+
+.support-credentials-submit {
+	display: flex;
+	justify-content: center;
+	margin: 0.25rem 0.25rem 0.25rem 0;
+	position: relative;
+	padding: 0.5rem 0 0.5rem 0;
+	font-size: 1rem;
+	width: 8rem;
+	background-color: #023047;
+	border-color: #023047;
+	border-style: solid;
+	border-radius: 0.25rem;
+	color: white;
+}
+
+.support-tickets-container {
+	display: flex;
 }
 
 .update-tracking {
 	display: flex;
 	flex-direction: column;
 	position: relative;
-	width: 100%;;
+	justify-content: center;
+	width: 40rem;
+	background-color: white;
+	border: 1px solid black;
 }
 
 .update-tracking-form {
 	display: flex;
+	flex-direction: column;
+	position: relative;
+	padding: 0.5rem 0.75rem 0.5rem 0.75rem;
+	border-bottom: 1px solid lightgray;
+	border-top: 1px solid lightgray;
+}
+
+.update-tracking-label, .support-label {
+	font-size: 1rem;
+	font-weight: bold;
+	color: #303645;
+	font-weight: bold;
+}
+
+.update-input {
+	font-size: 1rem;
+	margin: 0 0.25rem 0.5rem 0.25rem;
+	border-color: #dde1eb;
+	background-color: #f7f9fc;
+	border-style: solid;
+	border-radius: 0.25rem;
+	padding: 0.25rem 0 0.25rem 0.1rem;
+}
+
+.update-tracking-submit-container {
+	display: flex;
+	justify-content: flex-end;
+	position: relative;
+	width: 100%;
+}
+
+.update-tracking-submit {
+	margin: 0.25rem 0.25rem 0.25rem 0;
+	position: relative;
+	padding: 0.25rem 0 0.25rem 0;
+	font-size: 1rem;
+	width: 9rem;
+	background-color: #023047;
+	border-color: #023047;
+	border-style: solid;
+	border-radius: 0.25rem;
+	color: white;
+	cursor: pointer;
+}
+
+.clock {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.date-time {
+	display: flex;
+	justify-content: flex-start;
+	flex-direction: column;
+	padding: 0.75rem 0 0.75rem 0.5rem
+}
+
+#time-clock {
+	font-size: 2.5rem;
+	padding: 0;
+}
+
+#date-clock {
+	position: relative;
+	top: -0.5rem;
+	font-size: 1.25rem;
+	color: gray;
+}
+
+.clockin {
+	display: flex;
+	flex-direction: column;
 	position: relative;
 	justify-content: center;
+	width: 30rem;
+	background-color: white;
+	border: 1px solid black;
 }
 
-.update-tracking-header{
-	font-weight: bold;
-	font-size: 2.5rem;
+.clockin-clockout-btns {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+}
+
+.shift-time {
+	display: flex;
+	flex-direction: column;
+	padding-right: 0.5rem;
+}
+
+.shift-start {
+	color: #303645;
+	font-size: 1.5rem;
+	text-align: left;
+}
+
+#shift-start {
+	color: black;
+	font-size: 1rem;
 	text-align: center;
-	padding-bottom: 2rem;
 }
 
-.view-tracking-label {
+.shift-end {
+	color: #303645;
+	font-size: 1.5rem;
+	text-align: left;
+}
+
+#shift-end {
+	color: black;
 	font-size: 1rem;
+	text-align: center;
 }
 
-.update-tracking-label {
+.ticket-header {
+	display: flex;
+	border: 1px solid #303645;;
+	justify-content: space-between;
+}
+
+.ticket-header-info {
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	padding: 0.25rem 0 0.25rem 0.25rem;
+	width: 100%;
+}
+
+.ticket-title {
+	font-size: 1.5rem;
+	font-weight: bold;
+	color: #303645;;
+	padding-left: 0.25rem;
+}
+
+.ticket-email {
 	font-size: 1rem;
+	padding-left: 0.25rem;
 }
 
-.update-employee-label {
+.ticket-date {
+	position: absolute;
+	top: 0.25rem;
+	right: 0.25rem;
+}
+
+.ticket-description-container {
+	padding: 0.5rem 0.25rem 0.25rem 0.25rem;
+	border: 1px solid #023047;
+}
+
+.ticket-description {
+	margin: 0.25rem 0.25rem 1rem 0.25rem;
+	border-color: #dde1eb;
+	background-color: #f7f9fc;
+	border-style: solid;
+	border-radius: 0.25rem;
+	padding: 0.25rem;
+	height: 10rem;
+}
+
+
+.close-button-container {
+	background-color: #023047;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+}
+
+.close-update-button, .close-view-button {
+	display: flex;
+	justify-content: flex-end;
+	border-color: #023047;
+	background-color: #023047;
+	border: none;
+	color: white;
+	width: 100%;
+	font-size: 2rem;
+}
+
+.ticket-number-title {
+	position: relative;
+	left: 0.25rem;
+	font-size: 1.25rem;
+	font-weight: bold;
+	color: white;
+	white-space: nowrap;
+}
+
+.support-label {
+	padding: 0 0 0 0.25rem;
 	font-size: 1rem;
+	font-weight: bold;
+	color: #303645;
+	font-weight: bold;
 }
 
-.update-status-label {
-	font-size: 1rem;
-}
-
-.update-tracking-employee {
+.update-support-status-form {
+	border: 1px solid black;
 	display: flex;
+	flex-direction: column;
+	padding: 0.5rem 0.25rem 0.25rem 0.25rem;
 }
 
-.view-tracking-employee {
-	display: flex;
-}
-
-.update-tracking-status {
-	display: flex;
-}
-
-.update-tracking-input {
-	display: flex;
+.hidden {
+	display: none;
 }
 /*package overview*/
 .page{
