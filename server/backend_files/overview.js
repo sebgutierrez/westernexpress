@@ -74,17 +74,18 @@ async function employeePackageOverview(date1, date2, classVal, statusVal) {
 
             query = await query.query(`
                 SELECT 
-                    P.tracking_number, 
-                    S.sender_id, 
-                    R.receiver_id, 
-                    P.class, 
-                    P.status, 
-                    CAST(P.send_date AS DATE) AS send_date
-                FROM dbo.package AS P 
-                INNER JOIN dbo.sender AS S ON S.sender_id = P.sender_id
-                INNER JOIN dbo.receiver AS R ON R.receiver_id = P.receiver_id
-                ${whereClause}
-                ORDER BY send_date ASC
+                    P.tracking_number AS [Tracking Number], 
+                    CONCAT(S.first_name, ' ', S.last_name) AS [Sender Name], 
+                    CONCAT(R.first_name, ' ', R.last_name) AS [Receiver ID], 
+                    P.class AS [Class], 
+                    P.status AS [Status], 
+                    CAST(P.send_date AS DATE) AS [Send Date],
+                    CAST(P.receiving_date AS DATE) AS [Receive Date]
+                    FROM dbo.package AS P 
+                    INNER JOIN dbo.sender AS S ON S.sender_id = P.sender_id
+                    INNER JOIN dbo.receiver AS R ON R.receiver_id = P.receiver_id
+                    ${whereClause}
+                    ORDER BY [Send Date] ASC
                 `);
 
 

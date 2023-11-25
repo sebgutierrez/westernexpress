@@ -245,7 +245,7 @@ const getRandomInt = (min, max) => {
         const adminResult = await pool.request()
         .input('username', sql.VarChar, req.body.username)
         .input('password', sql.VarChar, req.body.password)
-        .query('SELECT ad_id, username FROM admins WHERE login_ad = @username AND password_ad = @password');
+        .query('SELECT ad_id FROM admins WHERE login_ad = @username AND password_ad = @password');
   
         console.log(adminResult.recordsets);
         // Check if there is at least one record
@@ -673,6 +673,19 @@ app.post('/reset_pass', async (req, res) => {
     res.status(500).send('Error while processing your request');
   }
 });
+
+
+app.get('/login/customerData', async (req,res) => {
+  try {
+    const pool = await sql.connect(config);
+    const result = await pool.request().query('SELECT customer_id as "ID", first_name as "First Name", last_name as "Last Name", phone AS "Phone", email AS "Email", username AS "Username", address_id AS "Address ID" FROM dbo.customer');
+    res.json(result.recordset);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
