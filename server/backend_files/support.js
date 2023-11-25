@@ -9,6 +9,7 @@ async function getEmployeeId(password){
                 FROM employees_new AS E, credentials AS C
                 WHERE E.username = C.usernames AND C.passwords = '${password}';`);
         pool.close();
+		console.log(record.recordsets)
 		return record.recordset[0].emp_id;
 	} catch (error) {
 		console.log(error);

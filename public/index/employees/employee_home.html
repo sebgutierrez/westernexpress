@@ -150,11 +150,11 @@
               <label for="support-credentials-input" class="support-credentials-label">Enter Password To Access Support Tickets</label>
               <input type="text" name="support-credentials-input" id="support-credentials-input" class="support-credentials-input" placeholder="" required />
               <div class="support-credentials-submit-container">
-                <button id="support-credentials-submit" onclick="supportTicketTable(); return false;" class="support-credentials-submit">SUBMIT</button>
+                <button id="support-credentials-submit" onclick="openSupportTicketTable(); return false;" class="support-credentials-submit">SUBMIT</button>
               </div>
             </form>
           </div>
-          <div class="support-tickets-container" id="support-tickets-container">
+          <div class="support-tickets-container hidden" id="support-tickets-container">
             <div class="support-table-header">
               <span class="support-name">Support Ticket Dashboard</span>
             </div>
@@ -558,19 +558,12 @@
 
       /*************************************************************************************************************/
     
-      const support_box = document.getElementById('support-box');
-      const cred_button = document.getElementById('support-credentials-submit');
-      const support_tickets = document.getElementById('support-tickets-container');
+      const support_box = document.querySelector('.support-box');
+      const cred_btn = document.querySelector('.support-credentials-submit');
+      const support_tickets = document.querySelector('.support-tickets-container');
 
-      cred_button.onsubmit = (event) => {
-        event.preventDefault();
-
-        support_box.classList.add("hidden");
-        support_tickets.classList.remove("hidden");
-      };
-
-      async function supportTicketTable(){
-        const password = document.getElementById('support-credentials-input').value;
+      async function openSupportTicketTable(){
+        const password = document.querySelector('.support-credentials-input').value;
 
         const data = {
           'password' : password
@@ -588,6 +581,8 @@
           .then(data => {
             if(typeof data.alert === 'undefined'){
               supportTickets(data[0], 'supportTable');
+              support_box.classList.add("hidden");
+              support_tickets.classList.remove("hidden");
             }
             else{
               alert('Your credentials indicate you are not a support agent.'); 
