@@ -72,10 +72,22 @@ async function employeePackageOverview(date1, date2, classVal, statusVal) {
                 whereClause += ` AND P.class = @pclass`;
             }
 
-            query = await query.query(`SELECT P.tracking_number, P.class, P.status, CAST(P.send_date AS DATE) AS Date
-                FROM dbo.package AS P 
-                ${whereClause}
-                ORDER BY date ASC`);
+            query = await query.query(`
+                SELECT 
+                    P.tracking_number AS [Tracking Number], 
+                    CONCAT(S.first_name, ' ', S.last_name) AS [Sender Name], 
+                    CONCAT(R.first_name, ' ', R.last_name) AS [Receiver ID], 
+                    P.class AS [Class], 
+                    P.status AS [Status], 
+                    CAST(P.send_date AS DATE) AS [Send Date],
+                    CAST(P.receiving_date AS DATE) AS [Receive Date]
+                    FROM dbo.package AS P 
+                    INNER JOIN dbo.sender AS S ON S.sender_id = P.sender_id
+                    INNER JOIN dbo.receiver AS R ON R.receiver_id = P.receiver_id
+                    ${whereClause}
+                    ORDER BY [Send Date] ASC
+                `);
+
 
             pool.close();
             console.log(query);
@@ -88,12 +100,6 @@ async function employeePackageOverview(date1, date2, classVal, statusVal) {
         return { 'error': 'An error occurred' };
     }
 }
-
-
-
-
-
-
 
 
 module.exports = {

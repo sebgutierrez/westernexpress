@@ -245,7 +245,7 @@ const getRandomInt = (min, max) => {
         const adminResult = await pool.request()
         .input('username', sql.VarChar, req.body.username)
         .input('password', sql.VarChar, req.body.password)
-        .query('SELECT ad_id, username FROM admins WHERE login_ad = @username AND password_ad = @password');
+        .query('SELECT ad_id FROM admins WHERE login_ad = @username AND password_ad = @password');
   
         console.log(adminResult.recordsets);
         // Check if there is at least one record
@@ -580,6 +580,112 @@ app.post('/login/overview', (req, res) => {
       res.send(result);
   })
 });
+
+///////////////forget password and reset password////////////////
+app.post('/forgot_pass', async (req, res) => {
+  try {
+    const inputUsername = req.body.username; // Extracting inputUsername from the request body
+
+    const pool = await sql.connect(config);
+    const request = pool.request();
+
+    // Queries to check the username in each table
+    const customerQuery = `SELECT * FROM dbo.customer WHERE login = @cInputUser`;
+    const employeeQuery = `SELECT * FROM dbo.employees_new WHERE login_emp = @eInputUser`;
+    const adminQuery = `SELECT * FROM dbo.admins WHERE login_ad = @aInputUser`;
+
+
+    const [customerResult, employeeResult, adminResult] = await Promise.all([
+      request.input('cInputUser', sql.VarChar, inputUsername).query(customerQuery),
+      request.input('eInputUser', sql.VarChar, inputUsername).query(employeeQuery),
+      request.input('aInputUser', sql.VarChar, inputUsername).query(adminQuery),
+    ]);
+
+
+    const foundUser = {
+      customer: customerResult.recordset.length > 0,
+      employee: employeeResult.recordset.length > 0,
+      admin: adminResult.recordset.length > 0,
+    };
+
+    if (foundUser.customer || foundUser.employee || foundUser.admin) {
+      req.session.username = inputUsername; // Store username in the session
+      req.session.userType = foundUser;
+      res.redirect('/index/reset_pass.html');
+    } else {
+      res.send('Invalid username. Please try again.');
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).send('Error while processing your request');
+  }
+});
+
+app.post('/reset_pass', async (req, res) => {
+  try {
+    const newPassword = req.body.password;
+    const confirmPassword = req.body.confirmPassword;
+
+    if (newPassword !== confirmPassword) {
+      res.status(400).send('Passwords do not match. Please try again.');
+      return;
+    }
+
+    const pool = await sql.connect(config);
+    const request = pool.request();
+
+    const username = req.session.username; // Retrieve stored username from session
+
+    if (!username) {
+      res.status(404).send('Username not found. Please try again.');
+      return;
+    }
+
+    const { userType } = req.session; // Retrieve the user type from session
+
+    let updateQuery = '';
+
+    if (userType.customer) {
+      updateQuery = `UPDATE dbo.customer SET password_ = @newPassword WHERE login = @cUpdateUser`;
+    } else if (userType.employee) {
+      updateQuery = `UPDATE dbo.employees_new SET password_emp = @newPassword WHERE login_emp = @eUpdateUser`;
+    } else if (userType.admin) {
+      updateQuery = `UPDATE dbo.admins SET password_ad = @newPassword WHERE login_ad = @aUpdateUser`;
+    } else {
+      res.status(404).send('User not found. Please try again.');
+      return;
+    }
+
+    request.input('newPassword', sql.VarChar, newPassword);
+    request.input('cUpdateUser', sql.VarChar, username);
+    request.input('eUpdateUser', sql.VarChar, username);
+    request.input('aUpdateUser', sql.VarChar, username);
+
+    const result = await request.query(updateQuery);
+
+    if (result.rowsAffected[0] > 0) {
+      res.redirect('/index/sign_in.html'); // Redirect to the login page after password reset
+    } else {
+      res.status(404).send('Username not found. Please try again.');
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).send('Error while processing your request');
+  }
+});
+
+
+app.get('/login/customerData', async (req,res) => {
+  try {
+    const pool = await sql.connect(config);
+    const result = await pool.request().query('SELECT customer_id as "ID", first_name as "First Name", last_name as "Last Name", phone AS "Phone", email AS "Email", username AS "Username", address_id AS "Address ID" FROM dbo.customer');
+    res.json(result.recordset);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);

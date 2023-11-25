@@ -11,15 +11,15 @@
     <body>
         <div class="page">
             <div class="container">
-                <form id="forgetPasswordForm" onsubmit="checkUserName(); return false;"action="" method="post">
+                <form id="forgetPasswordForm" action="/reset_pass" method="post">
                     <h1 id="reset_pass">Reset Password</h1>
                     <div class="input_field">
                         <p>Password</p>
-                        <input type="password" name="text" required>
+                        <input type="password" name="password" id="password" required>
                     </div>
                     <div class="input_field">
                         <p>Confirm Password</p>
-                        <input type="password" name="text" required>
+                        <input type="password" name="confirmPassword" id="confirmPassword" required>
                     </div>
                     <input type="submit" value="Submit">
                     <div class="back_home"><a id="back_home_link" href="/index/sign_in.html">Back to Sign In</a></div>                                                                                                                                                   

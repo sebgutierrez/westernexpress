@@ -306,8 +306,10 @@ th, td {
 .page{
     display: flex;
     justify-content: center;
-   
   }
+  #packages h2{
+	border-bottom: 1px solid black;
+   }
   .container1{
     text-align: left;
     width: 55%;
@@ -342,4 +344,7 @@ th, td {
     width: 30%;
     height: 3rem;
     background-color: #e2e2e2;
+  }
+  .customer-report h2{
+	border-bottom: 1px solid black;
   }
