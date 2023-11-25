@@ -1,43 +1,110 @@
-/* CSS for top menu */
-.top-menu {
-    background-color: #f2f2f2;
-    overflow: hidden;
-    position: fixed;
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden; /* Ensure the blur doesn't overflow the body */
+}
+
+body::before {
+    content: "";
+    position: fixed; /* Fixed to cover the entire viewport */
     top: 0;
-    width: 100%;
-    z-index: 999; /* Ensures the menu is on top of other elements */
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('/images/homepage_images/renam2.jpg'); /* Replace 'your-image-path.jpg' with the actual path to your background image */
+    background-size: cover;
+    background-repeat: no-repeat;
+    filter: blur(7px); /* Adjust the blur amount as needed */
+    z-index: -1;
+    pointer-events: none; /* Ensure that the pseudo-element doesn't capture any pointer events */
+}
+header {
+    background-color: #000000;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+}
+
+.top-menu {
+    display: flex;
+    justify-content: center;
 }
 
 .top-menu ul {
-    list-style-type: none;
+    list-style: none;
     margin: 0;
     padding: 0;
-    overflow: hidden;
+    display: flex;
 }
 
-.top-menu li {
-    float: right;
+.top-menu ul li {
+    margin: 0 10px;
 }
 
-.top-menu li a {
-    display: block;
-    color: #333;
-    text-align: center;
-    padding: 14px 16px;
+.top-menu ul li a {
+    color: #fff;
     text-decoration: none;
 }
 
-.top-menu li a:hover {
-    background-color: #ddd;
+.top-menu ul li a:hover {
+    text-decoration: underline;
 }
 
-/* Adjusted styles to ensure header is not covered by the nav bar */
-header {
-    padding-top: 40px; /* Adjust the padding as necessary to prevent the header from being covered by the navbar */
+.track-package {
+    text-align: center;
+    margin: 20px 0;
 }
 
-/* Adjusted image size */
-img {
-    max-width: 100px; /* Adjust the width as needed */
-    height: auto; /* Ensures the aspect ratio is maintained */
+.track-package input {
+    padding: 8px;
+    margin-right: 5px;
 }
+
+.track-package button {
+    padding: 8px 15px;
+    background-color: #060606;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+}
+
+.homepage-images {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.homepage-images h2 {
+    margin-bottom: 10px;
+    color: #fff; /* Set the text color to white */
+}
+
+
+
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #ffffff;
+    color: #000000;
+    padding: 20px;
+    text-align: center;
+}
+
+.footer .button-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer button {
+    padding: 8px 15px;
+    color: #000000;
+    border: none;
+    cursor: pointer;
+}
+

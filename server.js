@@ -37,6 +37,20 @@ app.use((req, res, next) => {
     next();
 });
 
+  //////////////////////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////////////////////
+  // Add this middleware to enable sessions
+  app.use(session({
+    secret: 'adsfadsreqwrsdfdsafdsfete', // Change this to a secure random key
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        sameSite: true,
+        secure: false, //make sure to make this true when deploying
+        expires: false
+      }
+  }));
+  
 app.get('/track/history/:id', (req, res) => {
     tracking.customerTracking(req.params.id)
     .then(result => {
@@ -59,6 +73,7 @@ app.get('/track/package/:id', (req, res) => {
 });
 
 app.post('/employee-support', (req, res) => {
+  console.log(req.body.password);
     support.getSupportTickets(req.body.password)
     .then(result => {
         res.send(result);
@@ -96,19 +111,36 @@ app.post('/clockout', (req, res) => {
     })
 });
 
-  //////////////////////////////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////////////////////////////
-  // Add this middleware to enable sessions
-  app.use(session({
-    secret: 'adsfadsreqwrsdfdsafdsfete', // Change this to a secure random key
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-        sameSite: true,
-        secure: false, //make sure to make this true when deploying
-        expires: false
-      }
-  }));
+app.get('/employeeData', async (req, res) => {
+  try {
+    console.log(req.session);
+    console.log(req.session.emp_username);
+    const user = req.session.emp_username;
+    const searchQuery = req.query.search || ''; // Extract the search query from the URL
+
+    const pool = await sql.connect(config);
+    const result = await pool.request()
+      .input('username', sql.VarChar, user)
+      .input('search', sql.VarChar, `%${searchQuery}%`) // Use the search query in the SQL query
+      .query(`
+        SELECT
+          E.postoffice_id AS [Post Office ID],
+          S.emp_id AS [Employee ID],
+          CONCAT(E.first_name,' ', E.last_name) AS [Name],
+          S.tracking_number AS [Tracking Number],
+          S.sale_date AS [Sale Date],
+          S.amount AS [Amount]
+        FROM dbo.sales AS S
+        INNER JOIN dbo.employees_new AS E ON E.emp_id = S.emp_id
+        WHERE E.username = @username
+        AND (E.first_name LIKE @search OR E.last_name LIKE @search OR S.tracking_number LIKE @search OR S.amount LIKE @search OR S.sale_date LIKE @search)
+        ORDER BY [Sale Date] ASC`);
+   console.log(result.recordset);
+    res.json(result.recordset);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
 
 app.get('/alerts', (req, res) => {
     console.log(req.session);
@@ -236,7 +268,7 @@ const getRandomInt = (min, max) => {
 
             // Customer login
             // res.sendFile(path.join(__dirname, 'public', 'index', 'customer', 'customer.html'));
-            res.redirect('http://localhost:5500/index/customer/customer.html');
+            res.redirect('https://westernexpresspostal.azurewebsites.net/index/customer/customer.html');
             return;
         }  
   
@@ -245,20 +277,22 @@ const getRandomInt = (min, max) => {
         const employeeResult = await pool.request()
         .input('username', sql.VarChar, req.body.username)
         .input('password', sql.VarChar, req.body.password)
-        .query('SELECT emp_id, username FROM employees_new WHERE login_emp = @username AND password_emp = @password');
+        .query('SELECT emp_id, username, postoffice_id FROM employees_new WHERE login_emp = @username AND password_emp = @password');
   
         // Check if there is at least one record
         if (employeeResult.recordset.length > 0) {
             const emp_id = employeeResult.recordset[0].emp_id;
             const username = employeeResult.recordset[0].username;
+            const postoffice_id = employeeResult.recordset[0].postoffice_id;
 
             // Store employerIDNumber in the session
             req.session.emp_id = emp_id;
             req.session.emp_username = username;
+            req.session.postoffice_id = postoffice_id;
 
             // Employee login
             //res.sendFile(path.join(__dirname, 'public', 'index', 'employees', 'employee_home.html'));
-            res.redirect('http://localhost:5500/index/employees/employee_home.html');
+            res.redirect('https://westernexpresspostal.azurewebsites.net/index/employees/employee_home.html');
             return;
         }
   
@@ -279,7 +313,7 @@ const getRandomInt = (min, max) => {
     
             // Admin login
             // res.sendFile(path.join(__dirname, 'public', 'index', 'admin', 'admin_home.html'));
-            res.redirect('http://localhost:5500/index/admin/admin_home.html');
+            res.redirect('https://westernexpresspostal.azurewebsites.net/index/admin/admin_home.html');
             return;
         }
   
@@ -292,6 +326,55 @@ const getRandomInt = (min, max) => {
     }
 });  
   
+// Signup route customer
+app.post('/employee/signup', async (req, res) => {
+  try {
+    const pool = await sql.connect(config);
+
+    // Generate a unique emp ID
+    const lastemp_idIdResult = await pool.request().query('SELECT MAX(emp_id) AS max_emp_id FROM employees_new');
+    const lastemp_idId = lastemp_idIdResult.recordset[0].max_emp_id || 99; // Set to 99 to start from 100
+    const empId = parseInt(lastemp_idId) + 1;
+
+    // Generate a unique emp address ID
+    const lastAddressIdResult = await pool.request().query('SELECT MAX(address_id) AS max_address_id FROM addresses');
+    const lastAddressId = lastAddressIdResult.recordset[0].max_address_id || 100;
+    const addressId = lastAddressId + 1;
+
+    // Insert into the address table
+    await pool.request()
+      .input('addressId', sql.Int, addressId)
+      .input('address', sql.VarChar, req.body.address)
+      .input('city', sql.VarChar, req.body.city)
+      .input('state', sql.Char, req.body.state)
+      .input('zipcode', sql.Int, req.body.zipcode)
+      .query('INSERT INTO addresses (address_id, address, city, state, zip) VALUES (@addressId, @address, @city, @state, @zipcode)');
+
+    // Insert into the employees_new table
+    
+    await pool.request()
+      .input('empId', sql.BigInt, empId)
+      .input('firstname', sql.VarChar(255), req.body.firstname)
+      .input('lastname', sql.VarChar(255), req.body.lastname)
+      .input('username', sql.NVarChar(255), req.body.username)
+      .input('password', sql.NVarChar(255), req.body.password)
+      .input('phoneNumber', sql.VarChar(20), req.body.phoneNumber) // Adjust the length based on your needs
+      .input('email', sql.VarChar(255), req.body.email)
+      .input('addressId', sql.Int, addressId)
+      .input('postalOfficeId', sql.Int, req.body.postOfficeLocation)
+      .query(`
+        INSERT INTO employees_new 
+        (emp_id, first_name, last_name, login_emp, password_emp, number, email, address_id,postoffice_id) 
+        VALUES 
+        (@empId, @firstname, @lastname, @username, @password, @phoneNumber, @email, @addressId,@postalOfficeId)
+      `);
+
+    alert('Successfully created user!');
+  } catch (err) {
+    console.error('Error occurred:', err);
+    res.status(500).send('Error while processing your request');
+  }
+});
   //////////////////////////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////////////////// 
   // Handle GET request for creating a label for customer view
@@ -541,7 +624,7 @@ const getRandomInt = (min, max) => {
      
            ////////////////////////////////////////////////////////////////////////////////////////
            //generate tracking number
-           tracking_ready=getRandomInt(100000000000000,900000000000000)
+           tracking_ready=getRandomInt(10000000,90000000)
            //const sendDate = new Date();
           // Insert data into package
           const packageResult = await pool
@@ -593,6 +676,325 @@ const getRandomInt = (min, max) => {
         await sql.close();
       }
     });
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////// 
+// Route when a package is receved at a postal office by customer, this modifes the status
+app.post('/incomingpackages', async (req, res) => {
+
+  try {
+
+    // Create a SQL Server connection pool
+    const pool = await sql.connect(config);
+
+    // Begin a new transaction
+    const transaction = await pool.transaction();
+
+
+    // get the postal_id- employee is working in
+    const postalID = req.session.postoffice_id;
+    const empID = req.session.emp_id;
+    console.log(empID)
+    console.log(postalID)
+
+    // Use the transaction for both queries
+    await transaction.begin();
+    
+
+    // Insert the new package into the incoming_packages table
+    await pool.request()
+        .input('trackingNumber', sql.BigInt, req.body.trackingNumberInput)
+        .input('postalId', sql.Int, postalID)
+        .input('empID', sql.Int, empID)
+        .query('INSERT INTO incoming_packages (tracking_number, postoffice_id, emp_id) VALUES (@trackingNumber, @postalId, @empID)');
+
+
+    // Update the status of the package in the package table to "In Transit"
+    await pool.request()
+        .input('trackingNumber', sql.BigInt, req.body.trackingNumberInput)
+        .query('UPDATE package SET status = \'ARRIVED AT FACILITY\' WHERE tracking_number = @trackingNumber');
+
+    // Commit the transaction
+    await transaction.commit(); 
+
+
+
+    // Send a success response to the client
+    res.json({ success: true, message: 'Package information saved successfully!!' });
+
+} catch (error) {
+    console.error('Error saving package information:', error);
+    res.status(500).send('Internal server error');
+}
+});
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////// 
+// Route to retrieve past shipments for customer page
+async function queryPastShipments(customerID) {
+  let pool;
+  try {
+    // Request a connection from the pool using the global config
+    pool = await sql.connect(config);
+
+    // Begin a database transaction
+    const transaction = new sql.Transaction();
+    await transaction.begin();
+
+    
+    // Log the customerID to the console
+    console.log('Customer ID shippments:', customerID);
+
+
+    const result = await pool
+      .request(transaction)
+      .input('customeriD', sql.Int, customerID)
+      .query(`
+      SELECT
+        p.sendDate,
+        p.tracking_number,
+        a.address AS sender_address,
+        p.postoffice_id,
+        p.package_status
+      FROM
+          package p
+      INNER JOIN
+          sender s ON p.sender_id = s.sender_id
+      INNER JOIN
+          customer c ON s.FK_customer_id = c.customer_id
+      INNER JOIN
+          addresses a ON c.address_id = a.address_id
+      WHERE
+          s.FK_customer_id = @customeriD
+      ORDER BY
+          p.sendDate DESC;
+      `);
+
+    // Commit the transaction
+    await transaction.commit();
+
+
+    
+ 
+
+    // Return the result set
+    return result.recordset;
+  } catch (err) {
+    // Handle errors during the query
+    console.error('Error querying past shipments:', err.message);
+    throw err;
+  } finally {
+    // Release the connection back to the pool
+    if (pool) {
+      await pool.close();
+    }
+  }
+}
+
+// 2. Your route handler
+app.get('/past-shipments', async (req, res) => {
+  try {
+    const customerID_past_shippment1 = req.session.customer_id;
+    const pastShipmentsData = await queryPastShipments(customerID_past_shippment1);
+    res.json(pastShipmentsData);
+  } catch (err) {
+    console.error('Error handling request:', err.message);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////
+// Route customer page/edit profile
+app.post('/user/update', async (req, res) => {
+  try {
+    await sql.connect(config);
+
+    const customerID_editprofile = req.session.customer_id;
+
+    // Log the form data
+    console.log("Request Body:", req.body);
+
+    // Construct the SQL query based on the form data
+    const query = `
+      -- Update the address details in the addresses table
+      UPDATE addresses
+      SET
+        address = COALESCE(@address, address),
+        city = COALESCE(@city, city),
+        state = COALESCE(@state, state),
+        zip = COALESCE(@zip, zip)
+      WHERE
+        address_id = (SELECT address_id FROM customer WHERE customer_id = @customer_id);
+
+      -- Update customer information
+      UPDATE customer
+      SET
+        first_name = COALESCE(@firstname, first_name),
+        last_name = COALESCE(@lastname, last_name),
+        phone = COALESCE(@phone, phone),
+        email = COALESCE(@email, email)
+      WHERE
+        customer_id = @customer_id;
+    `;
+
+    // Define input parameters
+    const params = new sql.Request();
+    params.input('firstname', sql.VarChar, req.body.firstname);
+    params.input('lastname', sql.VarChar, req.body.lastname);
+    params.input('phone', sql.VarChar, req.body.phone);
+    params.input('email', sql.VarChar, req.body.email);
+    params.input('customer_id', sql.Int, customerID_editprofile);
+    params.input('address', sql.VarChar, req.body.address);
+    params.input('city', sql.VarChar, req.body.city);
+    params.input('state', sql.Char(2), req.body.state);
+    params.input('zip', sql.Int, req.body.zip);
+
+    // Log for error if the SQL query and parameters
+    //console.log("SQL Query:", query);
+    //console.log("Parameters:", params);
+
+    // Execute the query with parameters
+    await params.query(query);
+
+    res.send('Profile updated successfully');
+
+
+  } catch (err) {
+    console.error(err);
+
+  } finally {
+    sql.close();
+  }
+});
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////
+// Endpoint for deleting customer account
+app.post('/user/delete', async (req, res) => {
+  try {
+    await sql.connect(config);
+
+    const customerIDToDelete = req.session.customer_id;
+    const passwordToDelete = req.body.password;
+
+    // Verify the password before proceeding with the deletion
+    const passwordCheckQuery = `
+      SELECT customer_id
+      FROM customer
+      WHERE customer_id = @customer_id AND password_ = @password;
+    `;
+
+    const passwordCheckParams = new sql.Request();
+    passwordCheckParams.input('customer_id', sql.Int, customerIDToDelete);
+    passwordCheckParams.input('password', sql.VarChar, passwordToDelete);
+
+    const passwordCheckResult = await passwordCheckParams.query(passwordCheckQuery);
+    console.log(passwordCheckResult.recordset[0]);
+    if (passwordCheckResult.recordset[0].length === 0) {
+      // Incorrect password
+      return res.status(401).send('Incorrect password. Account deletion failed.');
+    }
+
+    // Password is correct, proceed with deletion
+    const deleteQuery = `
+      DELETE FROM customer
+      WHERE customer_id = @customer_id;
+    `;
+
+    const deleteParams = new sql.Request();
+    deleteParams.input('customer_id', sql.Int, customerIDToDelete);
+
+    await deleteParams.query(deleteQuery);
+
+    // You can add additional queries here to delete related information in other tables
+
+    
+    res.redirect('/index.html');
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error deleting account.');
+  } finally {
+    sql.close();
+  }
+});
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////
+// Customer support - create a ticket
+app.post('/customer/support', async (req, res) =>{
+
+  const { title, description, department, priority } = req.body;
+
+  try {
+    // Connect to the database
+    const pool = await sql.connect(config);
+    const customerSupportID = req.session.customer_id
+    const ticket_status = 'Open'
+
+    // Insert data into the database using parameters
+    const result = await pool.request()
+    .input("customerID", sql.Int, customerSupportID)
+    .input('title', sql.NVarChar, title)
+    .input('description', sql.NVarChar, description)
+    .input('department', sql.NVarChar, department)
+    .input('priority', sql.NVarChar, priority)
+    .input('status', sql.NVarChar, ticket_status)
+    .query(`
+      INSERT INTO customer_support (customer_id,title, description, department, priorit,status)
+      VALUES (@customerID,@title, @description, @department, @priority,@status)
+    `);
+
+    console.log('Ticket submitted successfully.');
+    res.status(200).json({ success: true, message: 'Ticket submitted successfully' });
+  } catch (error) {
+    console.error('Error submitting ticket:', error.message);
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
+  } finally {
+    // Close the SQL connection
+    await sql.close();
+  }
+
+  
+
+
+
+})
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// Customer support - view tickets
+app.get('/customer/viewTickets', async (req, res) => {
+  try {
+    // Assuming you have a user ID in the request query
+    const pool = await sql.connect(config);
+    const customerid = req.session.customer_id;
+    console.log('view tickets', customerid)
+
+    // Perform a database query using the pool
+    const result = await pool.request()
+      .input('customer_id', sql.Int, customerid) // Corrected parameter name
+      .query('SELECT ticket_number, description, department, priorit, title, status FROM customer_support WHERE customer_id = @customer_id'); // Corrected parameter name
+
+    // Send the results back to the client
+    res.json(result.recordset);
+    console.log(result.recordset);
+  } catch (error) {
+    console.error('Error in /customer/viewTickets:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+
 //////////////package overview///////////////////
 app.post('/login/overview', (req, res) => {
   console.log(req.body);

@@ -34,7 +34,7 @@ select {
 }
 
 input[type="submit"] {
-    background-color: #3498db;
+    background-color: #003152;
     color: #fff;
     cursor: pointer;
 }
@@ -50,5 +50,3 @@ input[type="submit"]:hover {
     background-color: #e0f7fa; /* Light blue background for label container */
     border-radius: 8px;
 }
-
-/* Add more styles as needed */

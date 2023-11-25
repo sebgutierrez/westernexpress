@@ -128,7 +128,7 @@ body {
 
 .hero-banner {
 	display: flex;
-	height: 55vh; 
+	height: 45vh; 
 	position: relative;
 	top: 1rem;
 }

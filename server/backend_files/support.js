@@ -39,6 +39,7 @@ async function checkSupportCredentials(employee_id){
 
 async function getSupportTickets(password){
     try {
+		console.log(password);
 		// should only allow update if there's no match with old and new package status
 		let employee_id = await getEmployeeId(password);
 		let exists = await checkSupportCredentials(employee_id);

@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+    
+        #container {
+            display: flex;
+            height: 100vh;
+        }
+    
+        #sidebar {
+            background-color: #222E50;
+            color: #fff;
+            width: 200px;
+            padding: 20px;
+        }
+    
+        #content {
+            flex: 1;
+            padding: 20px;
+        }
+    
+        h1 {
+            color: #333;
+        }
+    
+        #ticket-content {
+            display: none;
+        }
+    
+        .menu-item {
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+    
+        .menu-item:hover {
+            color: #ffd700;
+        }
+    
+        .ticket-form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+    
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+    
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+        }
+    
+        #ticketTable {
+            border-collapse: collapse;
+            width: 100%;
+        }
+    
+        #ticketTable th, #ticketTable td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+    
+        #ticketTable th {
+            background-color: #f2f2f2;
+        }
+    
+        button {
+            background-color: #3498db;
+            color: white;
+            padding: 8px;
+            border: none;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        /* Add CSS styles for the image */
+        img {
+            width: 50%; /* Make the image stretch across the screen */
+            height: auto; /* Maintain aspect ratio */
+            border-radius: 50px; /* Add rounded corners */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1), 0 8px 50px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+            transform: translateY(-10px); /* Add a slight reflection effect */
+            float: right; /* Align the image to the left */
+            margin-right: 20px; /* Add some space to the right of the image */
+            }
+
+    </style>
+
+
+    </style>
+    
+    
+
+<script>
+    function showContent(contentId) {
+    var ticketContent = document.getElementById('ticket-content');
+    var defaultContent = document.getElementById('default-content');
+    var create_ticket = document.getElementById('create_ticket');
+    var view_ticket = document.getElementById('view_ticket');
+
+    if (contentId === 'create_ticket') {
+        defaultContent.style.display = 'none';
+        ticketContent.style.display = 'none';
+        create_ticket.style.display = 'block';
+        view_ticket.style.display = 'none';
+    } else if (contentId === 'view_tickets') {
+        defaultContent.style.display = 'none';
+        ticketContent.style.display = 'block';
+        create_ticket.style.display = 'none';
+        view_ticket.style.display = 'block';
+
+        // Make sure to call the fetchTickets function when displaying the view_ticket content
+        fetchTickets();
+    } else {
+        defaultContent.style.display = 'block';
+        ticketContent.style.display = 'none';
+        create_ticket.style.display = 'none';
+        view_ticket.style.display = 'none';
+    }
+}
+
+    
+    
+</script>
+    
+</head>
+<body>
+    <div id="container">
+        <div id="sidebar">
+            <div class="menu-item" onclick="showContent('create_ticket')">Create Ticket</div>
+            <div class="menu-item" onclick="showContent('view_tickets')">View All Tickets</div>
+
+        </div>
+
+        <div id="content">
+            <h1 id="default-content">Western Express Help Center
+                <img class="support image" src="/images/homepage_images/supportpage.jpg">
+            </h1>
+            
+            
+            <div id="ticket-content"></div>
+        </div>
+    </div>
+
+    <!-- create ticket-->
+    <div id="create_ticket" style="display: none;">
+        <div class="ticket-form">
+            <h2>Western Express - Help desk</h2>
+            <form id="customersupport" action="/customer/support" method="post">
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title" required>
+
+                <label for="description">Description:</label>
+                <textarea id="description" name="description" rows="4" required></textarea>
+
+                <label for="department">Department:</label>
+                <select id="department" name="department" required>
+                    <option value="delivery_logistics">Delivery and Logistics</option>
+                    <option value="sales_marketing">Sales and Marketing</option>
+                    <option value="human_resources">Human Resources</option>
+                    <option value="administrative">Administrative</option>
+                    <option value="it_technology">IT and Technology</option>
+                </select>
+
+                <label for="priority">Priority:</label>
+                <select id="priority" name="priority" required>
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                </select>
+
+                <button type="submit">Submit Ticket</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="view_ticket" style="display:none;">
+        <table id="ticketTable">
+            <tr>
+                <th>Ticket ID</th>
+                <th>Title</th>
+                <th>Department</th>
+                <th>Priority</th>
+                <th>Status</th>
+                
+            </tr>
+            <!--  append rows using JavaScript -->
+        </table>
+
+    </div>
+    
+
+
+    <!-- create ticket script-->
+   <script>
+        document.getElementById('customersupport').addEventListener('submit', function (event) {
+          event.preventDefault();
+      
+          fetch('https://westernexpresspostal.azurewebsites.net/customer/support', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              title: document.getElementById('title').value,
+              description: document.getElementById('description').value,
+              department: document.getElementById('department').value,
+              priority: document.getElementById('priority').value,
+            }),
+          })
+          .then(response => response.json())
+          .then(data => {
+            if (data.success) {
+              alert('Ticket submitted successfully');
+              window.location.href = '/index/customer/helpdesk.html';  // Redirect to index.html
+            } else {
+              alert('Error submitting ticket: ' + data.message);
+            }
+          })
+          .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred while submitting the ticket');
+          });
+        });
+    </script>
+
+    <!-- view ticket script-->
+    <script>
+        // Function to fetch tickets from the server
+        const fetchTickets = () => {
+          // Fetch data from the server
+          fetch('https://westernexpresspostal.azurewebsites.net/customer/viewTickets')
+            .then(response => response.json())
+            .then(data => {
+              // Append data to the table
+              const table = document.getElementById('ticketTable'); // Corrected table ID
+              for (let i = table.rows.length - 1; i > 0; i--) {
+              table.deleteRow(i); }
+    
+              data.forEach(ticket => {
+                const row = table.insertRow();
+                row.insertCell(0).textContent = ticket.ticket_number;
+                row.insertCell(1).textContent = ticket.title;
+                row.insertCell(2).textContent = ticket.department;
+                row.insertCell(3).textContent = ticket.priorit;
+                row.insertCell(4).textContent = ticket.status;
+                
+                // Optionally, you can add a "View Details" link here as well
+                //const viewDetailsCell = row.insertCell(5);
+                /*const viewDetailsLink = document.createElement('a');
+                viewDetailsLink.href = `/customer/viewDetails?ticketId=${ticket.ticket_number}`;
+                viewDetailsLink.textContent = 'View Details';
+                viewDetailsCell.appendChild(viewDetailsLink);*/
+              });
+            })
+            .catch(error => console.error('Error fetching tickets:', error));
+        };
+    
+        // Call the fetchTickets function when the page loads
+        fetchTickets();
+    </script>
+    
+    
+
+
+      
+  
+
+    
+
+
+
+</body>
+</html>
+
+
+
+
+    

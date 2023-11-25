@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Account Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+    }
+
+    #menu {
+      width: 200px;
+      background-color: #f1f1f1;
+      padding: 20px;
+      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    #content {
+      flex: 1;
+      padding: 20px;
+    }
+
+    #past-shipments {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    #past-shipments th, #past-shipments td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    #past-shipments th {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+
+<div id="menu">
+  <h3>Account Menu</h3>
+  <ul>
+    <li><a href="#" onclick="showPastShipments()">View Shipments</a></li>
+    <li><a href="/index/customer/edit_profile.html" target="_blank">Edit Profile</a></li>
+    <li><a href="#" onclick="deleteAccount()">Delete Account</a></li>
+  </ul>
+</div>
+
+<div id="content">
+  <h2>My Shipments</h2>
+  <table id="past-shipments">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Tracking</th>
+        <th>Address</th>
+        <th>Post Office</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody id="shipment-data">
+      <!-- Data will be dynamically inserted here -->
+    </tbody>
+  </table>
+  
+</div>
+
+
+
+
+<script>
+
+    ///////////////////////////////////////////////
+    ///////////////////////////////////////////////
+    async function showPastShipments() {
+      try {
+        const response = await fetch('https://westernexpresspostal.azurewebsites.net/past-shipments'); // Assuming your server is running locally on the default port (http://localhost:3000)
+        const pastShipmentsData = await response.json();
+  
+        // Reference to the tbody where data will be inserted
+        const tbody = document.getElementById('shipment-data');
+  
+        // Clear existing data
+        tbody.innerHTML = '';
+
+          // Check if no data is returned
+        if (pastShipmentsData.length === 0) {
+          alert('No past shipments found.');
+          return;
+        }
+
+
+
+
+
+  
+        // Insert new data into the table
+        pastShipmentsData.forEach((shipment) => {
+          const row = document.createElement('tr');
+          Object.values(shipment).forEach((value) => {
+            const cell = document.createElement('td');
+            cell.textContent = value;
+            row.appendChild(cell);
+          });
+          tbody.appendChild(row);
+        });
+      } catch (error) {
+        console.error('Error fetching past shipments:', error.message);
+        // Handle the error as needed, e.g., display an error message to the user
+      }
+    }
+  
+
+</script>
+
+<script>
+  async function deleteAccount() {
+    // Ask the user for their password
+    const password = prompt('Enter your password to confirm account deletion:');
+    
+    // If the user clicks Cancel or leaves the password field empty, do nothing
+    if (!password) {
+      return;
+    }
+
+    try {
+      // Make a request to the backend to delete the account
+      const response = await fetch('/user/delete', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ password }),
+      });
+
+      if (response.ok) {
+        // Account deleted successfully
+        alert('Account deleted successfully! We hope to see you soon.');
+        //window.location.href = '/index.html';
+
+        // Optionally, you can redirect the user to a login page or perform other actions
+      } else {
+        // Account deletion failed
+        alert('Failed to delete account. Please check your password.');
+      }
+    } catch (error) {
+      console.error('Error deleting account:', error.message);
+      // Handle the error as needed, e.g., display an error message to the user
+    }
+  }
+</script>
+
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+
+</body>
+</html>
