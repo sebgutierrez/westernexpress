@@ -6,7 +6,6 @@ const shift = require("./server/backend_files/shifts.js");
 //const { generateReport } = require("./server/admin_backend/salesOverview.js"); // Import your salesOverview module
 const salaryOverview = require("./server/admin_backend/salaryOverview.js");
 const salesOverview = require("./server/admin_backend/salesOverview.js");
-const emp = require("./server/admin_backend/empview.js"); // Import the emp.js file
 
 require("dotenv").config();
 
