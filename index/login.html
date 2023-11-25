@@ -1,27 +1,61 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f4f4f4;
             margin: 0;
             padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
+            position: relative;
+            overflow: hidden; /* Hide the overflow to prevent blurred edges */
+        }
+
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background-image: url('/images/homepage_images/image1\ \(3\).jpg'); /* Replace 'your-background-image.jpg' with the path to your image */
+            background-size: cover;
+            background-position: center;
+            filter: blur(5px); /* Adjust the blur intensity as needed */
+            z-index: -1; /* Place the pseudo-element behind the content */
         }
 
         h2 {
             text-align: center;
-            font-size: 28px;
-            color: #333;
+            font-size: 50px;
+            color: #ffffff;
+            text-shadow: 3px 3px 3px #023047; /* Adding a subtle text shadow for a 3D effect */       
+            padding-left: 10px; /* Adjusting padding for better spacing */
+            position: absolute;
+            top: 60px; /* Adjust the top position as needed */
+            left: 50%;
+            transform: translateX(-50%); /* Center the element horizontally */
+            
+        }
+        h5 {
+            text-align: center;
+            font-size: 20px;
+            color: #ffffff;
+            padding-left: 10px; /* Adjusting padding for better spacing */
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%); /* Center the element horizontally */
         }
 
         form {
-            background-color: #fff;
+            background-color: rgba(255, 255, 255, 0.8);
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -40,7 +74,7 @@
         }
 
         input[type="submit"] {
-            background-color: #4caf50;
+            background-color: #023047;
             color: #fff;
             cursor: pointer;
             padding: 10px 15px;
@@ -50,17 +84,20 @@
         }
 
         input[type="submit"]:hover {
-            background-color: #45a049;
+            background-color: #000000;
         }
     </style>
 </head>
 <body>
 
-    <h2>Welcome to Western Express</h2>
+    <h2>Western Express Logistics</h2>
     <form action="/login" method="POST">
         <input type="text" name="username" placeholder="Username"><br><br>
         <input type="password" name="password" placeholder="Password"><br><br>
         <input type="submit" value="Login">
     </form>
+    <h5>www.westernexpress.com</h5>
+
 </body>
+
 </html>

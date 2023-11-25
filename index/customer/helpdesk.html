@@ -93,6 +93,21 @@
             font-size: 14px;
             cursor: pointer;
         }
+
+        /* Add CSS styles for the image */
+        img {
+            width: 50%; /* Make the image stretch across the screen */
+            height: auto; /* Maintain aspect ratio */
+            border-radius: 50px; /* Add rounded corners */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1), 0 8px 50px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+            transform: translateY(-10px); /* Add a slight reflection effect */
+            float: right; /* Align the image to the left */
+            margin-right: 20px; /* Add some space to the right of the image */
+            }
+
+    </style>
+
+
     </style>
     
     
@@ -139,8 +154,11 @@
         </div>
 
         <div id="content">
-            <h1 id="default-content">Western Express Help Center</h1>
-            <h2>Empowering Solutions, Elevating Support: Your Success, Our Priority!</h2>
+            <h1 id="default-content">Western Express Help Center
+                <img class="support image" src="/images/homepage_images/supportpage.jpg">
+            </h1>
+            
+            
             <div id="ticket-content"></div>
         </div>
     </div>

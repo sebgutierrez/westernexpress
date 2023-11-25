@@ -1,38 +1,46 @@
-/* Reset some default styles */
-body, h1, h2, p, form {
-    margin: 0;
-    padding: 0;
-}
-
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f2f2f2;
+    background-color: #f4f4f4;
+}
+
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-image: url('/images/homepage_images/loginimage.jpg'); /* Replace 'your-background-image.jpg' with the path to your image */
+    background-size: cover;
+    background-position: center;
+    filter: blur(5px); /* Adjust the blur intensity as needed */
+    z-index: -1; /* Place the pseudo-element behind the content */
 }
 
 #signupForm {
-    width: 400px;
+    max-width: 600px;
     margin: 50px auto;
-    background: #fff;
+    background-color: rgba(255, 255, 255, 0.8);
     padding: 20px;
-    border-radius: 5px;
+    border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-input[type="text"],
-input[type="password"],
-input[type="email"],
-input[type="number"],
-select {
-    width: 100%;
+input {
+    width: calc(100% - 22px); /* Adjusted width to fit on one line */
     padding: 10px;
     margin-bottom: 15px;
-    box-sizing: border-box;
     border: 1px solid #ccc;
     border-radius: 4px;
+    box-sizing: border-box;
+    display: inline-block;
 }
 
 .input-box {
     margin-bottom: 15px;
+    display: inline-block;
+    width: calc(50% - 20px); /* Adjusted width to create a two-column layout */
 }
 
 .details {
@@ -41,18 +49,10 @@ select {
     font-weight: bold;
 }
 
-select {
-    padding: 10px;
-    margin-bottom: 15px;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
 input[type="submit"] {
-    background-color: #4CAF50;
+    background-color: #023047;
     color: #fff;
-    padding: 10px 15px;
+    padding: 10px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -60,12 +60,10 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-    background-color: #45a049;
+    background-color: rgb(0, 0, 0);
 }
 
-/* Responsive layout */
-@media (max-width: 600px) {
-    #signupForm {
-        width: 80%;
-    }
+/* Add some spacing between form elements */
+br {
+    display: none; /* Hide line breaks */
 }
