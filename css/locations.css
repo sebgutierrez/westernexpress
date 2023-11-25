@@ -6,6 +6,18 @@ body {
     overflow-x: hidden;
 }
 
+body::before {
+	content: "";
+	background: url('/images/homepage_images/210908.jpg') center/cover fixed no-repeat;
+	filter: blur(8px); /* Adjust the blur amount as needed */
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+}
+
 /* Header styling */
 .header {
 	display: flex;

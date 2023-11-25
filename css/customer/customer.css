@@ -3,10 +3,26 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    position: relative;
+    overflow: hidden; /* Ensure the blur doesn't overflow the body */
 }
 
+body::before {
+    content: "";
+    position: fixed; /* Fixed to cover the entire viewport */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('/images/homepage_images/renam2.jpg'); /* Replace 'your-image-path.jpg' with the actual path to your background image */
+    background-size: cover;
+    background-repeat: no-repeat;
+    filter: blur(7px); /* Adjust the blur amount as needed */
+    z-index: -1;
+    pointer-events: none; /* Ensure that the pseudo-element doesn't capture any pointer events */
+}
 header {
-    background-color: #222E50;
+    background-color: #000000;
     color: #fff;
     padding: 10px;
     text-align: center;
@@ -49,7 +65,7 @@ header {
 
 .track-package button {
     padding: 8px 15px;
-    background-color: #222E50;
+    background-color: #060606;
     color: #ffffff;
     border: none;
     cursor: pointer;
@@ -62,37 +78,33 @@ header {
 
 .homepage-images h2 {
     margin-bottom: 10px;
+    color: #fff; /* Set the text color to white */
 }
 
-.homepage-images img {
+
+
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
     width: 100%;
-    max-width: 500px;
-    margin-bottom: 10px;
-}
-
-
-
-
-.footer-buttons {
-    background-color: #000000;
-    color: #f30000;
+    background-color: #ffffff;
+    color: #000000;
     padding: 20px;
     text-align: center;
 }
 
-.footer-buttons .button-group {
+.footer .button-group {
     display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin: 0 auto;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.footer-buttons button {
+.footer button {
     padding: 8px 15px;
     color: #000000;
     border: none;
-    margin: 5px;
     cursor: pointer;
 }
-
 

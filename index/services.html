@@ -8,37 +8,53 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
             padding: 40px;
             margin: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('/images/homepage_images/wallpaperflare.com_wallpaper\ \(2\).jpg') center/cover fixed;
+            filter: blur(2px);
+            z-index: -1;
         }
 
         .services-container {
-            background-color: #ffffff;
+            background-color: rgba(255, 255, 255, 0.8); /* Adjusted background color with some transparency */
             padding: 40px;
             border-radius: 10px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
             max-width: 800px;
             margin: 0 auto;
+            position: relative;
+            z-index: 1; /* Ensure services container is above the background */
         }
 
         h1 {
-            color: #6C63FF;
+            color: #1C2951;
             text-align: center;
+            margin-bottom: 20px;
         }
 
         .service-item {
             margin-bottom: 40px;
             border-bottom: 1px solid #ddd;
             padding-bottom: 20px;
+            transition: background-color 0.3s;
         }
 
         .service-title {
-            color: #333;
+            color: #1C2951;
             font-size: 1.8rem;
             font-weight: bold;
             margin-bottom: 10px;
@@ -49,16 +65,25 @@
             line-height: 1.6;
         }
 
+        .service-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #1C2951;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .service-button:hover {
+            background-color: #14203D;
+        }
+
         p {
             color: #888;
             font-size: 1.2rem;
             text-align: center;
             margin-top: 40px;
-        }
-
-        .service-item:hover {
-            background-color: #f9f9f9;
-            transition: background-color 0.3s;
         }
     </style>
 </head>
@@ -69,14 +94,17 @@
         <div class="service-item">
             <div class="service-title">First Class - Next Day Air</div>
             <div class="service-description">Our First Class service guarantees next day air delivery for your packages, ensuring timely and reliable transportation for urgent shipments.</div>
+            <a href="#" class="service-button">Learn More</a>
         </div>
         <div class="service-item">
             <div class="service-title">Second Class - 2-3 Days</div>
             <div class="service-description">With our Second Class service, expect efficient delivery within 2 to 3 days, providing a balance between speed and cost-effectiveness for your shipments.</div>
+            <a href="#" class="service-button">Learn More</a>
         </div>
         <div class="service-item">
             <div class="service-title">Economy - 3 or More Days</div>
             <div class="service-description">Our Economy service offers cost-effective shipping with a delivery time of 3 or more days, ideal for non-urgent shipments that require budget-friendly options.</div>
+            <a href="#" class="service-button">Learn More</a>
         </div>
         <p>Please note that we specialize in deliveries only and do not provide pickup services.</p>
     </div>
