@@ -20,7 +20,7 @@
       <h1><strong>Admin Portal</strong></h1>
     </header>
 
-    <div class="container">
+    <div class="containerOverall">
       <nav class="side-nav">
         <ul>
           <li>
@@ -48,7 +48,7 @@
       </nav>
       <main class="content">
         <div id="dashboard">
-          <h1>Western Express: Administration Portal</h1>
+          <h1>Dashboard</h1>
           <div class="dashboard-info">
             <div class="dashboard-card">
               <h2>Today's Packages</h2>
@@ -150,7 +150,6 @@
           </form>
 
           <div id="salaryResult">
-            <h3>Generated Salary Report:</h3>
             <ul id="salaryList"></ul>
           </div>
         </div>
@@ -368,6 +367,24 @@
       </main>
     </div>
     <script>
+      if (typeof require !== "undefined") {
+        const path = require("path");
+        require("dotenv").config({
+          path: path.resolve(__dirname, "../../../.env"),
+        });
+      }
+      /***************************************** SIGN OUT ******************************************************************/
+      document.addEventListener("DOMContentLoaded", function () {
+        // Get the sign-out button element
+        const signOutButton = document.getElementById("signOutButton");
+
+        // Add a click event listener to the button
+        signOutButton.addEventListener("click", function () {
+          // Redirect to the home page
+          window.location.href = `${BASE_URL}/sign_in.html`; // Replace "/home.html" with the actual URL of your home page
+        });
+      });
+      /***************************************** SIDE NAV **********************************************************/
       const links = document.querySelectorAll(".side-nav a");
 
       links.forEach((link) => {
@@ -473,36 +490,53 @@
           console.log("No data to send");
         }
       }
-
       function displayReport(data) {
+        const reportTable = document.createElement("table");
+        reportTable.innerHTML = `
+    <tr>
+      <th>Amount</th>
+      <th>Date</th>
+      <th>Employee ID</th>
+      <th>Employee Name</th>
+    </tr>
+  `;
+
         const reportList = document.getElementById("reportList");
         reportList.innerHTML = "";
 
         if (Array.isArray(data)) {
           data.forEach((item) => {
-            const listItem = document.createElement("li");
+            const row = reportTable.insertRow();
             const formattedDate = item.sale_date
               ? new Date(item.sale_date).toISOString().split("T")[0]
               : "Invalid Date";
 
-            listItem.textContent = `Amount: ${item.amount}, Date: ${formattedDate}, Employee ID: ${item.emp_id}, Employee Name: ${item.first_name} ${item.last_name}`;
-            reportList.appendChild(listItem);
-            //console.log($formattedDate); ////////////////////////////////////////////////////////////////////////////////////////////////
+            row.innerHTML = `
+        <td>${item.amount}</td>
+        <td>${formattedDate}</td>
+        <td>${item.emp_id}</td>
+        <td>${item.first_name} ${item.last_name}</td>
+      `;
           });
-          //console.log($formattedDate);
         } else if (typeof data === "object" && data !== null) {
-          const listItem = document.createElement("li");
+          const row = reportTable.insertRow();
           const formattedDate = data.sale_date
             ? new Date(data.sale_date).toISOString().split("T")[0]
             : "Invalid Date";
 
-          listItem.textContent = `Amount: ${data.amount}, Date: ${formattedDate}, Employee ID: ${data.emp_id}, Employee Name: ${data.first_name} ${data.last_name}`;
-          reportList.appendChild(listItem);
+          row.innerHTML = `
+      <td>${data.amount}</td>
+      <td>${formattedDate}</td>
+      <td>${data.emp_id}</td>
+      <td>${data.first_name} ${data.last_name}</td>
+    `;
         } else {
           const listItem = document.createElement("li");
           listItem.textContent = "Invalid data format";
           reportList.appendChild(listItem);
         }
+
+        reportList.appendChild(reportTable);
 
         const resultContainer = document.getElementById("result");
         resultContainer.style.display = "block";
@@ -566,7 +600,6 @@
           console.log("No data to send");
         }
 
-        // Function to create an HTML list from fetched salary report data
         function displaySalaryReport(data, elementToBind) {
           if (
             !Array.isArray(data) ||
@@ -577,26 +610,42 @@
             return;
           }
 
-          // Creating the HTML list structure
-          var ul = document.createElement("ul");
+          // Creating the HTML table structure
+          var table = document.createElement("table");
+          table.border = "1";
 
-          // Populating the list with data
-          for (var i = 0; i < data.length; i++) {
-            var li = document.createElement("li");
-            li.innerHTML = formatSalaryListItem(data[i]);
-            ul.appendChild(li);
+          // Creating the table header
+          var thead = document.createElement("thead");
+          var headerRow = document.createElement("tr");
+          for (var key in data[0]) {
+            if (data[0].hasOwnProperty(key)) {
+              var th = document.createElement("th");
+              th.innerHTML = key;
+              headerRow.appendChild(th);
+            }
           }
+          thead.appendChild(headerRow);
+          table.appendChild(thead);
 
-          // Displaying the list in the specified HTML element
+          // Populating the table with data
+          var tbody = document.createElement("tbody");
+          for (var i = 0; i < data.length; i++) {
+            var row = document.createElement("tr");
+            for (var key in data[i]) {
+              if (data[i].hasOwnProperty(key)) {
+                var cell = document.createElement("td");
+                cell.innerHTML = data[i][key];
+                row.appendChild(cell);
+              }
+            }
+            tbody.appendChild(row);
+          }
+          table.appendChild(tbody);
+
+          // Displaying the table in the specified HTML element
           var divContainer = document.getElementById(elementToBind);
           divContainer.innerHTML = "";
-          divContainer.appendChild(ul);
-        }
-
-        // Function to format a salary report item for display
-        function formatSalaryListItem(item) {
-          // Customize the formatting based on your data structure
-          return `${item.emp_id} ${item.first_name} ${item.last_name} - ${item.role_name}: Salary: ${item.salary}, Hours: ${item.total_hours}`;
+          divContainer.appendChild(table);
         }
       }
     </script>
