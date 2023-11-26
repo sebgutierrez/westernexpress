@@ -48,7 +48,7 @@ app.use((req, res, next) => {
     saveUninitialized: false,
     cookie: {
         sameSite: true,
-        secure: false, //make sure to make this true when deploying
+        secure: true, //make sure to make this true when deploying
         expires: false
       }
   }));
