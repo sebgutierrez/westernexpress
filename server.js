@@ -97,6 +97,7 @@ app.post('/updateTicket', (req, res) => {
 });
 
 app.post('/clockin', (req, res) => {
+    
     console.log(req.body.username, req.body.password);
     shift.clockIn(req.body.username, req.body.password)
     .then(result => {
@@ -106,6 +107,7 @@ app.post('/clockin', (req, res) => {
 
 
 app.post('/clockout', (req, res) => {
+    console.log(req.body);
     console.log(req.body.username, req.body.password);
     shift.clockOut(req.body.username, req.body.password)
     .then(result => {
@@ -370,11 +372,13 @@ app.post('/employee/signup', async (req, res) => {
     const lastemp_idIdResult = await pool.request().query('SELECT MAX(emp_id) AS max_emp_id FROM employees_new');
     const lastemp_idId = lastemp_idIdResult.recordset[0].max_emp_id || 99; // Set to 99 to start from 100
     const empId = parseInt(lastemp_idId) + 1;
+    console.log(empId);
 
     // Generate a unique emp address ID
     const lastAddressIdResult = await pool.request().query('SELECT MAX(address_id) AS max_address_id FROM addresses');
     const lastAddressId = lastAddressIdResult.recordset[0].max_address_id || 100;
     const addressId = lastAddressId + 1;
+    console.log(addressId);
 
     // Insert into the address table
     await pool.request()
@@ -403,8 +407,7 @@ app.post('/employee/signup', async (req, res) => {
         VALUES 
         (@empId, @firstname, @lastname, @username, @password, @phoneNumber, @email, @addressId,@postalOfficeId)
       `);
-
-    alert('Successfully created user!');
+    res.redirect('https://westernexpresspostal.azurewebsites.net/index/sign_in.html');
   } catch (err) {
     console.error('Error occurred:', err);
     res.status(500).send('Error while processing your request');

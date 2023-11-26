@@ -130,6 +130,8 @@ async function clockIn(username, password){
 
 async function clockOut(username, password){
 	try {
+		console.log('username');
+		console.log(username);
 		let exists = await checkCredentials(username, password);
 		if(exists === true){
 			let employee_id = await getEmployeeId(username);
