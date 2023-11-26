@@ -606,6 +606,7 @@ async function fetchEmployeeData() {
   try {
     const response = await fetch(`${BASE_URL}/employeeData`);
     employeeData = await response.json();
+    console.log(employeeData);
     renderTable(employeeData);
   } catch (error) {
     console.error("Fetch error: ", error);
@@ -631,6 +632,7 @@ function handleSearch() {
 
 function renderTable(tableData) {
   const tableContainer = document.getElementById('employeeData');
+  console.log(tableData[0]);
   const col = Object.keys(tableData[0]);
   const table = document.createElement('table');
   //table.classList.add('report-table');

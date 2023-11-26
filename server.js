@@ -48,7 +48,7 @@ app.use((req, res, next) => {
     saveUninitialized: false,
     cookie: {
         sameSite: true,
-        secure: true, //make sure to make this true when deploying
+        secure: false, //make sure to make this true when deploying
         expires: false
       }
   }));
@@ -329,7 +329,7 @@ const getRandomInt = (min, max) => {
             // Employee login
             //res.sendFile(path.join(__dirname, 'public', 'index', 'employees', 'employee_home.html'));
             
-            res.redirect('https://westernexpresspostal.azurewebsites.net/index/employees/employee_home.html');
+            res.redirect('http://localhost:5500/index/employees/employee_home.html');
             return;
         }
   
