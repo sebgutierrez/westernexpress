@@ -329,7 +329,7 @@ const getRandomInt = (min, max) => {
             // Employee login
             //res.sendFile(path.join(__dirname, 'public', 'index', 'employees', 'employee_home.html'));
             
-            res.redirect('http://localhost:5500/index/employees/employee_home.html');
+            res.redirect('https://westernexpresspostal.azurewebsites.net/index/employees/employee_home.html');
             return;
         }
   
