@@ -7,58 +7,7 @@
     <link rel="stylesheet" href="\css\employees\employee_home.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=DM Sans">
     <style>
-      body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
-    margin: 0;
-    padding: 0;
-}
-
-.create-label-form {
-    max-width: 600px;
-    margin: 20px auto;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.create-label-h2 {
-    margin-bottom: 10px;
-    color: #3498db; /* Dark blueish color */
-}
-
-.create-label-label {
-    display: block;
-    margin-bottom: 5px;
-}
-
-.create-label-input,
-.create-label-select {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    box-sizing: border-box;
-}
-
-.create-label-input[type="submit"] {
-    background-color: #003152;
-    color: #fff;
-    cursor: pointer;
-}
-
-.create-label-input[type="submit"]:hover {
-    background-color: #2980b9;
-}
-
-#labelContainer {
-    display: none;
-    margin-top: 20px;
-    padding: 20px;
-    background-color: #e0f7fa; /* Light blue background for label container */
-    border-radius: 8px;
-}
+      
     </style>
   </head>
   <body>
@@ -684,12 +633,14 @@ function renderTable(tableData) {
   const tableContainer = document.getElementById('employeeData');
   const col = Object.keys(tableData[0]);
   const table = document.createElement('table');
+  //table.classList.add('report-table');
   const tr = table.insertRow(-1);
 
 
   // Code to create table headers
   for (let i = 0; i < col.length; i++) {
     const th = document.createElement('th');
+    //th.classList.add('report-th');
     th.innerHTML = col[i];
     tr.appendChild(th);
   }
@@ -700,6 +651,7 @@ function renderTable(tableData) {
     const tr = table.insertRow(-1);
     for (let j = 0; j < col.length; j++) {
       const tabCell = tr.insertCell(-1);
+      //tabCell.classList.add('report-td');
       if (col[j] === 'Sale Date') {
         const dateValue = new Date(tableData[i][col[j]]);
         tabCell.innerHTML = dateValue.toISOString().split('T')[0];
@@ -1281,7 +1233,7 @@ function overviewReport() {
     if (Array.isArray(data) && data.length > 0 && typeof data[0] === 'object') {
       overviewTable(data, "package_overview");
     } else {
-      alert('Invalid data format or empty');
+      alert('No packages with selected filters found');
     }
   })
   .catch(error => console.error('Fetch error:', error));
@@ -1291,7 +1243,7 @@ function overviewReport() {
 
   function overviewTable(data, elementToBind) {           
     if (!Array.isArray(data) || data.length === 0 || typeof data[0] !== 'object') {
-      console.error('Invalid data format or empty');
+      console.error('No packages with selected filters found');
       return;
     }
 

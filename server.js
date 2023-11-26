@@ -3,6 +3,8 @@ const tracking = require('./server/backend_files/tracking.js');
 const shift = require('./server/backend_files/shifts.js');
 const support = require('./server/backend_files/support.js');
 const overview = require('./server/backend_files/overview.js');
+const salaryOverview = require("./server/admin_backend/salaryOverview.js");
+const salesOverview = require("./server/admin_backend/salesOverview.js");
 
 require('dotenv').config();
 
@@ -159,20 +161,52 @@ app.get('/alerts', (req, res) => {
 });
 
 app.post("/generateReport", async (req, res) => {
-    try {
-      const requestData = req.body;
-      await mssql.connect(config);
-      const result = await mssql.query(requestData.query); // Using the received SQL query
-      res.json(result.recordset);
-    } catch (error) {
+  console.log(req.body);
+ 
+ 
+  // Assuming your generateReportOverview function is in salesOverview.js and returns a promise
+  salesOverview
+    .generateSalesOverview(
+      req.body.amount,
+      req.body.amountComparison,
+      req.body.location,
+      req.body.date,
+      req.body.dateComparison,
+      req.body.employeeId
+    )
+    .then((result) => {
+      res.send(result);
+    })
+    .catch((error) => {
       console.error(error);
-      res.status(500).send("Internal Server Error");
-    } finally {
-      await mssql.close();
-    }
-});
+      res.status(500).send({ error: "Internal Server Error" });
+    });
+ });
+ 
 
+ app.post("/generateSalaryReport", async (req, res) => {
+  console.log(req.body);
+ 
+ 
+  // Assuming your generateSalaryOverview function is in salaryOverview.js and returns a promise
+  salaryOverview
+    .generateSalaryOverview(
+      req.body.employeeId,
+      req.body.amountComparison,
+      req.body.amount,
+      req.body.role,
+      req.body.location
+    )
+    .then((result) => {
+      res.send(result);
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).send({ error: "Internal Server Error" });
+    });
+ });
 
+ 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
@@ -292,6 +326,7 @@ const getRandomInt = (min, max) => {
 
             // Employee login
             //res.sendFile(path.join(__dirname, 'public', 'index', 'employees', 'employee_home.html'));
+            
             res.redirect('https://westernexpresspostal.azurewebsites.net/index/employees/employee_home.html');
             return;
         }

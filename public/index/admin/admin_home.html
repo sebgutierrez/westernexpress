@@ -360,7 +360,7 @@
 
           <br><br>
         <input type="submit" value="Signup">
-    </form>
+          </form>
 
 
         </div>
@@ -373,17 +373,6 @@
           path: path.resolve(__dirname, "../../../.env"),
         });
       }
-      /***************************************** SIGN OUT ******************************************************************/
-      document.addEventListener("DOMContentLoaded", function () {
-        // Get the sign-out button element
-        const signOutButton = document.getElementById("signOutButton");
-
-        // Add a click event listener to the button
-        signOutButton.addEventListener("click", function () {
-          // Redirect to the home page
-          window.location.href = `${BASE_URL}/sign_in.html`; // Replace "/home.html" with the actual URL of your home page
-        });
-      });
       /***************************************** SIDE NAV **********************************************************/
       const links = document.querySelectorAll(".side-nav a");
 

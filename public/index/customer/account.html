@@ -3,20 +3,46 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=DM Sans">
   <title>User Account Page</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'DM Sans', sans-serif;
       margin: 0;
       padding: 0;
       display: flex;
     }
 
+    h3 {
+      padding-left: 1rem;
+      color: white;
+    }
+
     #menu {
-      width: 200px;
-      background-color: #f1f1f1;
+      width: 12rem;
+      height: 100vh;
+      background-color: #023047;
       padding: 20px;
       box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    ul {
+      width: 8rem;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      padding: 1rem 1rem 0 1rem;
+    }
+
+    li {
+      width: fit-content;
+      padding: 0.5rem 0 0.5rem 0;
+    }
+
+    a {
+      color: white;
+      text-decoration: none;
+      font-size: 1rem;
     }
 
     #content {
@@ -49,6 +75,7 @@
     <li><a href="#" onclick="showPastShipments()">View Shipments</a></li>
     <li><a href="/index/customer/edit_profile.html" target="_blank">Edit Profile</a></li>
     <li><a href="#" onclick="deleteAccount()">Delete Account</a></li>
+    <li><a href="/index/customer/customer.html">Home</a></li>
   </ul>
 </div>
 
@@ -70,10 +97,6 @@
   </table>
   
 </div>
-
-
-
-
 <script>
 
     ///////////////////////////////////////////////

@@ -90,7 +90,7 @@ async function generateSalaryOverview(
 
     console.log(query);
     query = await query.query(`
-          SELECT e.emp_id, e.first_name, e.last_name, r.role_name, s.salary, wh.total_hours
+          SELECT e.emp_id AS "Employee #", e.first_name AS "First Name", e.last_name AS "Last Name", r.role_name AS "Role", s.salary AS "Salary", wh.total_hours AS "Total Hours"
           FROM dbo.employees_new e
           INNER JOIN dbo.post_office_details pd ON e.postoffice_id = pd.postoffice_id
           INNER JOIN dbo.employee_roles er ON e.emp_id = er.emp_id

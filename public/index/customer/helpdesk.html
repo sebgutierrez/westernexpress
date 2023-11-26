@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=DM Sans">
     <style>
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'DM Sans', sans-serif;
             margin: 0;
             padding: 0;
             display: flex;
@@ -19,7 +20,7 @@
         }
     
         #sidebar {
-            background-color: #222E50;
+            background-color: #023047;
             color: #fff;
             width: 200px;
             padding: 20px;
@@ -27,11 +28,21 @@
     
         #content {
             flex: 1;
+            margin-top: -0.75rem;
             padding: 20px;
         }
     
         h1 {
             color: #333;
+        }
+
+        a {
+            text-decoration: none;
+            color: white;
+        }
+
+        h3 {
+            margin-top: 1rem;
         }
     
         #ticket-content {
@@ -44,10 +55,11 @@
         }
     
         .menu-item:hover {
-            color: #ffd700;
+            cursor: pointer;
         }
     
         .ticket-form {
+            margin-top: 1rem;
             background-color: #fff;
             padding: 20px;
             border-radius: 8px;
@@ -68,6 +80,7 @@
         }
     
         #ticketTable {
+            margin-top: 1rem;
             border-collapse: collapse;
             width: 100%;
         }
@@ -148,8 +161,10 @@
 <body>
     <div id="container">
         <div id="sidebar">
+            <h2>Help Desk</h2>
             <div class="menu-item" onclick="showContent('create_ticket')">Create Ticket</div>
             <div class="menu-item" onclick="showContent('view_tickets')">View All Tickets</div>
+            <div class="menu-item"><a href="/index/customer/customer.html">Home</a></div>
 
         </div>
 
@@ -166,7 +181,7 @@
     <!-- create ticket-->
     <div id="create_ticket" style="display: none;">
         <div class="ticket-form">
-            <h2>Western Express - Help desk</h2>
+            <h2>Western Express - Help Desk</h2>
             <form id="customersupport" action="/customer/support" method="post">
                 <label for="title">Title:</label>
                 <input type="text" id="title" name="title" required>
